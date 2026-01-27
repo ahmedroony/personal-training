@@ -1,7 +1,6 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\CaptainController;
+route::get('/captain', [CaptainController::class, 'index'])->name('captain.index');
+route::get('/captain/create', [CaptainController::class, 'create'])->name('captain.create');
