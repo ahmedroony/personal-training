@@ -44,7 +44,7 @@
             <section class="data-section">
                 <div class="section-header">
                     <h2>المشتركين الحاليين</h2>
-                    <button class="btn-primary">+ إضافة عميل</button>
+                    <a class="btn-primary" href="<?php echo route('captain.create') ?>">+ إضافة عميل</a>
                 </div>
                 <table>
                     <thead>

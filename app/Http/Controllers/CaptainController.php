@@ -15,4 +15,9 @@ class CaptainController
             $service = new CaptainService();
             return $service->create();
     }
+    public function store(Request $request){
+            // dd(($request->all()));
+            $service = new CaptainService();
+            return $service->store($request);
+    }
 }
