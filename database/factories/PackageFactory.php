@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Faker\Guesser\Name;
+use App\Domains\packages\Modelpackages\Package;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -15,6 +16,7 @@ class PackageFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = Package::class;
     public function definition(): array
     {
         return [

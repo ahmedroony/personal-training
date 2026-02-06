@@ -18,14 +18,12 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone_number')->unique();
             $table->enum('status', ['active', 'inactive'])->default('inactive');
-            // 1. تعرّيف الأعمدة كأرقام موجبة كبيرة (نفس نوع الـ ID اللي هيربطوا بيه)
             $table->unsignedBigInteger('captain_id')->nullable();
-            $table->unsignedBigInteger('package_id')->nullable();
-            // 2. وضع قيود المفاتيح الأجنبية
             $table->foreign('captain_id')->references('id')->on('captains')->onDelete('set null');
-            $table->foreign('package_id')->references('id')->on('packages')->onDelete('set null');
-            $table->timestamps();
-        });
+            $table->string('package_name')->nullable();
+            $table->timestamp('subscription_starts_at')->nullable(); // تاريخ بدء الاشتراك
+            $table->timestamp('subscription_ends_at')->nullable();   // تاريخ انتهاء الاشتراك
+            $table->timestamps();});
     }
 
     /**
