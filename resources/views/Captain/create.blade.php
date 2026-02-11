@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     @vite('resources/css/Captain/create.css');
 </head>
+
 <body>
     <div class="dashboard-container">
         <aside class="sidebar">
@@ -44,13 +46,28 @@
                     </div>
                     <div class="form-group">
                         <label>اضافه باقه</label>
-                            <input type="text" name="package_name" required>
+                        <input type="text" name="package_name" required>
                     </div>
 
                     <div class="form-group">
                         <label>رقم الهاتف</label>
                         <input type="tel" name="phone_number" placeholder="01xxxxxxxxx">
                     </div>
+                    <div class="form-group">
+                        <label>تاريخ بداية الاشتراك</label>
+                        <input type="date"  required name="subscription_starts_at">
+                    </div>
+
+                    <div class="form-group">
+                        <label>تاريخ نهاية الاشتراك</label>
+                        <input type="date"  required name="subscription_ends_at">
+                    </div>
+
+                    <div class="form-group">
+                        <label>عدد أيام الاشتراك</label>
+                        <input type="number" name="duration_days" placeholder="مثال: 30" required>
+                    </div>
+
 
                     <button type="submit" class="btn-submit">تأجيل وإضافة العميل</button>
                 </form>
@@ -61,4 +78,5 @@
     </div>
 
 </body>
+
 </html>

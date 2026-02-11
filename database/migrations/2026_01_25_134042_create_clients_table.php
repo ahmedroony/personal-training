@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('phone_number')->unique();
+            $table->foreignId('package_id')->nullable()->constrained()->onDelete('set null');
             $table->enum('status', ['active', 'inactive'])->default('inactive');
             $table->unsignedBigInteger('captain_id')->nullable();
             $table->foreign('captain_id')->references('id')->on('captains')->onDelete('set null');

@@ -1,15 +1,18 @@
-* {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
+:root {
+            --bg-dark: #121212;
+            --sidebar-bg: #1e1e1e;
+            --primary-blue: #007bff;
+            --text-white: #ffffff;
+            --text-gray: #b3b3b3;
+            --border-color: #333;
+            --input-bg: #2a2a2a;
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+
         body {
-            background-color: #000000;
-            color: white;
-            min-height: 100vh;
-            direction: rtl;
+            background-color: var(--bg-dark);
+            color: var(--text-white);
         }
 
         .dashboard-container {
@@ -17,241 +20,149 @@
             min-height: 100vh;
         }
 
-        /* 2. القائمة الجانبية (Sidebar) */
+        /* Sidebar Styling */
         .sidebar {
             width: 260px;
-            background-color: #080808;
-            /* أسود أغمق قليلاً */
-            border-left: 1px solid #2d2d2d;
-            padding: 30px 20px;
-            position: fixed;
-            height: 100vh;
-            z-index: 1000;
+            background-color: var(--sidebar-bg);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--border-color);
         }
 
-        .logo {
+        .sidebar .logo {
             font-size: 24px;
             font-weight: bold;
-            color: #007bff;
-            text-align: center;
+            color: var(--primary-blue);
             margin-bottom: 40px;
+            text-align: center;
+            letter-spacing: 1px;
         }
 
-        .sidebar nav ul li {
-            padding: 12px 15px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            transition: 0.3s;
-            color: #aaa;
-            list-style: none;
-        }
+        .sidebar nav ul { list-style: none; }
 
         .sidebar nav ul li a {
-            text-decoration: none;
-            color: inherit;
             display: block;
+            padding: 12px 15px;
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: 0.3s;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            font-size: 15px;
         }
 
-        .sidebar nav ul li:hover,
-        .sidebar nav ul li.active {
-            background-color: #1a1a1a;
-            color: #fff;
-            border-right: 4px solid #007bff;
+        .sidebar nav ul li a:hover,
+        .sidebar nav ul li a.active {
+            background-color: #2a2a2a;
+            color: var(--primary-blue);
+            border-right: 3px solid var(--primary-blue);
         }
 
-        /* 3. المحتوى الرئيسي */
+        /* Main Content Styling */
         .main-content {
             flex: 1;
-            margin-right: 260px;
-            /* مساحة للـ Sidebar */
             padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* عشان الفورم تكون فوق مش في نص الشاشة بالطول */
         }
 
-        /* 4. الهيدر (من صفحة التعديل) */
-        .header-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #333;
+        .form-container {
+            width: 100%;
+            max-width: 600px;
+            background-color: var(--sidebar-bg);
+            padding: 30px; /* تباعد داخلي مريح */
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid var(--border-color);
+        }
+
+        .form-header {
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
             padding-bottom: 15px;
         }
 
-        .header-section h1 {
-            font-size: 26px;
-            color: #fff;
+        .form-header h2 {
+            font-size: 22px;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .header-section p {
-            color: #888;
-            font-size: 14px;
+        .form-header p {
+            color: var(--text-gray);
+            font-size: 13px;
             margin-top: 5px;
         }
 
-        /* 5. الكروت (الفلاتر والجدول) */
-        .form-card {
-            background: #1a1a1a;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-            border: 1px solid #2d2d2d;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        .form-group { margin-bottom: 20px; }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-gray);
+            font-weight: 600;
+            font-size: 14px;
         }
 
-        .form-card h3 {
-            color: #007bff;
-            margin-bottom: 20px;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* 6. الفلاتر */
-        .filters-grid {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        input[type="text"],
-        select {
-            background: #111;
-            border: 1px solid #444;
-            color: #fff;
-            padding: 10px 15px;
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
+            color: white;
             outline: none;
+            transition: all 0.3s ease;
+            font-size: 15px;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 14px;
             transition: 0.3s;
         }
 
-        input:focus,
-        select:focus {
-            border-color: #007bff;
-        }
+        .back-link:hover { color: var(--primary-blue); }
 
-        .btn-primary {
-            background: #007bff;
-            color: white;
-            padding: 10px 25px;
-            border-radius: 8px;
-            font-weight: bold;
-            border: none;
+        /* تعديل شكل input date عشان الأيقونة تكون بيضاء */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            opacity: 0.6;
             cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
         }
-
-        /* 7. الجدول المطور */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            table-layout: auto;
-            /* بيخلي الأعمدة تتوزع حسب المحتوى تلقائياً */
-        }
-
-        thead tr {
-            background-color: rgba(255, 255, 255, 0.02);
-            /* تمييز بسيط للهيدر */
-        }
-
-        th {
-            color: #888;
-            text-align: right;
-            /* محاذاة لليمين عشان العربي */
-            padding: 15px 20px;
-            border-bottom: 2px solid #2d2d2d;
-            font-size: 14px;
-            white-space: nowrap;
-            /* بيمنع العنوان يتقسم على سطرين */
-        }
-
-        td {
-            padding: 15px 20px;
-            border-bottom: 1px solid #2d2d2d;
-            vertical-align: middle;
-            color: #efefef;
-            text-align: right;
-            /* لازم الـ td يكون نفس محاذاة الـ th */
-        }
-
-        .user-info-cell {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            justify-content: flex-start;
-            /* بيخلي الأفاتار والاسم لازقين في يمين الخلية */
-        }
-
-        /* حل مشكلة الإزاحة: نمنع الـ Flex على صفوف الجدول */
-        tr {
-            display: table-row !important;
-        }
-
-        tbody tr:hover {
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        /* الأفاتار والحالة */
-        .user-avatar {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #007bff, #00d2ff);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-
-        .status {
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .status.active {
-            background: rgba(40, 167, 69, 0.2);
-            color: #28a745;
-        }
-
-        .status.inactive {
-            background: rgba(220, 53, 69, 0.2);
-            color: #dc3545;
-        }
-
-        .action-btns {
-            display: flex;
-            gap: 10px;
-        }
-
-        .action-btns a,
-        .action-btns button {
-            background: #2d2d2d;
-            color: white;
-            border: none;
-            padding: 8px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .action-btns a:hover {
-            transform: scale(1.1);
-            background: #3d3d3d;
-        }
-
-        /* الموبايل */
-        @media (max-width: 992px) {
-            .sidebar {
-                display: none;
-            }
-
-            .main-content {
-                margin-right: 0;
-                padding: 20px;
-            }
+        input[type="date"]::-webkit-calendar-picker-indicator:hover {
+            opacity: 1;
         }

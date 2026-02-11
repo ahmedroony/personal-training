@@ -10,10 +10,17 @@ class PackageService
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric',
-            'duration_days' => 'required|integer',
         ]);
 }
-public function duration_days(){
-    
+public function update(Request $request, $id)
+{
+    $data = $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'price' => 'required|numeric',
+        'duration_days' => 'required|integer',
+    ]);
+    $package = Package::findOrFail($id);
+    $package->update($data);
 }
 }

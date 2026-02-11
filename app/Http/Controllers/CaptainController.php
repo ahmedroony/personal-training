@@ -32,9 +32,9 @@ class CaptainController
         $service = new CaptainService();
         return $service->toggleStatus($id);
     }
-    public function editpage()
+    public function manage()
     {
         $service = new CaptainService();
-        return $service->editpage();
+        return $service->manage();
     }
 }

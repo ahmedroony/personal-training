@@ -19,6 +19,9 @@ class ClientFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
+            'package_name'=>$this->faker->name(),
+            'subscription_starts_at'=>$this->faker->date(),
+            'subscription_ends_at'=>$this->faker->dateTimeThisYear(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => bcrypt('password'), // Default password
             'phone_number' => $this->faker->unique()->phoneNumber(),

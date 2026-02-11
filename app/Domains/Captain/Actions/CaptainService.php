@@ -4,7 +4,9 @@ namespace App\Domains\Captain\Actions;
 
 use App\Domains\Client\ModelClient\Client;
 use App\Domains\packages\Modelpackages\Package;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CaptainService
 {
@@ -15,17 +17,33 @@ class CaptainService
         return view('Captain.index', ['clients' => $clients, 'packages' => $packages]);
     }
 
-    public function store(request $request)
+    public function store(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'package_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:clients',
-            'phone_number' => 'required|string|unique:clients',
+        $request->validate([
+            'name' => 'required',
+            'package_name' => 'required',
+            'phone_number' => 'required|unique:clients,phone_number',
+            'duration_days' => 'required|integer',
         ]);
-        $data['password'] = bcrypt('12345678');
-        Client::create($data);
-        return redirect()->route('captain.index');
+        DB::transaction(function () use ($request) {
+            $days = (int) $request->duration_days;
+            $package = Package::create([
+                'name'=>$request->package_name,
+                'duration_days'=>$days,
+                'price'=>$request->price ?? 0,
+                'description'=>'باقة مضافة يدوياً للعميل '.$request->name,
+            ]);
+            Client::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone_number' => $request->phone_number,
+                'password' => bcrypt('123456789'),
+                'package_id' => $package->id,
+                'subscription_starts_at' => now(),
+                'subscription_ends_at' => now()->addDays($days),
+            ]);
+        });
+        return redirect()->route('captain.index')->with('success', 'تم إضافة العميل والباقة بنجاح');
     }
 
     public function create()
@@ -37,23 +55,28 @@ class CaptainService
     {
         $packages = Package::all();
         $client = Client::findOrFail($id);
-        return view('Captain.edit', ['client' => $client], ['packages' => $packages]);
+        return view('Captain.edit', ['client' => $client, 'packages' => $packages]);
     }
-    public function editpage()
+    public function manage()
     {
         $packages = Package::all();
-        $client = Client::all();
-        return view('Captain.edit', ['client' => $client], ['packages' => $packages]);
+        $clients = Client::all();
+        return view('Captain.manage', ['clients' => $clients], ['packages' => $packages]);
     }
     public function update(Request $request, $id)
     {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:clients,email,' . $id,
-            'package_name' => 'required|string|max:255',
-            'phone_number' => 'required|string|unique:clients,phone_number,' . $id,
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone_number' => 'required|unique:clients,phone_number,' . $id,
+            'package_name' => 'required',
+            'subscription_starts_at' => 'required|date',
+            'subscription_ends_at' => 'required|date',
         ]);
-        return redirect()->route('captain.index');
+        $client = Client::findOrFail($id);
+
+        $client->update($request->except(['duration_days']));
+        return redirect()->route('captain.index')->with('success', 'تم تحديث بيانات العميل والباقة بنجاح');
     }
     public function toggleStatus($id)
     {
