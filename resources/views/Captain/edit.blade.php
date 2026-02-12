@@ -40,46 +40,56 @@
                         </ul>
                     </div>
                 @endif
+
                 <form method="POST" action="{{ route('captain.update', $client->id) }}">
                     @csrf
                     @method('put')
+
                     <div class="form-group">
                         <label>اسم المتدرب بالكامل</label>
-                        <input type="text" name="name" value="{{ $client->name }}" required>
+                        <input type="text" name="name" value="{{ old('name', $client->name) }}" required>
                     </div>
 
                     <div class="form-group">
                         <label>البريد الإلكتروني</label>
-                        <input type="email" name="email" value="{{ $client->email }}" required>
+                        <input type="email" name="email" value="{{ old('email', $client->email) }}" required>
                     </div>
 
                     <div class="form-group">
-                        <label>اسم الباقة الحالية</label>
-                        <input type="text" name="package_name" value="{{ $client->package_name ?? 'لا يوجد باقة' }}" required>
+                        <label>اسم الباقة</label>
+                        <input type="text" name="package_name"
+                            value="{{ old('package_name', $client->package_name ?? '') }}" required>
                     </div>
 
                     <div class="form-group">
                         <label>رقم الهاتف</label>
-                        <input type="tel" name="phone_number" value="{{ $client->phone_number }}" required>
+                        <input type="tel" name="phone_number"
+                            value="{{ old('phone_number', $client->phone_number) }}" required>
                     </div>
 
                     <div class="form-group">
                         <label>تاريخ بداية الاشتراك</label>
-                        <input type="date" name="subscription_starts_at" value="{{ $client->subscription_starts_at->format('Y-m-d') }}" required>
+                        <input type="date" name="subscription_starts_at"
+                            value="{{ old('subscription_starts_at', $client->subscription_starts_at->format('Y-m-d')) }}"
+                            required>
                     </div>
 
                     <div class="form-group">
-                        <label>تاريخ نهاية الاشتراك</label>
-                        <input type="date" name="subscription_ends_at" value="{{ $client->subscription_ends_at->format('Y-m-d') }}" required>
+                        <label>عدد أيام الباقة</label>
+                        <input type="number" name="duration_days"
+                            value="{{ old('duration_days', $client->duration_days) }}" min="1" required>
                     </div>
 
-                    <div class="form-group">
-                        <label>عدد أيام الباقة (للتحديث)</label>
-                        <input type="number" name="duration_days" value="{{$client->days_left}}" required>
-                    </div>
+                    {{-- ✅ تاريخ النهاية بيتحسب تلقائي مش محتاج حقل --}}
+                    <p style="color: gray; font-size: 14px;">
+                        📅 تاريخ نهاية الاشتراك الحالي:
+                        {{ $client->subscription_ends_at->format('Y-m-d') }}
+                        (هيحدث تلقائي)
+                    </p>
 
                     <button type="submit" class="btn-submit">💾 حفظ التعديلات</button>
                 </form>
+
                 <a href="{{ route('captain.index') }}" class="back-link">← إلغاء وعودة للقائمة</a>
             </div>
         </main>

@@ -20,8 +20,9 @@
 
         <main class="main-content">
             @if ($errors->any())
-                <div style="background-color: #ff4d4d; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                    <ul style="list-style: none; color: white;">
+                <div
+                    style="background-color: #dc3545; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <ul style="margin: 0; padding-right: 20px;">
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
@@ -55,12 +56,12 @@
                     </div>
                     <div class="form-group">
                         <label>تاريخ بداية الاشتراك</label>
-                        <input type="date"  required name="subscription_starts_at">
+                        <input type="date" required name="subscription_starts_at">
                     </div>
 
                     <div class="form-group">
                         <label>تاريخ نهاية الاشتراك</label>
-                        <input type="date"  required name="subscription_ends_at">
+                        <input type="date" required name="subscription_ends_at">
                     </div>
 
                     <div class="form-group">

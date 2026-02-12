@@ -51,6 +51,7 @@
                             <th>الحالة</th>
                             <th>الباقة</th>
                             <th>عدد الايام</th>
+                            <th>عدد الأيام المتبقية</th>
                         </tr>
                     </thead>
                     <tbody id="clients-body">
@@ -63,7 +64,10 @@
                                 </span>
                             </td>
                             <td>
-                                {{ $client->package->name ?? 'غير محدد' }}
+                                {{ $client->package_name ?? 'غير محدد' }}
+                            </td>
+                            <td>
+                                {{ $client->duration_days?? 'غير محدد' }}
                             </td>
                             <td>
                                 {{ $client->days_left }}

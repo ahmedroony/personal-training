@@ -3,7 +3,6 @@
 namespace App\Domains\Client\ModelClient;
 
 use App\Domains\Captain\ModelCaptain\Captain;
-use App\Domains\packages\Modelpackages\Package;
 use Carbon\Carbon;
 use Database\Factories\ClientFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,21 +12,19 @@ class Client extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'email', 'phone_number', 'password', 'status', 'captain_id', 'package_name', 'subscription_starts_at', 'subscription_ends_at', 'package_id'];
-
-    protected $casts = [
-        'subscription_starts_at' => 'datetime',
-        'subscription_ends_at' => 'datetime',
+    protected $fillable = [
+        'name',
+        'email',
+        'subscription_ends_at',
+        'subscription_starts_at',
+        'package_name',
+        'duration_days',
+        'phone_number',
     ];
 
     public function captain()
     {
         return $this->belongsTo(Captain::class);
-    }
-
-    public function package()
-    {
-        return $this->belongsTo(Package::class);
     }
 
     protected static function newFactory()
@@ -46,6 +43,7 @@ class Client extends Model
         $endDate = Carbon::parse($this->subscription_ends_at);
         // نحسب الفرق بين دلوقتي وتاريخ النهاية
         $remaining = now()->diffInDays($endDate, false);
+
         // لو الرقم موجب نرجعه، لو سالب (الاشتراك انتهى) نرجع 0
         return $remaining > 0 ? (int) $remaining : 0;
     }

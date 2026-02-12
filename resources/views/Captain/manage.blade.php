@@ -62,10 +62,10 @@
                                 <tr>
                                     <td>{{ $client->name }}</td>
                                     <td>{{ $client->phone_number }}</td>
-                                    <td> {{ $client->package->name ?? 'غير محدد' }}</td>
+                                    <td> {{ $client->package_name ?? 'غير محدد' }}</td>
                                     <td>{{ $client->subscription_ends_at }}</td>
                                     <td>
-                                        {{ $client->days_left }}
+                                        {{ $client->duration_days ?? 'غير محدد'}}
                                     </td>
                                     <td>
                                         <span style="color: {{ $client->status === 'active' ? 'green' : 'red' }};">
