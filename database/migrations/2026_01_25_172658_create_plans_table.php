@@ -15,11 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->enum('type', ['workout', 'diet']);
-            $table->unsignedBigInteger('client_id');
-            $table->unsignedBigInteger('captain_id');
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
-            $table->foreign('captain_id')->references('id')->on('captains')->onDelete('cascade');
+            $table->enum('type', ['workout', 'diet','package']);
             $table->timestamps();
         });
     }

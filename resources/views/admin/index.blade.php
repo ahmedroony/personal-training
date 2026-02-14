@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة التحكم | GYM CORE</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    @vite('resources/css/Captain/index.css');
+    @vite('resources/css/Admin/index.css')
 </head>
 <body>
 
@@ -14,7 +14,7 @@
             <div class="logo">GYM CORE</div>
             <nav class="nav-links">
                 <a href="#" class="active">الرئيسية</a>
-                <a href="{{ route('captain.manage') }}">إدارة العملاء</a>
+                <a href="#">إدارة العملاء</a>
                 <a href="#">جداول التمارين</a>
             </nav>
         </aside>
@@ -30,15 +30,15 @@
             <section class="stats-grid">
                 <div class="stat-card active-filter" onclick="applyFilter('all', this)">
                     <h3>إجمالي المتدربين</h3>
-                    <div class="number">{{ $clients->count() }}</div>
+                    <div class="number">150</div>
                 </div>
                 <div class="stat-card" onclick="applyFilter('active', this)">
                     <h3>المشتركون النشطون</h3>
-                    <div class="number">{{ $clients->where('status', 'active')->count() }}</div>
+                    <div class="number">120</div>
                 </div>
                 <div class="stat-card" onclick="applyFilter('inactive', this)">
                     <h3>الاشتراكات المنتهية</h3>
-                    <div class="number">{{ $clients->where('status', 'inactive')->count() }}</div>
+                    <div class="number">30</div>
                 </div>
             </section>
 
@@ -55,30 +55,41 @@
                         </tr>
                     </thead>
                     <tbody id="clients-body">
-                        @foreach($clients as $client)
-                        <tr class="client-row" data-status="{{ $client->status }}">
-                            <td>{{ $client->name }}</td>
+                        <tr class="client-row" data-status="active">
+                            <td>أحمد محمد</td>
                             <td>
-                                <span class="badge {{ $client->status }}">
-                                    {{ $client->status == 'active' ? 'نشط' : 'منتهي' }}
-                                </span>
+                                <span class="badge active">نشط</span>
                             </td>
-                            <td>
-                                {{ $client->package_name ?? 'غير محدد' }}
-                            </td>
-                            <td>
-                                {{ $client->duration_days?? 'غير محدد' }}
-                            </td>
-                            <td>
-                                {{ $client->days_left }}
-                            </td>
+                            <td>باقة التخسيس 3 شهور</td>
+                            <td>90</td>
+                            <td>45</td>
                         </tr>
-                        @endforeach
+
+                        <tr class="client-row" data-status="inactive">
+                            <td>محمود علي</td>
+                            <td>
+                                <span class="badge inactive">منتهي</span>
+                            </td>
+                            <td>خطة تمارين شهرية</td>
+                            <td>30</td>
+                            <td>0</td>
+                        </tr>
+
+                        <tr class="client-row" data-status="active">
+                            <td>علي إبراهيم</td>
+                            <td>
+                                <span class="badge active">نشط</span>
+                            </td>
+                            <td>باقة كمال أجسام</td>
+                            <td>60</td>
+                            <td>12</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </main>
     </div>
+
     <script>
         function applyFilter(status, selectedCard) {
             const rows = document.querySelectorAll('.client-row');
