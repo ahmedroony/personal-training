@@ -14,7 +14,7 @@
             <div class="logo">GYM CORE</div>
             <nav class="nav-links">
                 <a href="#" class="active">الرئيسية</a>
-                <a href="#">إدارة العملاء</a>
+                <a href="{{ route('admin.mange') }}">إدارة العملاء</a>
                 <a href="#">جداول التمارين</a>
             </nav>
         </aside>

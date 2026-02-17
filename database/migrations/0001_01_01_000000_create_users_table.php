@@ -23,7 +23,8 @@ return new class extends Migration
             $table->timestamps();
             $table->foreignId('captain_id')->nullable()->constrained('users')->nullOnDelete();
             // 0: admin, 1: captain, 2: client
-            $table->integer('role')->default(2);});
+            $table->integer('role')->default(2);
+            });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();

@@ -35,8 +35,8 @@ class DatabaseSeeder extends Seeder
             'captain_id' => $captain->id,
         ]);
         Plan::create([
-            'name' => 'Basic Plan',
-            'type' => 'workout',
+            'name_plan' => 'Basic Plan',
+            'price' => 100.00,
             'description'=>'A basic workout plan for beginners.',
         ]);
         $this->call([

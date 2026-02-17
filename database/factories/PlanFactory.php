@@ -17,9 +17,9 @@ class PlanFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->words(3, true),
+            'name_plan' => fake()->words(3, true),
             'description' => fake()->sentence(),
-            'type' => fake()->randomElement(['workout', 'diet', 'package']),
+            'price' => fake()->randomFloat(2, 100, 1000),
         ];
     }
 }

@@ -10,8 +10,8 @@ class Plan extends Model
     /** @use HasFactory<\Database\Factories\PlanFactory> */
     use HasFactory;
     protected $fillable = [
-        'name',
+        'name_plan',
         'description',
-        'type',
+        'price',
     ];
 }

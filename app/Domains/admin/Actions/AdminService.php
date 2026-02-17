@@ -1,14 +1,22 @@
 <?php
 
 namespace App\Domains\admin\Actions;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
+
+use App\interfaces\main;
 use App\Models\User;
-class AdminService
+
+class AdminService implements main
 {
     public function index()
     {
         $users = User::all();
-        return view('admin.index', ['users' => $users]);
+        return $users;
     }
+    public function create()
+    {
+
     }
+    public function mange()
+    {
+    }
+}
