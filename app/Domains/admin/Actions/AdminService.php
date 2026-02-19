@@ -12,11 +12,21 @@ class AdminService implements main
         $users = User::all();
         return $users;
     }
-    public function create()
+    public function createClient()
     {
 
     }
     public function mange()
     {
+    }
+    public function storeClient($request)
+    {
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->role = 'client';
+        $user->save();
+
     }
 }

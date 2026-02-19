@@ -30,7 +30,10 @@
                     <h1>سجل المشتركين</h1>
                     <p>إدارة، بحث وتعديل بيانات المتدربين</p>
                 </div>
-                <a href="{{ route('admin.create') }}" class="btn-primary">+ مشترك جديد</a>
+                <div>
+                    <a href="" class="btn-primary">+ كابتن جديد</a>
+                    <a href="{{ route('admin.createclient') }}" class="btn-primary">+ مشترك جديد</a>
+                </div>
             </header>
 
             <section class="form-card">

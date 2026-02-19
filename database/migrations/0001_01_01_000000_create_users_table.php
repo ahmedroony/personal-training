@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('phone_number')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('status', ['active', 'inactive'])->default('inactive');
             $table->rememberToken();
             $table->timestamps();
             $table->foreignId('captain_id')->nullable()->constrained('users')->nullOnDelete();

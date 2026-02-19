@@ -34,13 +34,7 @@ class DatabaseSeeder extends Seeder
             'role' => 2, // 2 = Regular User
             'captain_id' => $captain->id,
         ]);
-        Plan::create([
-            'name_plan' => 'Basic Plan',
-            'price' => 100.00,
-            'description'=>'A basic workout plan for beginners.',
-        ]);
         $this->call([
-            PlanSeeder::class,
             SubscriptionSeeder::class,
         ]);
     }

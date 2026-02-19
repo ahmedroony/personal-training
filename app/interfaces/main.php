@@ -4,6 +4,7 @@ namespace App\interfaces;
 interface main
 {
     public function index();
-    public function create();
+    public function createClient();
     public function mange();
+    public function storeClient($request);
 }

@@ -55,8 +55,10 @@
                         </tr>
                     </thead>
                     <tbody id="clients-body">
+                        @foreach ($users as $user)
+
                         <tr class="client-row" data-status="active">
-                            <td>أحمد محمد</td>
+                            <td>{{ $user->name }}</td>
                             <td>
                                 <span class="badge active">نشط</span>
                             </td>
@@ -84,6 +86,7 @@
                             <td>60</td>
                             <td>12</td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
