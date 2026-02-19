@@ -5,7 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 route::middleware(['auth'])->group(function () {
     route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-    route::get('/admin/mange', [AdminController::class, 'mange'])->name('admin.mange');
+    route::get('/admin/manage', [AdminController::class, 'manage'])->name('admin.manage');
     route::get('/admin/createclient', [AdminController::class, 'createclient'])->name('admin.createclient');
     route::post('/admin/storeclient', [AdminController::class, 'storeclient'])->name('admin.storeclient');
 });

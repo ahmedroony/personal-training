@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('ends_at')->nullable();
             $table->text('description');
             $table->decimal('price', 8, 2);
+            $table->integer('duration'); // Duration in days
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });

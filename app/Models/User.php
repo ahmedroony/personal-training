@@ -48,4 +48,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function captain()
+    {
+        return $this->belongsTo(User::class, 'captain_id');
+    }
+    public function clients()
+    {
+        return $this->hasMany(User::class, 'captain_id');
+    }
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
 }
