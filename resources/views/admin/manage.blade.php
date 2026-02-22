@@ -58,65 +58,39 @@
                                 <th>المتدرب</th>
                                 <th>رقم الهاتف</th>
                                 <th>الباقة</th>
-                                <th>تاريخ الانتهاء</th>
-                                <th>عدد الايام</th>
+                                <th>عدد الأيام المتبقية</th>
                                 <th>الحالة</th>
                                 <th>الإجراءات</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>أحمد محمود</td>
-                                <td>01012345678</td>
-                                <td>باقة التخسيس 3 شهور</td>
-                                <td>2026-05-15</td>
-                                <td>90</td>
+                                @foreach ($users as $user)
+                            <tr
+                            class="client-row"data-status="{{ $user->subscription?->is_active ? 'active' : 'inactive' }}">
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->phone_number }}</td>
+                                <td>{{ $user->subscription?->name_plan ?? 'لا يوجد اشتراك' }}</td>
+                                <td>{{ $user->subscription?->remaining_days ?? 0 }} يوم</td>
                                 <td>
-                                    <span style="color: green; font-weight: bold;">نشط</span>
+                                    @if ($user->subscription?->is_active)
+                                        <span class="badge active">نشط</span>
+                                    @else
+                                        <span class="badge inactive">منتهي</span>
+                                    @endif
                                 </td>
                                 <td>
                                     <div class="action-btns">
+                                        <form action="{{ route('admin.deleteClient', $user->id) }}" method="POST" style="margin: 0;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" title="حذف" style="color: #dc3545; background: #2d2d2d; border: thin; cursor: pointer;">🗑️</button>
+                                        </form>
                                         <a href="#" title="تعديل" style="color: #ffc107; text-decoration: none;">✏️</a>
-                                        <button type="button" title="تفعيل/تعطيل" style="background: none; border: none; cursor: pointer;">🔄</button>
-                                        <button type="button" title="حذف" style="color: #dc3545; background: none; border: none; cursor: pointer;">🗑️</button>
                                     </div>
                                 </td>
                             </tr>
-
-                            <tr>
-                                <td>محمد علي</td>
-                                <td>01198765432</td>
-                                <td>خطة تمارين شهرية</td>
-                                <td>2026-01-10</td>
-                                <td>30</td>
-                                <td>
-                                    <span style="color: red; font-weight: bold;">منتهي</span>
-                                </td>
-                                <td>
-                                    <div class="action-btns">
-                                        <a href="#" title="تعديل" style="color: #ffc107; text-decoration: none;">✏️</a>
-                                        <button type="button" title="تفعيل/تعطيل" style="background: none; border: none; cursor: pointer;">🔄</button>
-                                        <button type="button" title="حذف" style="color: #dc3545; background: none; border: none; cursor: pointer;">🗑️</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>ياسر إبراهيم</td>
-                                <td>01234567890</td>
-                                <td>غير محدد</td>
-                                <td>2026-06-20</td>
-                                <td>غير محدد</td>
-                                <td>
-                                    <span style="color: green; font-weight: bold;">نشط</span>
-                                </td>
-                                <td>
-                                    <div class="action-btns">
-                                        <a href="#" title="تعديل" style="color: #ffc107; text-decoration: none;">✏️</a>
-                                        <button type="button" title="تفعيل/تعطيل" style="background: none; border: none; cursor: pointer;">🔄</button>
-                                        <button type="button" title="حذف" style="color: #dc3545; background: none; border: none; cursor: pointer;">🗑️</button>
-                                    </div>
-                                </td>
+                            @endforeach
                             </tr>
                         </tbody>
                     </table>

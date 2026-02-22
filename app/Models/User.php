@@ -56,8 +56,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(User::class, 'captain_id');
     }
-    public function subscriptions()
-    {
-        return $this->hasMany(Subscription::class);
-    }
+    public function subscription()
+{
+    return $this->hasOne(Subscription::class)->latestOfMany();
+}
+public function subscriptions()
+{
+    return $this->hasMany(Subscription::class);
+}
 }

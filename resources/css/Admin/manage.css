@@ -206,20 +206,20 @@
             font-weight: bold;
         }
 
-        .status {
-            padding: 4px 12px;
+        .badge {
+            padding: 4px 10px;
             border-radius: 6px;
             font-size: 12px;
             font-weight: bold;
         }
 
-        .status.active {
-            background: rgba(40, 167, 69, 0.2);
+        .badge.active {
+            background: rgba(40, 167, 69, 0.1);
             color: #28a745;
         }
 
-        .status.inactive {
-            background: rgba(220, 53, 69, 0.2);
+        .badge.inactive {
+            background: rgba(220, 53, 69, 0.1);
             color: #dc3545;
         }
 
@@ -255,3 +255,4 @@
                 padding: 20px;
             }
         }
+        

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,6 @@
     @vite('resources/css/Admin/index.css')
 </head>
 <body>
-
     <div class="app-wrapper">
         <aside class="sidebar" id="sidebar">
             <div class="logo">GYM CORE</div>
@@ -56,43 +56,25 @@
                     </thead>
                     <tbody id="clients-body">
                         @foreach ($users as $user)
-
-                        <tr class="client-row" data-status="active">
-                            <td>{{ $user->name }}</td>
-                            <td>
-                                <span class="badge active">نشط</span>
-                            </td>
-                            <td>باقة التخسيس 3 شهور</td>
-                            <td>90</td>
-                            <td>45</td>
-                        </tr>
-
-                        <tr class="client-row" data-status="inactive">
-                            <td>محمود علي</td>
-                            <td>
-                                <span class="badge inactive">منتهي</span>
-                            </td>
-                            <td>خطة تمارين شهرية</td>
-                            <td>30</td>
-                            <td>0</td>
-                        </tr>
-
-                        <tr class="client-row" data-status="active">
-                            <td>علي إبراهيم</td>
-                            <td>
-                                <span class="badge active">نشط</span>
-                            </td>
-                            <td>باقة كمال أجسام</td>
-                            <td>60</td>
-                            <td>12</td>
-                        </tr>
+                            <tr class="client-row"data-status="{{ $user->subscription?->is_active ? 'active' : 'inactive' }}">
+                                <td>{{ $user->name }}</td>
+                                <td>
+                                    @if ($user->subscription?->is_active)
+                                        <span class="badge active">نشط</span>
+                                    @else
+                                        <span class="badge inactive">منتهي</span>
+                                    @endif
+                                </td>
+                                <td>{{ $user->subscription?->name_plan ?? 'لا يوجد اشتراك' }}</td>
+                                <td>{{ $user->subscription?->duration ?? 0 }}</td>
+                                <td>{{ $user->subscription?->remaining_days ?? 0 }} يوم</td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </main>
     </div>
-
     <script>
         function applyFilter(status, selectedCard) {
             const rows = document.querySelectorAll('.client-row');
@@ -104,9 +86,9 @@
             selectedCard.classList.add('active-filter');
 
             // 2. تحديث عنوان الجدول
-            if(status === 'all') title.innerText = "عرض كل المشتركين";
-            if(status === 'active') title.innerText = "عرض المتدربين النشطين";
-            if(status === 'inactive') title.innerText = "عرض الاشتراكات المنتهية";
+            if (status === 'all') title.innerText = "عرض كل المشتركين";
+            if (status === 'active') title.innerText = "عرض المتدربين النشطين";
+            if (status === 'inactive') title.innerText = "عرض الاشتراكات المنتهية";
 
             // 3. فلترة الصفوف مع أنميشن بسيط
             rows.forEach(row => {

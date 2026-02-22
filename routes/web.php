@@ -8,6 +8,7 @@ route::middleware(['auth'])->group(function () {
     route::get('/admin/manage', [AdminController::class, 'manage'])->name('admin.manage');
     route::get('/admin/createclient', [AdminController::class, 'createclient'])->name('admin.createclient');
     route::post('/admin/storeclient', [AdminController::class, 'storeclient'])->name('admin.storeclient');
+    route::delete('/admin/deleteClient/{id}', [AdminController::class, 'deleteClient'])->name('admin.deleteClient');
 });
 //--------------------------------------------------------------------------------------------
 route::get('/register',[AuthController::class, 'showRegistar'])->name('show.register');
