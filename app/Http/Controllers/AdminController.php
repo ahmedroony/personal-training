@@ -6,6 +6,7 @@ use App\Domains\admin\Actions\AdminService;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class AdminController extends Controller
 {
@@ -53,9 +54,26 @@ class AdminController extends Controller
         $this->adminService->storeClient($validatedData);
         return redirect()->route('admin.index')->with('success', 'تم إضافة المتدرب بنجاح.');
     }
+    public function editClient($id)
+    {
+        $user = $this->adminService->editClient($id);
+        return view('admin.edit_Client', compact('user'));
+    }
+    public function updateClient($id, Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'phone_number' => 'required|string|max:20|unique:users,phone_number,' . $id,
+            'name_plan' => 'required|string|max:255',
+            'duration' => 'required|integer',
+        ]);
+        $this->adminService->updateClient($id, $validatedData);
+        return redirect()->route('admin.index')->with('success', 'تم تحديث بيانات المتدرب بنجاح.');
+    }
     public function deleteClient($id)
     {
         $this->adminService->deleteClient($id);
         return redirect()->route('admin.index')->with('success', 'تم حذف المتدرب بنجاح.');
-    }   
+    }
 }

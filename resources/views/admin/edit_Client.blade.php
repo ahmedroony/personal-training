@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تعديل بيانات العميل - GYM CORE</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    @vite('resources/css/Captain/edit.css');
+    @vite('resources/css/Admin/edit.css');
 </head>
 
 <body>
@@ -15,12 +15,6 @@
             <div class="logo">GYM CORE</div>
             <nav>
                 <p style="color: #6c757d; text-align: center; margin-bottom: 15px; font-size: 13px;">لوحة التحكم</p>
-                <ul>
-                    <li><a href="#">🏠 الرئيسية</a></li>
-                    <li><a href="#" class="active">👥 إدارة العملاء</a></li>
-                    <li><a href="#">📊 التقارير</a></li>
-                    <li><a href="#">⚙️ الإعدادات</a></li>
-                </ul>
             </nav>
         </aside>
 
@@ -41,56 +35,40 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('captain.update', $client->id) }}">
+                <form method="POST" action="{{ route('admin.updateClient', $user->id) }}">
                     @csrf
-                    @method('put')
+                    @method('PUT')
 
                     <div class="form-group">
                         <label>اسم المتدرب بالكامل</label>
-                        <input type="text" name="name" value="{{ old('name', $client->name) }}" required>
+                        <input type="text" name="name" value="{{ old('name', $user->name) }}" required>
                     </div>
 
                     <div class="form-group">
                         <label>البريد الإلكتروني</label>
-                        <input type="email" name="email" value="{{ old('email', $client->email) }}" required>
+                        <input type="email" name="email" value="{{ old('email', $user->email) }}" required>
                     </div>
 
                     <div class="form-group">
                         <label>اسم الباقة</label>
-                        <input type="text" name="package_name"
-                            value="{{ old('package_name', $client->package_name ?? '') }}" required>
+                        <input type="text" name="name_plan"
+                            value="{{ old('name_plan', $user->subscription->name_plan ?? '') }}" required>
                     </div>
 
                     <div class="form-group">
                         <label>رقم الهاتف</label>
                         <input type="tel" name="phone_number"
-                            value="{{ old('phone_number', $client->phone_number) }}" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>تاريخ بداية الاشتراك</label>
-                        <input type="date" name="subscription_starts_at"
-                            value="{{ old('subscription_starts_at', $client->subscription_starts_at->format('Y-m-d')) }}"
-                            required>
+                            value="{{ old('phone_number', $user->phone_number) }}" required>
                     </div>
 
                     <div class="form-group">
                         <label>عدد أيام الباقة</label>
-                        <input type="number" name="duration_days"
-                            value="{{ old('duration_days', $client->duration_days) }}" min="1" required>
+                        <input type="number" name="duration"
+                            value="{{ old('duration', $user->subscription->duration ?? 0) }}" min="1" required>
                     </div>
-
-                    {{-- ✅ تاريخ النهاية بيتحسب تلقائي مش محتاج حقل --}}
-                    <p style="color: gray; font-size: 14px;">
-                        📅 تاريخ نهاية الاشتراك الحالي:
-                        {{ $client->subscription_ends_at->format('Y-m-d') }}
-                        (هيحدث تلقائي)
-                    </p>
-
                     <button type="submit" class="btn-submit">💾 حفظ التعديلات</button>
                 </form>
-
-                <a href="{{ route('captain.index') }}" class="back-link">← إلغاء وعودة للقائمة</a>
+                <a href="{{ route('admin.index') }}" class="back-link">← إلغاء وعودة للقائمة</a>
             </div>
         </main>
     </div>

@@ -58,7 +58,7 @@
                                 <th>المتدرب</th>
                                 <th>رقم الهاتف</th>
                                 <th>الباقة</th>
-                                <th>عدد الأيام المتبقية</th>
+                                <th>عدد الأيام </th>
                                 <th>الحالة</th>
                                 <th>الإجراءات</th>
                             </tr>
@@ -71,7 +71,7 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->phone_number }}</td>
                                 <td>{{ $user->subscription?->name_plan ?? 'لا يوجد اشتراك' }}</td>
-                                <td>{{ $user->subscription?->remaining_days ?? 0 }} يوم</td>
+                                <td>{{ $user->subscription?->duration ?? 0 }} يوم</td>
                                 <td>
                                     @if ($user->subscription?->is_active)
                                         <span class="badge active">نشط</span>
@@ -86,7 +86,7 @@
                                             @method('DELETE')
                                             <button type="submit" title="حذف" style="color: #dc3545; background: #2d2d2d; border: thin; cursor: pointer;">🗑️</button>
                                         </form>
-                                        <a href="#" title="تعديل" style="color: #ffc107; text-decoration: none;">✏️</a>
+                                        <a href="{{ route('admin.editClient', $user->id) }}" title="تعديل" style="color: #ffc107; text-decoration: none;">✏️</a>
                                     </div>
                                 </td>
                             </tr>

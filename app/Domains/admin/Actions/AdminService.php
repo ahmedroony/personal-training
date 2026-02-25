@@ -5,12 +5,14 @@ namespace App\Domains\admin\Actions;
 use App\interfaces\AdminServiceInterface;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class AdminService implements AdminServiceInterface
 {
     public function index()
     {
         $users = User::all();
+
         return $users;
     }
 
@@ -18,7 +20,6 @@ class AdminService implements AdminServiceInterface
     {
         // نجلب المستخدمين اللي نوعهم عميل (role = 2) مع اشتراكاتهم
         $users = User::where('role', 2)->with('subscription')->get();
-
         // نعدل على شكل البيانات عشان تكون جاهزة للـ View
         foreach ($users as $user) {
             $sub = $user->subscription;
@@ -56,15 +57,50 @@ class AdminService implements AdminServiceInterface
             'price' => $data['price'] ?? 0,
             'duration' => $data['duration'] ?? 30,
         ]);
+
         return $user;
     }
+
+    public function editClient($id)
+    {
+        $user = User::find($id);
+        if (! $user || $user->role != 2) {
+            return null; // أو ترجع رسالة خطأ حسب التصميم
+        }
+        return $user;
+    }
+
+    public function updateClient($id,array $data)
+    {
+        $user = User::find($id);
+        if (!$user || $user->role != 2) {
+            return null;
+        }
+
+        $user->update([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone_number' => $data['phone_number'],
+        ]);
+        $newEndDate = \Carbon\Carbon::today()->addDays((int) $data['duration']);
+        $user->subscription()->updateOrCreate(
+            [
+            'name_plan' => $data['name_plan'],
+            'ends_at'   => $newEndDate,
+            ]
+        );
+        return $user;
+    }
+
     public function deleteClient($id)
     {
         $user = User::find($id);
-        if($user){
+        if ($user) {
             $user->delete();
+
             return true;
         }
-        return false;   
+
+        return false;
     }
 }
