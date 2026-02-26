@@ -1,0 +1,161 @@
+:root {
+    --bg-dark: #121212;
+    --sidebar-bg: #1e1e1e;
+    --primary-blue: #007bff;
+    --text-white: #ffffff;
+    --text-gray: #b3b3b3;
+    --border-color: #333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-white);
+}
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background-color: var(--sidebar-bg);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--border-color);
+}
+
+.sidebar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-blue);
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* لضبط الفورم أعلى الصفحة وليس في المنتصف تماماً */
+}
+
+/* Form Container */
+.form-container {
+    width: 100%;
+    max-width: 600px;
+    background-color: var(--sidebar-bg);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.form-header {
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+    text-align: center; /* توسيط العنوان */
+}
+
+.form-header h2 {
+    font-size: 24px;
+    color: var(--primary-blue);
+    margin-bottom: 5px;
+}
+
+.form-header p {
+    color: var(--text-gray);
+    font-size: 14px;
+}
+
+/* Form Inputs */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-gray);
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    background-color: #2a2a2a;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: white;
+    outline: none;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+/* تنسيق خاص للقوائم المنسدلة */
+.form-group select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23b3b3b3'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 15px center; /* ضبط السهم ناحية اليسار (عشان الـ RTL) */
+    padding-left: 35px;
+    cursor: pointer;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--primary-blue);
+    background-color: #333; /* تغميق لون الخلفية عند التركيز قليلاً */
+}
+
+.form-group input::placeholder {
+    color: #666;
+}
+
+/* Submit Button */
+.btn-submit {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Back Link */
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: var(--text-gray);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.back-link:hover {
+    color: var(--primary-blue);
+}

@@ -21,7 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-    ];
+        'phone_number',
+        'role',
+        'captain_id',
+        ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -45,4 +48,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function captain()
+    {
+        return $this->belongsTo(User::class, 'captain_id');
+    }
+    public function clients()
+    {
+        return $this->hasMany(User::class, 'captain_id');
+    }
+    public function subscription()
+{
+    return $this->hasOne(Subscription::class)->latestOfMany();
+}
+public function subscriptions()
+{
+    return $this->hasMany(Subscription::class);
+}
 }
