@@ -13,9 +13,11 @@
         <aside class="sidebar" id="sidebar">
             <div class="logo">GYM CORE</div>
             <nav class="nav-links">
-                <a href="#" class="active">الرئيسية</a>
+                <a href="{{ route('admin.index') }}" class="active">الرئيسية</a>
                 <a href="{{ route('admin.manage') }}">إدارة العملاء</a>
+                <a href="{{ route('admin.captains.index') }}">إدارة الكباتن</a>
                 <a href="#">جداول التمارين</a>
+                <a href="#">الأنظمة الغذائية</a>
             </nav>
         </aside>
 

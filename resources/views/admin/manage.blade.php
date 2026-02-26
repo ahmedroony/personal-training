@@ -16,8 +16,9 @@
             <div class="logo">GYM CORE</div>
             <nav>
                 <ul>
-                    <li><a href="#"> الرئيسية</a></li>
-                    <li class="active"><a href="#"> إدارة العملاء</a></li>
+                    <li><a href="{{ route('admin.index') }}"> الرئيسية</a></li>
+                    <li class="active"><a href="{{ route('admin.manage') }}"> إدارة العملاء</a></li>
+                    <li><a href="{{ route('admin.captains.index') }}"> إدارة الكباتن</a></li>
                     <li><a href="#"> جداول التمارين</a></li>
                     <li><a href="#"> الأنظمة الغذائية</a></li>
                 </ul>
@@ -25,13 +26,17 @@
         </aside>
 
         <main class="main-content">
+            @if(session('success'))
+                <div style="background-color: #198754; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    {{ session('success') }}
+                </div>
+            @endif
             <header class="header-section">
                 <div>
                     <h1>سجل المشتركين</h1>
                     <p>إدارة، بحث وتعديل بيانات المتدربين</p>
                 </div>
                 <div>
-                    <a href="" class="btn-primary">+ كابتن جديد</a>
                     <a href="{{ route('admin.createclient') }}" class="btn-primary">+ مشترك جديد</a>
                 </div>
             </header>

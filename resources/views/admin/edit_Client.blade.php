@@ -14,7 +14,13 @@
         <aside class="sidebar">
             <div class="logo">GYM CORE</div>
             <nav>
-                <p style="color: #6c757d; text-align: center; margin-bottom: 15px; font-size: 13px;">لوحة التحكم</p>
+                <ul>
+                    <li><a href="{{ route('admin.index') }}"> الرئيسية</a></li>
+                    <li class="active"><a href="{{ route('admin.manage') }}"> إدارة العملاء</a></li>
+                    <li><a href="{{ route('admin.captains.index') }}"> إدارة الكباتن</a></li>
+                    <li><a href="#"> جداول التمارين</a></li>
+                    <li><a href="#"> الأنظمة الغذائية</a></li>
+                </ul>
             </nav>
         </aside>
 

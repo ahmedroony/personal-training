@@ -82,13 +82,31 @@ class AdminService implements AdminServiceInterface
             'email' => $data['email'],
             'phone_number' => $data['phone_number'],
         ]);
-        $newEndDate = \Carbon\Carbon::today()->addDays((int) $data['duration']);
-        $user->subscription()->updateOrCreate(
-            [
-            'name_plan' => $data['name_plan'],
-            'ends_at'   => $newEndDate,
-            ]
-        );
+        $subscription = $user->subscription;
+        if ($subscription) {
+            $updateData = [
+                'name_plan' => $data['name_plan'],
+                'duration'  => $data['duration'],
+            ];
+            
+            if ($subscription->starts_at) {
+                // نحسب تاريخ الانتهاء بناءً على تاريخ البداية الأصلي عشان الأيام تتخصم صح
+                $updateData['ends_at'] = $subscription->starts_at->copy()->addDays((int) $data['duration']);
+            } else {
+                $updateData['ends_at'] = \Carbon\Carbon::today()->addDays((int) $data['duration']);
+            }
+            
+            $subscription->update($updateData);
+        } else {
+            $newEndDate = \Carbon\Carbon::today()->addDays((int) $data['duration']);
+            $user->subscriptions()->create([
+                'name_plan' => $data['name_plan'],
+                'duration'  => $data['duration'],
+                'starts_at' => \Carbon\Carbon::today(),
+                'ends_at'   => $newEndDate,
+                'status'    => 'active',
+            ]);
+        }
         return $user;
     }
 

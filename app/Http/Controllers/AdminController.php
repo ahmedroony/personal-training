@@ -22,7 +22,6 @@ class AdminController extends Controller
         // نطلب البيانات الجاهزة من السيرفس بدل ما نعالجها هنا
         // الكنترولر وظيفته ياخد الداتا ويسلمها للـ View بس (SRP)
         $users = $this->adminService->getAllClients();
-
         return view('admin.index', compact('users'));
     }
 
