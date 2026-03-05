@@ -6,54 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إضافة كابتن جديد - GYM CORE</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    @vite('resources/css/Admin/edit.css')
-    <style>
-        .form-container {
-            max-width: 600px;
-            margin: 20px auto;
-            background: #111;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            border: 1px solid #333;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #ddd;
-            font-weight: bold;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            background: #222;
-            border: 1px solid #444;
-            color: #fff;
-            border-radius: 5px;
-        }
-        .btn-submit {
-            background: #0d6efd;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-            font-weight: bold;
-        }
-        .btn-submit:hover {
-            background: #0b5ed7;
-        }
-        .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 15px;
-            color: #ccc;
-            text-decoration: none;
-        }
-    </style>
+    @vite('resources/css/captains/form.css')
 </head>
 
 <body>
@@ -73,9 +26,9 @@
 
         <main class="main-content">
             <div class="form-container">
-                <div class="form-header" style="text-align: center; margin-bottom: 20px;">
+                <div class="form-header">
                     <h2>💪 إضافة كابتن (مدرب) جديد</h2>
-                    <p style="color: #aaa;">أدخل بيانات المدرب الجديد لإنشاء حسابه</p>
+                    <p>أدخل بيانات المدرب الجديد لإنشاء حسابه</p>
                 </div>
 
                 @if ($errors->any())
@@ -111,7 +64,7 @@
                         <input type="password" name="password" required placeholder="كلمة مرور للدخول للوحة الكابتن (8 أحرف على الأقل)">
                     </div>
 
-                    <button type="submit" class="btn-submit">➕ إضافة الكابتن</button>
+                    <button type="submit" class="btn-submit btn-submit-create">➕ إضافة الكابتن</button>
                 </form>
                 <a href="{{ route('admin.captains.index') }}" class="back-link">← إلغاء وعودة للقائمة</a>
             </div>

@@ -16,7 +16,7 @@
                 <a href="{{ route('admin.index') }}" class="active">الرئيسية</a>
                 <a href="{{ route('admin.manage') }}">إدارة العملاء</a>
                 <a href="{{ route('admin.captains.index') }}">إدارة الكباتن</a>
-                <a href="#">جداول التمارين</a>
+                <a href="{{ route('workout.index') }}">جداول التمارين</a>
                 <a href="#">الأنظمة الغذائية</a>
             </nav>
         </aside>
@@ -32,15 +32,15 @@
             <section class="stats-grid">
                 <div class="stat-card active-filter" onclick="applyFilter('all', this)">
                     <h3>إجمالي المتدربين</h3>
-                    <div class="number">150</div>
+                    <div class="number">{{ $usersCount }}</div>
                 </div>
                 <div class="stat-card" onclick="applyFilter('active', this)">
                     <h3>المشتركون النشطون</h3>
-                    <div class="number">120</div>
+                    <div class="number">{{ $activeSubscribersCount }}</div>
                 </div>
                 <div class="stat-card" onclick="applyFilter('inactive', this)">
                     <h3>الاشتراكات المنتهية</h3>
-                    <div class="number">30</div>
+                    <div class="number">{{ $inactiveSubscribersCount }}</div>
                 </div>
             </section>
 
@@ -52,8 +52,8 @@
                             <th>الاسم</th>
                             <th>الحالة</th>
                             <th>الباقة</th>
-                            <th>عدد الايام</th>
-                            <th>عدد الأيام المتبقية</th>
+                            <th>الأيام المتبقية</th>
+                            <th>التمرين</th>
                         </tr>
                     </thead>
                     <tbody id="clients-body">
@@ -68,8 +68,19 @@
                                     @endif
                                 </td>
                                 <td>{{ $user->subscription?->name_plan ?? 'لا يوجد اشتراك' }}</td>
-                                <td>{{ $user->subscription?->duration ?? 0 }}</td>
                                 <td>{{ $user->subscription?->remaining_days ?? 0 }} يوم</td>
+                                <td>
+                                    @if ($user->subscription?->description)
+                                        <details style="cursor: pointer;">
+                                            <summary style="color: var(--primary); font-size: 13px;">🔎 عرض</summary>
+                                            <div style="background: #1a1a1a; padding: 10px; border-radius: 5px; margin-top: 5px; font-size: 13px; color: #ccc; border: 1px solid #333; position: absolute; z-index: 100; max-width: 250px;">
+                                                {{ $user->subscription->description }}
+                                            </div>
+                                        </details>
+                                    @else
+                                        <span style="color: var(--muted); font-size: 12px;">--</span>
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -7,7 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-
+use App\Models\Subscription;
 class AdminController extends Controller
 {
     protected $adminService;
@@ -19,10 +19,11 @@ class AdminController extends Controller
 
     public function index()
     {
-        // نطلب البيانات الجاهزة من السيرفس بدل ما نعالجها هنا
-        // الكنترولر وظيفته ياخد الداتا ويسلمها للـ View بس (SRP)
         $users = $this->adminService->getAllClients();
-        return view('admin.index', compact('users'));
+        $usersCount = $users->count();
+        $activeSubscribersCount = $users->where('current_status', 'active')->count();
+        $inactiveSubscribersCount = $users->where('current_status', 'inactive')->count();
+        return view('admin.index', compact('users','usersCount','activeSubscribersCount', 'inactiveSubscribersCount'));
     }
 
     public function createClient()
@@ -32,8 +33,6 @@ class AdminController extends Controller
 
     public function manage()
     {
-        // بدل ما كنا بنعمل User::all() ونجلب كل حاجة حتى المديرين (Admins)
-        // هنستخدم نفس الدالة اللي في السيرفس عشان نجيب المتدربين (العملاء) بس
         $users = $this->adminService->getAllClients();
         return view('admin.manage',compact('users'));
     }

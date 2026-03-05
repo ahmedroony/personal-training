@@ -1,336 +1,336 @@
 <mxfile host="65bd71144e">
     <diagram id="oDkP3wERTvdshghzDZ3w" name="Page-1">
-        <mxGraphModel dx="1041" dy="534" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="877" dy="569" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="2" value="البداية" style="ellipse;aspect=fixed;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+                <mxCell id="2" value="البداية" style="ellipse;aspect=fixed;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="1045" y="20" width="44" height="44" as="geometry"/>
                 </mxCell>
-                <mxCell id="3" value="تسجيل دخول الكابتن" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="3" value="تسجيل دخول الكابتن" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="985" y="114" width="164" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="4" value="لوحة التحكم" style="rhombus;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+                <mxCell id="4" value="لوحة التحكم" style="rhombus;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="1010" y="218" width="114" height="114" as="geometry"/>
                 </mxCell>
-                <mxCell id="5" value="اختر العملية" style="rhombus;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+                <mxCell id="5" value="اختر العملية" style="rhombus;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="609" y="406" width="115" height="115" as="geometry"/>
                 </mxCell>
-                <mxCell id="6" value="إدخال بيانات العميل: الاسم، السن، تاريخ الاشتراك" style="shape=parallelogram;perimeter=parallelogramPerimeter;fixedSize=1;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+                <mxCell id="6" value="إدخال بيانات العميل: الاسم، السن، تاريخ الاشتراك" style="shape=parallelogram;perimeter=parallelogramPerimeter;fixedSize=1;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="134" y="618" width="278" height="63" as="geometry"/>
                 </mxCell>
-                <mxCell id="7" value="اختيار الباقة والسعر" style="shape=parallelogram;perimeter=parallelogramPerimeter;fixedSize=1;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+                <mxCell id="7" value="اختيار الباقة والسعر" style="shape=parallelogram;perimeter=parallelogramPerimeter;fixedSize=1;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="202" y="860" width="155" height="39" as="geometry"/>
                 </mxCell>
-                <mxCell id="12" value="حفظ العميل في قاعدة البيانات" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+                <mxCell id="12" value="حفظ العميل في قاعدة البيانات" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="286" y="1216" width="165" height="82" as="geometry"/>
                 </mxCell>
-                <mxCell id="13" value="تحديث بيانات العميل" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="13" value="تحديث بيانات العميل" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="585" y="1112" width="164" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="14" value="حذف بيانات العميل" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="14" value="حذف بيانات العميل" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="799" y="1112" width="158" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="15" value="تحديث قاعدة البيانات" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+                <mxCell id="15" value="تحديث قاعدة البيانات" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="817" y="1218" width="121" height="76" as="geometry"/>
                 </mxCell>
-                <mxCell id="16" value="بحث واختيار العميل" style="shape=parallelogram;perimeter=parallelogramPerimeter;fixedSize=1;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+                <mxCell id="16" value="بحث واختيار العميل" style="shape=parallelogram;perimeter=parallelogramPerimeter;fixedSize=1;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="1198" y="444" width="157" height="39" as="geometry"/>
                 </mxCell>
-                <mxCell id="17" value="نوع الخطة" style="rhombus;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+                <mxCell id="17" value="نوع الخطة" style="rhombus;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="1222" y="595" width="109" height="109" as="geometry"/>
                 </mxCell>
-                <mxCell id="18" value="هل يوجد نظام؟" style="rhombus;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+                <mxCell id="18" value="هل يوجد نظام؟" style="rhombus;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="1083" y="778" width="132" height="132" as="geometry"/>
                 </mxCell>
-                <mxCell id="19" value="تجديد/تعديل النظام" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="19" value="تجديد/تعديل النظام" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="921" y="984" width="157" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="20" value="إنشاء نظام جديد وتخزينه" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="20" value="إنشاء نظام جديد وتخزينه" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="1128" y="984" width="187" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="21" value="ربط الخطة بالعميل" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="21" value="ربط الخطة بالعميل" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="1143" y="1112" width="157" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="22" value="تحديد التمارين المناسبة للمستوى" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="22" value="تحديد التمارين المناسبة للمستوى" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="1365" y="984" width="224" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="23" value="حفظ التغييرات" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+                <mxCell id="23" value="حفظ التغييرات" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="1177" y="1221" width="89" height="70" as="geometry"/>
                 </mxCell>
-                <mxCell id="24" value="النهاية" style="ellipse;aspect=fixed;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+                <mxCell id="24" value="النهاية" style="ellipse;aspect=fixed;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="855" y="1347" width="45" height="45" as="geometry"/>
                 </mxCell>
-                <mxCell id="25" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.51;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="2" target="3">
+                <mxCell id="25" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.51;exitY=1;entryX=0.5;entryY=0;rounded=0;" parent="1" source="2" target="3" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="26" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.51;entryY=0;rounded=0;" edge="1" parent="1" source="3" target="4">
+                <mxCell id="26" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.51;entryY=0;rounded=0;" parent="1" source="3" target="4" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="27" value="إدارة العملاء" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.62;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="4" target="5">
+                <mxCell id="27" value="إدارة العملاء" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.62;entryX=0.5;entryY=0;rounded=0;" parent="1" source="4" target="5" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="667" y="369"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="28" value="إضافة عميل جديد" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.62;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="5" target="6">
+                <mxCell id="28" value="إضافة عميل جديد" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.62;entryX=0.5;entryY=0;rounded=0;" parent="1" source="5" target="6" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="273" y="558"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="29" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="6" target="7">
+                <mxCell id="29" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="6" target="7" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points"/>
                         <mxPoint x="280" y="850" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="30" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1.01;rounded=0;" edge="1" parent="1" source="7" target="12">
+                <mxCell id="30" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1.01;rounded=0;" parent="1" source="7" target="12" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points"/>
                         <mxPoint x="273" y="991" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="37" value="تعديل بيانات" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=-0.01;rounded=0;" edge="1" parent="1" source="5" target="13">
+                <mxCell id="37" value="تعديل بيانات" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=-0.01;rounded=0;" parent="1" source="5" target="13" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="38" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.99;entryY=0.27;rounded=0;" edge="1" parent="1" source="13" target="12">
+                <mxCell id="38" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.99;entryY=0.27;rounded=0;" parent="1" source="13" target="12" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="667" y="1191"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="39" value="حذف عميل" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.73;entryX=0.5;entryY=-0.01;rounded=0;" edge="1" parent="1" source="5" target="14">
+                <mxCell id="39" value="حذف عميل" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.73;entryX=0.5;entryY=-0.01;rounded=0;" parent="1" source="5" target="14" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="878" y="558"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="40" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.5;entryY=0.01;rounded=0;" edge="1" parent="1" source="14" target="15">
+                <mxCell id="40" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.5;entryY=0.01;rounded=0;" parent="1" source="14" target="15" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="41" value="إدارة الخطط" style="curved=1;startArrow=none;endArrow=block;exitX=1.01;exitY=0.73;entryX=0.5;entryY=0.01;rounded=0;" edge="1" parent="1" source="4" target="16">
+                <mxCell id="41" value="إدارة الخطط" style="curved=1;startArrow=none;endArrow=block;exitX=1.01;exitY=0.73;entryX=0.5;entryY=0.01;rounded=0;" parent="1" source="4" target="16" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="1277" y="369"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="42" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1.01;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="16" target="17">
+                <mxCell id="42" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1.01;entryX=0.5;entryY=0;rounded=0;" parent="1" source="16" target="17" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="43" value="نظام غذائي" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.86;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="17" target="18">
+                <mxCell id="43" value="نظام غذائي" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.86;entryX=0.5;entryY=0;rounded=0;" parent="1" source="17" target="18" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="1149" y="741"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="44" value="نعم" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.84;entryX=0.5;entryY=-0.01;rounded=0;" edge="1" parent="1" source="18" target="19">
+                <mxCell id="44" value="نعم" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.84;entryX=0.5;entryY=-0.01;rounded=0;" parent="1" source="18" target="19" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="1000" y="947"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="45" value="لا" style="curved=1;startArrow=none;endArrow=block;exitX=0.85;exitY=1;entryX=0.5;entryY=-0.01;rounded=0;" edge="1" parent="1" source="18" target="20">
+                <mxCell id="45" value="لا" style="curved=1;startArrow=none;endArrow=block;exitX=0.85;exitY=1;entryX=0.5;entryY=-0.01;rounded=0;" parent="1" source="18" target="20" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="1221" y="947"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="46" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0;entryY=0.07;rounded=0;" edge="1" parent="1" source="19" target="21">
+                <mxCell id="46" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0;entryY=0.07;rounded=0;" parent="1" source="19" target="21" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="1000" y="1075"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="47" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.5;entryY=-0.01;rounded=0;" edge="1" parent="1" source="20" target="21">
+                <mxCell id="47" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.5;entryY=-0.01;rounded=0;" parent="1" source="20" target="21" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="48" value="تمارين" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.73;entryX=0.5;entryY=-0.01;rounded=0;" edge="1" parent="1" source="17" target="22">
+                <mxCell id="48" value="تمارين" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.73;entryX=0.5;entryY=-0.01;rounded=0;" parent="1" source="17" target="22" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="1477" y="741"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="49" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=1;entryY=0.13;rounded=0;" edge="1" parent="1" source="22" target="21">
+                <mxCell id="49" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=1;entryY=0.13;rounded=0;" parent="1" source="22" target="21" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="1477" y="1075"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="50" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="21" target="23">
+                <mxCell id="50" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.5;entryY=0;rounded=0;" parent="1" source="21" target="23" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="51" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0;entryY=0.46;rounded=0;" edge="1" parent="1" source="12" target="24">
+                <mxCell id="51" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0;entryY=0.46;rounded=0;" parent="1" source="12" target="24" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="368" y="1322"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="52" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1.01;entryX=1.01;entryY=0.44;rounded=0;" edge="1" parent="1" source="23" target="24">
+                <mxCell id="52" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1.01;entryX=1.01;entryY=0.44;rounded=0;" parent="1" source="23" target="24" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="1221" y="1322"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="53" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.51;entryY=0;rounded=0;" edge="1" parent="1" source="15" target="24">
+                <mxCell id="53" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.51;entryY=0;rounded=0;" parent="1" source="15" target="24" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="54" value="منطقة العميل" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
-                    <mxGeometry x="167" y="2100" width="561" height="1043" as="geometry"/>
+                <mxCell id="54" value="منطقة العميل" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
+                    <mxGeometry x="168" y="2099" width="561" height="1043" as="geometry"/>
                 </mxCell>
-                <mxCell id="55" value="منطقة الكابتن" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="55" value="منطقة الكابتن" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="935" y="2229" width="570" height="756" as="geometry"/>
                 </mxCell>
-                <mxCell id="56" value="بداية التطبيق" style="ellipse;aspect=fixed;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+                <mxCell id="56" value="بداية التطبيق" style="ellipse;aspect=fixed;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="612" y="1410" width="79" height="79" as="geometry"/>
                 </mxCell>
-                <mxCell id="57" value="هل لديك حساب؟" style="rhombus;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+                <mxCell id="57" value="هل لديك حساب؟" style="rhombus;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="582" y="1539" width="139" height="139" as="geometry"/>
                 </mxCell>
-                <mxCell id="58" value="إنشاء حساب جديد" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="58" value="إنشاء حساب جديد" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="330" y="1752" width="151" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="59" value="اختر نوع الحساب" style="rhombus;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+                <mxCell id="59" value="اختر نوع الحساب" style="rhombus;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="332" y="1880" width="145" height="145" as="geometry"/>
                 </mxCell>
-                <mxCell id="60" value="استكمال بيانات الكابتن" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="60" value="استكمال بيانات الكابتن" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="1286" y="2295" width="173" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="61" value="استكمال بيانات العميل" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="61" value="استكمال بيانات العميل" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="319" y="2125" width="171" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="62" value="تسجيل الدخول" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="62" value="تسجيل الدخول" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="765" y="2125" width="133" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="63" value="فحص الصلاحية" style="rhombus;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+                <mxCell id="63" value="فحص الصلاحية" style="rhombus;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="763" y="2254" width="137" height="137" as="geometry"/>
                 </mxCell>
-                <mxCell id="64" value="لوحة تحكم الكابتن" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="64" value="لوحة تحكم الكابتن" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="1174" y="2506" width="151" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="65" value="واجهة العميل" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="65" value="واجهة العميل" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="315" y="2779" width="127" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="66" value="إنشاء/عرض كود الكابتن الخاص" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="66" value="إنشاء/عرض كود الكابتن الخاص" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="970" y="2675" width="230" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="67" value="إدارة التمارين والأنظمة الغذائية" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="67" value="إدارة التمارين والأنظمة الغذائية" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="1251" y="2675" width="219" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="68" value="رفع التمارين للنظام" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="68" value="رفع التمارين للنظام" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="1281" y="2779" width="159" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="69" value="حفظ في قاعدة البيانات" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+                <mxCell id="69" value="حفظ في قاعدة البيانات" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="1296" y="2883" width="129" height="77" as="geometry"/>
                 </mxCell>
-                <mxCell id="70" value="إدخال كود الكابتن" style="shape=parallelogram;perimeter=parallelogramPerimeter;fixedSize=1;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+                <mxCell id="70" value="إدخال كود الكابتن" style="shape=parallelogram;perimeter=parallelogramPerimeter;fixedSize=1;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="333" y="2303" width="144" height="39" as="geometry"/>
                 </mxCell>
-                <mxCell id="71" value="التحقق من الكود" style="rhombus;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+                <mxCell id="71" value="التحقق من الكود" style="rhombus;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="286" y="2465" width="136" height="136" as="geometry"/>
                 </mxCell>
-                <mxCell id="72" value="ربط العميل بالكابتن" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="72" value="ربط العميل بالكابتن" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="521" y="2675" width="159" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="73" value="إعادة المحاولة" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="73" value="إعادة المحاولة" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="339" y="2675" width="131" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="74" value="عرض النظام الغذائي" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="74" value="عرض النظام الغذائي" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="288" y="3049" width="167" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="75" value="عرض التمارين المخصصة" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="75" value="عرض التمارين المخصصة" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="491" y="2895" width="199" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="76" value="تجديد الباقة" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="76" value="تجديد الباقة" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="202" y="2895" width="116" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="77" value="جلب تمارين الكابتن المرتبط به" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+                <mxCell id="77" value="جلب تمارين الكابتن المرتبط به" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="521" y="3035" width="172" height="82" as="geometry"/>
                 </mxCell>
-                <mxCell id="78" value="بوابة الدفع" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="78" value="بوابة الدفع" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="20" y="3049" width="112" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="79" value="النهاية" style="ellipse;aspect=fixed;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+                <mxCell id="79" value="النهاية" style="ellipse;aspect=fixed;strokeWidth=2;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="334" y="3193" width="45" height="45" as="geometry"/>
                 </mxCell>
-                <mxCell id="80" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="56" target="57">
+                <mxCell id="80" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" parent="1" source="56" target="57" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="81" value="لا" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.72;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="57" target="58">
+                <mxCell id="81" value="لا" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.72;entryX=0.5;entryY=0;rounded=0;" parent="1" source="57" target="58" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="405" y="1715"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="82" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="58" target="59">
+                <mxCell id="82" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" parent="1" source="58" target="59" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="83" value="أنا كابتن" style="curved=1;startArrow=none;endArrow=block;exitX=1.01;exitY=0.56;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="59" target="60">
+                <mxCell id="83" value="أنا كابتن" style="curved=1;startArrow=none;endArrow=block;exitX=1.01;exitY=0.56;entryX=0.5;entryY=0;rounded=0;" parent="1" source="59" target="60" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="1372" y="2063"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="84" value="أنا عميل" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=-0.01;rounded=0;" edge="1" parent="1" source="59" target="61">
+                <mxCell id="84" value="أنا عميل" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=-0.01;rounded=0;" parent="1" source="59" target="61" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="85" value="نعم" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.8;entryX=0.5;entryY=-0.01;rounded=0;" edge="1" parent="1" source="57" target="62">
+                <mxCell id="85" value="نعم" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.8;entryX=0.5;entryY=-0.01;rounded=0;" parent="1" source="57" target="62" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="832" y="1715"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="86" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="62" target="63">
+                <mxCell id="86" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.5;entryY=0;rounded=0;" parent="1" source="62" target="63" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="87" value="كابتن" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.77;entryX=0.12;entryY=0;rounded=0;" edge="1" parent="1" source="63" target="64">
+                <mxCell id="87" value="كابتن" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.77;entryX=0.12;entryY=0;rounded=0;" parent="1" source="63" target="64" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="1027" y="2428"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="88" value="عميل" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.59;entryX=0;entryY=0.08;rounded=0;" edge="1" parent="1" source="63" target="65">
+                <mxCell id="88" value="عميل" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.59;entryX=0;entryY=0.08;rounded=0;" parent="1" source="63" target="65" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="233" y="2428"/>
@@ -338,64 +338,64 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="89" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.71;entryY=0;rounded=0;" edge="1" parent="1" source="60" target="64">
+                <mxCell id="89" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.71;entryY=0;rounded=0;" parent="1" source="60" target="64" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="1372" y="2428"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="90" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.22;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="64" target="66">
+                <mxCell id="90" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.22;exitY=1;entryX=0.5;entryY=0;rounded=0;" parent="1" source="64" target="66" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="1086" y="2638"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="91" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.69;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="64" target="67">
+                <mxCell id="91" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.69;exitY=1;entryX=0.5;entryY=0;rounded=0;" parent="1" source="64" target="67" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="1361" y="2638"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="92" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="67" target="68">
+                <mxCell id="92" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" parent="1" source="67" target="68" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="93" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="68" target="69">
+                <mxCell id="93" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" parent="1" source="68" target="69" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="94" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.5;entryY=-0.01;rounded=0;" edge="1" parent="1" source="61" target="70">
+                <mxCell id="94" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.5;entryY=-0.01;rounded=0;" parent="1" source="61" target="70" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="95" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.43;exitY=0.99;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="70" target="71">
+                <mxCell id="95" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.43;exitY=0.99;entryX=0.5;entryY=0;rounded=0;" parent="1" source="70" target="71" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="354" y="2428"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="96" value="كود صحيح" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.71;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="71" target="72">
+                <mxCell id="96" value="كود صحيح" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.71;entryX=0.5;entryY=0;rounded=0;" parent="1" source="71" target="72" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="600" y="2638"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="97" value="كود خطأ" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.34;entryY=0;rounded=0;" edge="1" parent="1" source="71" target="73">
+                <mxCell id="97" value="كود خطأ" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.34;entryY=0;rounded=0;" parent="1" source="71" target="73" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="354" y="2638"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="98" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.74;exitY=0;entryX=0.59;entryY=0.99;rounded=0;" edge="1" parent="1" source="73" target="70">
+                <mxCell id="98" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.74;exitY=0;entryX=0.59;entryY=0.99;rounded=0;" parent="1" source="73" target="70" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="478" y="2638"/>
@@ -403,42 +403,42 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="99" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=1;entryY=0.23;rounded=0;" edge="1" parent="1" source="72" target="65">
+                <mxCell id="99" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=1;entryY=0.23;rounded=0;" parent="1" source="72" target="65" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="600" y="2754"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="100" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.47;exitY=1;entryX=0.5;entryY=0.01;rounded=0;" edge="1" parent="1" source="65" target="74">
+                <mxCell id="100" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.47;exitY=1;entryX=0.5;entryY=0.01;rounded=0;" parent="1" source="65" target="74" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="371" y="2858"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="101" value="" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.79;entryX=0.5;entryY=-0.01;rounded=0;" edge="1" parent="1" source="65" target="75">
+                <mxCell id="101" value="" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.79;entryX=0.5;entryY=-0.01;rounded=0;" parent="1" source="65" target="75" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="590" y="2858"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="102" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.02;exitY=1;entryX=0.5;entryY=-0.01;rounded=0;" edge="1" parent="1" source="65" target="76">
+                <mxCell id="102" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.02;exitY=1;entryX=0.5;entryY=-0.01;rounded=0;" parent="1" source="65" target="76" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="261" y="2858"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="103" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.44;entryY=0;rounded=0;" edge="1" parent="1" source="75" target="77">
+                <mxCell id="103" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.44;entryY=0;rounded=0;" parent="1" source="75" target="77" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="590" y="3010"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="104" value="" style="curved=1;dashed=1;dashPattern=2 3;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.68;entryY=0;rounded=0;" edge="1" parent="1" source="69" target="77">
+                <mxCell id="104" value="" style="curved=1;dashed=1;dashPattern=2 3;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.68;entryY=0;rounded=0;" parent="1" source="69" target="77" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="1361" y="2985"/>
@@ -446,28 +446,28 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="105" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=1;entryY=0.13;rounded=0;" edge="1" parent="1" source="76" target="78">
+                <mxCell id="105" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=1;entryY=0.13;rounded=0;" parent="1" source="76" target="78" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="261" y="3010"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="106" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1.01;entryX=-0.01;entryY=0.41;rounded=0;" edge="1" parent="1" source="78" target="79">
+                <mxCell id="106" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1.01;entryX=-0.01;entryY=0.41;rounded=0;" parent="1" source="78" target="79" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="76" y="3168"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="107" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1.01;entryX=0.66;entryY=-0.01;rounded=0;" edge="1" parent="1" source="74" target="79">
+                <mxCell id="107" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1.01;entryX=0.66;entryY=-0.01;rounded=0;" parent="1" source="74" target="79" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="371" y="3168"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="108" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1.01;entryX=1;entryY=0.4;rounded=0;" edge="1" parent="1" source="77" target="79">
+                <mxCell id="108" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1.01;entryX=1;entryY=0.4;rounded=0;" parent="1" source="77" target="79" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="607" y="3168"/>
@@ -478,7 +478,7 @@
         </mxGraphModel>
     </diagram>
     <diagram name="Page-2" id="0lpN85xy1WGVKYMAPuR-">
-        <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="658" dy="427" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>

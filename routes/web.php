@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CaptainController;
-
+use App\Http\Controllers\WorkoutRoutinesController;
+    // ----------------- عملاء -----------------
 route::middleware(['auth'])->group(function () {
     route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     route::get('/admin/manage', [AdminController::class, 'manage'])->name('admin.manage');
@@ -14,14 +15,19 @@ route::middleware(['auth'])->group(function () {
     route::get('/admin/editClient/{id}', [AdminController::class, 'editClient'])->name('admin.editClient');
     route::put('/admin/updateClient/{id}', [AdminController::class, 'updateClient'])->name('admin.updateClient');
     route::delete('/admin/deleteClient/{id}', [AdminController::class, 'deleteClient'])->name('admin.deleteClient');
+    route::get('/admin/search', [AdminController::class, 'search'])->name('admin.search');
     // ----------------- كباتن -----------------
-    
+
     route::get('/admin/captains', [CaptainController::class, 'index'])->name('admin.captains.index');
     route::get('/admin/captains/create', [CaptainController::class, 'create'])->name('admin.captains.create');
     route::post('/admin/captains/store', [CaptainController::class, 'store'])->name('admin.captains.store');
     route::get('/admin/captains/{id}/edit', [CaptainController::class, 'edit'])->name('admin.captains.edit');
     route::put('/admin/captains/{id}', [CaptainController::class, 'update'])->name('admin.captains.update');
     route::delete('/admin/captains/{id}', [CaptainController::class, 'destroy'])->name('admin.captains.destroy');
+        // ----------------- جداول التمارين -----------------
+    route::get('/admin/workoutroutines',[WorkoutRoutinesController::class,'index'])->name('workout.index');
+    route::post('/admin/workoutroutines',[WorkoutRoutinesController::class,'store'])->name('workout.store');
+
 });
 //--------------------------------------------------------------------------------------------
 route::get('/register',[AuthController::class, 'showRegistar'])->name('show.register');

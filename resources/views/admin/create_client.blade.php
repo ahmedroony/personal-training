@@ -51,7 +51,7 @@
                     <div class="form-group">
                         <label class="form-label">البريد الإلكتروني</label>
                         <input type="email" class="form-input" placeholder="example@mail.com" name="email"
-                            value="{{ old('email') }}" required>
+                        value="{{ old('email') }}" required>
                     </div>
 
                     <div class="form-group">

@@ -12,7 +12,6 @@ class AdminService implements AdminServiceInterface
     public function index()
     {
         $users = User::all();
-
         return $users;
     }
 
@@ -45,7 +44,6 @@ class AdminService implements AdminServiceInterface
         $user->phone_number = $data['phone'];
         $user->role = 2;
         $user->save();
-        // حساب تاريخ الانتهاء هنا في السيرفس بدل الكنترولر عشان نحقق الـ SRP
         $endsAt = Carbon::parse($data['starts_at'])->addDays((int) $data['duration']);
 
         $user->subscriptions()->create([
@@ -88,14 +86,14 @@ class AdminService implements AdminServiceInterface
                 'name_plan' => $data['name_plan'],
                 'duration'  => $data['duration'],
             ];
-            
+
             if ($subscription->starts_at) {
                 // نحسب تاريخ الانتهاء بناءً على تاريخ البداية الأصلي عشان الأيام تتخصم صح
                 $updateData['ends_at'] = $subscription->starts_at->copy()->addDays((int) $data['duration']);
             } else {
                 $updateData['ends_at'] = \Carbon\Carbon::today()->addDays((int) $data['duration']);
             }
-            
+
             $subscription->update($updateData);
         } else {
             $newEndDate = \Carbon\Carbon::today()->addDays((int) $data['duration']);
