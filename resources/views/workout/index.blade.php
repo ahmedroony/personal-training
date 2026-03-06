@@ -30,22 +30,8 @@
                     <p>اختر متدرب واكتب التمارين أو الملاحظات الخاصة به</p>
                 </div>
             </header>
-            @if (session('success'))
-                <div style="background-color: #198754; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                    {{ session('success') }}
-                </div>
-            @endif
 
-            @if ($errors->any())
-                <div style="background-color: #dc3545; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                    <ul style="margin: 0; padding-right: 20px;">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
+            {{-- اختيار المتدرب --}}
             <section class="form-card">
                 <h3>🏋️ اختر المتدرب</h3>
                 <form action="{{ route('workout.store') }}" method="POST" class="client-form">
@@ -68,6 +54,7 @@
             </section>
         </main>
     </div>
+
 </body>
 </html>
 
