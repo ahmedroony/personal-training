@@ -1,258 +1,261 @@
 * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
-        }
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Cairo", sans-serif;
+}
 
-        body {
-            background-color: #000000;
-            color: white;
-            min-height: 100vh;
-            direction: rtl;
-        }
+body {
+    background-color: #000000;
+    color: white;
+    min-height: 100vh;
+    direction: rtl;
+}
 
-        .dashboard-container {
-            display: flex;
-            min-height: 100vh;
-        }
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
 
-        /* 2. القائمة الجانبية (Sidebar) */
-        .sidebar {
-            width: 260px;
-            background-color: #080808;
-            /* أسود أغمق قليلاً */
-            border-left: 1px solid #2d2d2d;
-            padding: 30px 20px;
-            position: fixed;
-            height: 100vh;
-            z-index: 1000;
-        }
+/* 2. القائمة الجانبية (Sidebar) */
+.sidebar {
+    width: 260px;
+    background-color: #080808;
+    /* أسود أغمق قليلاً */
+    border-left: 1px solid #2d2d2d;
+    padding: 30px 20px;
+    position: fixed;
+    height: 100vh;
+    z-index: 1000;
+}
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #007bff;
-            text-align: center;
-            margin-bottom: 40px;
-        }
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 40px;
+}
 
-        .sidebar nav ul li {
-            padding: 12px 15px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            transition: 0.3s;
-            color: #aaa;
-            list-style: none;
-        }
+.sidebar nav ul li {
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: 0.3s;
+    color: #aaa;
+    list-style: none;
+}
 
-        .sidebar nav ul li a {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
 
-        .sidebar nav ul li:hover,
-        .sidebar nav ul li.active {
-            background-color: #1a1a1a;
-            color: #fff;
-            border-right: 4px solid #007bff;
-        }
+.sidebar nav ul li:hover,
+.sidebar nav ul li.active {
+    background-color: #1a1a1a;
+    color: #fff;
+    border-right: 4px solid #007bff;
+}
 
-        /* 3. المحتوى الرئيسي */
-        .main-content {
-            flex: 1;
-            margin-right: 260px;
-            /* مساحة للـ Sidebar */
-            padding: 40px;
-        }
+/* 3. المحتوى الرئيسي */
+.main-content {
+    flex: 1;
+    margin-right: 260px;
+    /* مساحة للـ Sidebar */
+    padding: 40px;
+}
 
-        /* 4. الهيدر (من صفحة التعديل) */
-        .header-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 15px;
-        }
+/* 4. الهيدر (من صفحة التعديل) */
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 15px;
+}
 
-        .header-section h1 {
-            font-size: 26px;
-            color: #fff;
-        }
+.header-section h1 {
+    font-size: 26px;
+    color: #fff;
+}
 
-        .header-section p {
-            color: #888;
-            font-size: 14px;
-            margin-top: 5px;
-        }
+.header-section p {
+    color: #888;
+    font-size: 14px;
+    margin-top: 5px;
+}
 
-        /* 5. الكروت (الفلاتر والجدول) */
-        .form-card {
-            background: #1a1a1a;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-            border: 1px solid #2d2d2d;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
+/* 5. الكروت (الفلاتر والجدول) */
+.form-card {
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 1px solid #2d2d2d;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
 
-        .form-card h3 {
-            color: #007bff;
-            margin-bottom: 20px;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.form-card h3 {
+    color: #007bff;
+    margin-bottom: 20px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-        /* 6. الفلاتر */
-        .filters-grid {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
+/* 6. الفلاتر */
+.filters-grid {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
 
-        input[type="text"],
-        select {
-            background: #111;
-            border: 1px solid #444;
-            color: #fff;
-            padding: 10px 15px;
-            border-radius: 8px;
-            outline: none;
-            transition: 0.3s;
-        }
+input[type="text"],
+select {
+    background: #111;
+    border: 1px solid #444;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.3s;
+}
 
-        input:focus,
-        select:focus {
-            border-color: #007bff;
-        }
+input:focus,
+select:focus {
+    border-color: #007bff;
+}
 
-        .btn-primary {
-            background: #007bff;
-            color: white;
-            padding: 10px 25px;
-            border-radius: 8px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-        }
+.btn-primary {
+    background: #007bff;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
 
-        /* 7. الجدول المطور */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            table-layout: auto;
-            /* بيخلي الأعمدة تتوزع حسب المحتوى تلقائياً */
-        }
+/* 7. الجدول المطور */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    table-layout: auto;
+    /* بيخلي الأعمدة تتوزع حسب المحتوى تلقائياً */
+}
 
-        thead tr {
-            background-color: rgba(255, 255, 255, 0.02);
-            /* تمييز بسيط للهيدر */
-        }
+thead tr {
+    background-color: rgba(255, 255, 255, 0.02);
+    /* تمييز بسيط للهيدر */
+}
 
-        th {
-            color: #888;
-            text-align: right;
-            /* محاذاة لليمين عشان العربي */
-            padding: 15px 20px;
-            border-bottom: 2px solid #2d2d2d;
-            font-size: 14px;
-            white-space: nowrap;
-            /* بيمنع العنوان يتقسم على سطرين */
-        }
+th {
+    color: #888;
+    text-align: right;
+    /* محاذاة لليمين عشان العربي */
+    padding: 15px 20px;
+    border-bottom: 2px solid #2d2d2d;
+    font-size: 14px;
+    white-space: nowrap;
+    /* بيمنع العنوان يتقسم على سطرين */
+}
 
-        td {
-            padding: 15px 20px;
-            border-bottom: 1px solid #2d2d2d;
-            vertical-align: middle;
-            color: #efefef;
-            text-align: right;
-            /* لازم الـ td يكون نفس محاذاة الـ th */
-        }
+td {
+    padding: 15px 20px;
+    border-bottom: 1px solid #2d2d2d;
+    vertical-align: middle;
+    color: #efefef;
+    text-align: right;
+    /* لازم الـ td يكون نفس محاذاة الـ th */
+}
 
-        .user-info-cell {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            justify-content: flex-start;
-            /* بيخلي الأفاتار والاسم لازقين في يمين الخلية */
-        }
+.user-info-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: flex-start;
+    /* بيخلي الأفاتار والاسم لازقين في يمين الخلية */
+}
 
-        /* حل مشكلة الإزاحة: نمنع الـ Flex على صفوف الجدول */
-        tr {
-            display: table-row !important;
-        }
+/* حل مشكلة الإزاحة: نمنع الـ Flex على صفوف الجدول */
+tr {
+    display: table-row !important;
+}
 
-        tbody tr:hover {
-            background: rgba(255, 255, 255, 0.02);
-        }
+tbody tr {
+    transition: background 0.2s ease;
+}
 
-        /* الأفاتار والحالة */
-        .user-avatar {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #007bff, #00d2ff);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
+tbody tr:hover {
+    background: rgba(0, 123, 255, 0.05);
+}
 
-        .badge {
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: bold;
-        }
+/* الأفاتار والحالة */
+.user-avatar {
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, #007bff, #00d2ff);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
 
-        .badge.active {
-            background: rgba(40, 167, 69, 0.1);
-            color: #28a745;
-        }
+.badge {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+}
 
-        .badge.inactive {
-            background: rgba(220, 53, 69, 0.1);
-            color: #dc3545;
-        }
+.badge.active {
+    background: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
 
-        .action-btns {
-            display: flex;
-            gap: 10px;
-        }
+.badge.inactive {
+    background: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+}
 
-        .action-btns a,
-        .action-btns button {
-            background: #2d2d2d;
-            color: white;
-            border: none;
-            padding: 8px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+.action-btns {
+    display: flex;
+    gap: 10px;
+}
 
-        .action-btns a:hover {
-            transform: scale(1.1);
-            background: #3d3d3d;
-        }
+.action-btns a,
+.action-btns button {
+    background: #2d2d2d;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
 
-        /* الموبايل */
-        @media (max-width: 992px) {
-            .sidebar {
-                display: none;
-            }
+.action-btns a:hover {
+    transform: scale(1.1);
+    background: #3d3d3d;
+}
 
-            .main-content {
-                margin-right: 0;
-                padding: 20px;
-            }
-        }
-        
+/* الموبايل */
+@media (max-width: 992px) {
+    .sidebar {
+        display: none;
+    }
+
+    .main-content {
+        margin-right: 0;
+        padding: 20px;
+    }
+}
