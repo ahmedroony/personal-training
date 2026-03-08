@@ -17,7 +17,7 @@
                 <a href="{{ route('admin.manage') }}">إدارة العملاء</a>
                 <a href="{{ route('admin.captains.index') }}">إدارة الكباتن</a>
                 <a href="{{ route('workout.index') }}">جداول التمارين</a>
-                <a href="#">الأنظمة الغذائية</a>
+                <a href="{{ route('meals.index') }}">الأنظمة الغذائية</a>
             </nav>
         </aside>
 
