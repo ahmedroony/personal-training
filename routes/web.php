@@ -3,7 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CaptainController;
-use App\Http\Controllers\MealsController;
+use App\Http\Controllers\DietPlanController;
 use App\Http\Controllers\WorkoutRoutinesController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +18,7 @@ route::middleware(['auth'])->group(function () {
     route::put('/admin/updateClient/{id}', [AdminController::class, 'updateClient'])->name('admin.updateClient');
     route::delete('/admin/deleteClient/{id}', [AdminController::class, 'deleteClient'])->name('admin.deleteClient');
     route::get('/admin/search', [AdminController::class, 'search'])->name('admin.search');
+    route::get('/admin/client/{id}', [AdminController::class, 'showClient'])->name('admin.client.show');
     // ----------------- كباتن -----------------
 
     route::get('/admin/captains', [CaptainController::class, 'index'])->name('admin.captains.index');
@@ -30,7 +31,8 @@ route::middleware(['auth'])->group(function () {
     route::get('/admin/workoutroutines', [WorkoutRoutinesController::class, 'index'])->name('workout.index');
     route::post('/admin/workoutroutines', [WorkoutRoutinesController::class, 'store'])->name('workout.store');
     // ----------------- الانظمه  -----------------
-    route::get('/admin/meals', [MealsController::class, 'index'])->name('meals.index');
+    route::get('/admin/meals', [DietPlanController::class, 'index'])->name('diet_plans.index');
+    route::post('/admin/meals', [DietPlanController::class, 'store'])->name('diet_plans.store');
 });
 // --------------------------------------------------------------------------------------------
 route::get('/register', [AuthController::class, 'showRegistar'])->name('show.register');

@@ -19,7 +19,7 @@
                     <li><a href="{{ route('admin.manage') }}"> إدارة العملاء</a></li>
                     <li class="active"><a href="{{ route('admin.captains.index') }}"> إدارة الكباتن</a></li>
                     <li><a href="#"> جداول التمارين</a></li>
-                    <li><a href="#"> الأنظمة الغذائية</a></li>
+                    <li><a href="{{ route('diet_plans.index') }}"> الأنظمة الغذائية</a></li>
                 </ul>
             </nav>
         </aside>

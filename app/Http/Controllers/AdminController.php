@@ -74,4 +74,10 @@ class AdminController extends Controller
         $this->adminService->deleteClient($id);
         return redirect()->route('admin.index')->with('success', 'تم حذف المتدرب بنجاح.');
     }
+
+    public function showClient($id)
+    {
+        $user = $this->adminService->getClientById($id);
+        return view('admin.client_details', compact('user'));
+    }
 }

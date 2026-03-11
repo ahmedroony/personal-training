@@ -119,4 +119,11 @@ class AdminService implements AdminServiceInterface
 
         return false;
     }
+
+    public function getClientById($id)
+    {
+        return User::where('role', 2)
+            ->with(['subscription', 'dietPlans'])
+            ->findOrFail($id);
+    }
 }

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الأنظمة الغذائية - GYM CORE</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-    @vite('resources/css/meals/index.css')
+    @vite('resources/css/diet_plans/index.css')
 </head>
 
 <body>
@@ -19,34 +19,48 @@
                     <li><a href="{{ route('admin.manage') }}">إدارة العملاء</a></li>
                     <li><a href="{{ route('admin.captains.index') }}">إدارة الكباتن</a></li>
                     <li><a href="{{ route('workout.index') }}">جداول التمارين</a></li>
-                    <li class="active"><a href="{{ route('meals.index') }}">الأنظمة الغذائية</a></li>
+                    <li class="active"><a href="{{ route('diet_plans.index') }}">الأنظمة الغذائية</a></li>
                 </ul>
             </nav>
         </aside>
 
         <main class="main-content">
+            @if ($errors->any())
+                <div
+                    style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 20px; text-align: right;">
+                    <strong>عفواً، يوجد أخطاء في البيانات:</strong>
+                    <ul style="margin-top: 10px;">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <header class="header-section">
                 <div>
                     <h1>الأنظمة الغذائية</h1>
                     <p>إدارة وتعيين الأنظمة الغذائية بطريقة سهلة واحترافية</p>
                 </div>
             </header>
-
             <!-- 1. تعيين المتدربين -->
             <section class="form-card">
                 <h3>👥 اختيار المتدربين</h3>
-                <div class="select-clients">
-                    <label>الرجاء تحديد متدرب أو أكثر لتعيين النظام لهم:</label>
-                    <select multiple class="custom-select">
-                        @foreach ($users as $user)
-                            <option value="{{ $user->id }}">{{$user->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
+                <form action="{{ route('diet_plans.store') }}" method="POST">
+                    <div class="select-clients">
+                        <label>الرجاء تحديد متدرب أو أكثر لتعيين النظام لهم:</label>
+                        <select multiple class="custom-select" name="user_id">
+                            @foreach ($users as $user)
+                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
             </section>
 
             <!-- 2. النظام الغذائي الحر (النوتة) والقوالب -->
             <section class="form-card">
+                @csrf
+                @method('POST')
                 <div class="section-header">
                     <h3>📝 النظام الغذائي الحر (النوتة)</h3>
                     <div class="template-selector">
@@ -59,8 +73,11 @@
                     </div>
                 </div>
                 <div class="free-text-area">
-                    <textarea placeholder="اكتب النظام الغذائي الخاص بالعميل هنا بكل حرية، كما تفعل في جداول التمارين..."></textarea>
+                    <textarea name="description" placeholder="اكتب النظام الغذائي الخاص بالعميل هنا بكل حرية، كما تفعل في جداول التمارين..."
+                        required></textarea>
                 </div>
+                <button type="submit" class="save-plan-btn large">💾 حفظ وتعيين النظام للعملاء المحددين</button>
+                </form>
             </section>
 
             <!-- 3. المكملات والمياه -->
@@ -145,8 +162,9 @@
             </div>
 
             <div class="bottom-actions">
-                <button class="save-plan-btn large">💾 حفظ وتعيين النظام للعملاء المحددين</button>
+                <button type="submit" class="save-plan-btn large">💾 حفظ وتعيين النظام للعملاء المحددين</button>
             </div>
+            </form>
         </main>
     </div>
 </body>

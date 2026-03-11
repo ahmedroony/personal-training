@@ -8,7 +8,7 @@ class workoutroutines{
         return $users;
     }
 
-    
+
     public function updateDescription(array $data)
     {
         $user = User::findOrFail($data['user_id']);
@@ -16,7 +16,7 @@ class workoutroutines{
 
         if ($subscription) {
             $subscription->update([
-                'description' => $data['description']
+                'description' => $data['description'] ?? 'new subscription',
             ]);
         }
     }

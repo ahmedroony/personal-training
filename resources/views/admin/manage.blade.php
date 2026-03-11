@@ -19,7 +19,7 @@
                     <li class="active"><a href="{{ route('admin.manage') }}"> إدارة العملاء</a></li>
                     <li><a href="{{ route('admin.captains.index') }}"> إدارة الكباتن</a></li>
                     <li><a href="{{ route('workout.index') }}"> جداول التمارين</a></li>
-                    <li><a href="#"> الأنظمة الغذائية</a></li>
+                    <li><a href="{{ route('diet_plans.index') }}"> الأنظمة الغذائية</a></li>
                 </ul>
             </nav>
         </aside>
@@ -50,14 +50,13 @@
                                 <th>الباقة</th>
                                 <th>الأيام المتبقية</th>
                                 <th>الحالة</th>
+                                <th>التمرين</th>
                                 <th>الإجراءات</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                @foreach ($users as $user)
-                            <tr
-                            class="client-row"data-status="{{ $user->subscription?->is_active ? 'active' : 'inactive' }}">
+                            @foreach ($users as $user)
+                            <tr class="client-row" data-status="{{ $user->subscription?->is_active ? 'active' : 'inactive' }}">
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->phone_number }}</td>
                                 <td>{{ $user->subscription?->name_plan ?? 'لا يوجد اشتراك' }}</td>
@@ -82,14 +81,8 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if ($user->subscription?->is_active)
-                                        <span class="badge active">نشط</span>
-                                    @else
-                                        <span class="badge inactive">منتهي</span>
-                                    @endif
-                                </td>
-                                <td>
                                     <div class="action-btns" style="display: flex; gap: 10px; align-items: center;">
+                                        <a href="{{ route('admin.client.show', $user->id) }}" title="عرض التفاصيل" style="text-decoration: none; font-size: 18px;">👁️</a>
                                         <a href="{{ route('admin.editClient', $user->id) }}" title="تعديل" style="color: #ffc107; text-decoration: none; font-size: 18px;">✏️</a>
                                         <form action="{{ route('admin.deleteClient', $user->id) }}" method="POST" style="margin: 0; display: inline;">
                                             @csrf
