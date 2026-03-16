@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CaptainController;
 use App\Http\Controllers\DietPlanController;
+use App\Http\Controllers\FoodsController;
 use App\Http\Controllers\WorkoutRoutinesController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,9 @@ route::middleware(['auth'])->group(function () {
     // ----------------- الانظمه  -----------------
     route::get('/admin/meals', [DietPlanController::class, 'index'])->name('diet_plans.index');
     route::post('/admin/meals', [DietPlanController::class, 'store'])->name('diet_plans.store');
+    // ----------------- كتالوج الأكل  -----------------
+    route::get('/admin/foods', [FoodsController::class, 'index'])->name('foods.index');
+    route::post('/admin/foods', [FoodsController::class, 'store'])->name('foods.store');
 });
 // --------------------------------------------------------------------------------------------
 route::get('/register', [AuthController::class, 'showRegistar'])->name('show.register');

@@ -8,7 +8,9 @@ class DietPlanService
 {
     public function index()
     {
-        $users = User::where('role', 2)->with('subscription')->get();
+        $users = User::whereHas('userType', function($q){
+            $q->where('name', 'Client');
+        })->with('subscription')->get();
 
         return $users;
     }

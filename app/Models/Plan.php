@@ -5,17 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DietPlan extends Model
+class Plan extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'name',
+        'duration_days',
         'description',
-    ];
-
-    public function user()
+        'price',
+    ];  
+    
+    public function subscriptions()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(Subscription::class);
     }
 }

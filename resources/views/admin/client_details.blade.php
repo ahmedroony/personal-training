@@ -96,7 +96,7 @@
                     </div>
                     <div class="info-item">
                         <span class="info-label">اسم الباقة:</span>
-                        <span class="info-value">{{ $user->subscription->name_plan ?? 'بدون باقة' }}</span>
+                        <span class="info-value">{{ $user->subscription->plan->name ?? 'بدون باقة' }}</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">سعر الباقة:</span>
@@ -104,11 +104,11 @@
                     </div>
                     <div class="info-item">
                         <span class="info-label">تاريخ البدء:</span>
-                        <span class="info-value">{{ $user->subscription?->starts_at?->format('Y-m-d') ?? '--' }}</span>
+                        <span class="info-value">{{ $user->subscription?->start_date?->format('Y-m-d') ?? '--' }}</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">تاريخ الانتهاء:</span>
-                        <span class="info-value">{{ $user->subscription?->ends_at?->format('Y-m-d') ?? '--' }}</span>
+                        <span class="info-value">{{ $user->subscription?->end_date?->format('Y-m-d') ?? '--' }}</span>
                     </div>
                 </div>
 
@@ -119,7 +119,7 @@
                         <span class="info-label">وصف التدريب:</span>
                     </div>
                     <div class="content-box">
-                        {{ $user->subscription->description ?? 'لا يوجد جدول تمارين محدد بعد' }}
+                        {{ $user->subscription->plan->description ?? 'لا يوجد جدول تمارين محدد بعد' }}
                     </div>
                 </div>
 

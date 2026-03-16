@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\UserType;
 class UserSeeder extends Seeder
 {
     /**
@@ -12,11 +13,13 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        $adminType = UserType::firstOrCreate(['name' => 'Admin']);
+
         User::create([
             'name' => 'Admin User',
             'email' => 'admin@admin.com',
             'password' => bcrypt('12345678'),
-            'role' => 0, // 0 = Admin
+            'user_type_id' => $adminType->id,
             'status' => 'active',
         ]);
     }

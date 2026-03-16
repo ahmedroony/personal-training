@@ -4,7 +4,9 @@ namespace App\Domains\admin\Actions;
 
 use App\interfaces\AdminServiceInterface;
 use App\Models\User;
-use Carbon\Carbon;
+use App\Models\Plan;
+use App\Models\UserType;
+use Carbon\Carbon;  
 use Illuminate\Http\Request;
 
 class AdminService implements AdminServiceInterface
@@ -17,13 +19,14 @@ class AdminService implements AdminServiceInterface
 
     public function getAllClients()
     {
-        // نجلب المستخدمين اللي نوعهم عميل (role = 2) مع اشتراكاتهم
-        $users = User::where('role', 2)->with('subscription')->get();
-        // نعدل على شكل البيانات عشان تكون جاهزة للـ View
+        $users = User::whereHas('userType', function ($q) {
+            $q->where('name', 'Client');
+        })->with('subscription.plan')->get();
+
         foreach ($users as $user) {
             $sub = $user->subscription;
-            $user->name_plan = $sub ? $sub->name_plan : 'لا يوجد اشتراك';
-            $user->total_days = $sub ? $sub->duration : 0;
+            $user->name_plan = ($sub && $sub->plan) ? $sub->plan->name : 'لا يوجد اشتراك';
+            $user->total_days = ($sub && $sub->plan) ? $sub->plan->duration_days : 0;
             $user->remaining_days = $sub ? $sub->remaining_days : 0;
             $user->current_status = ($sub && $sub->is_active) ? 'active' : 'inactive';
         }
@@ -41,37 +44,44 @@ class AdminService implements AdminServiceInterface
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->password = bcrypt($data['password']);
-        $user->phone_number = $data['phone'];
-        $user->role = 2;
+        $user->phone_number = $data['phone'] ?? null;
+        $clientType = UserType::where('name', 'Client')->first();
+        $user->user_type_id = $clientType ? $clientType->id : null;
         $user->save();
-        $endsAt = Carbon::parse($data['starts_at'])->addDays((int) $data['duration']);
 
-        $user->subscriptions()->create([
-            'name_plan' => $data['name_plan'],
-            'starts_at' => $data['starts_at'],
-            'ends_at' => $endsAt,
-            'status' => 'active',
-            'description' => $data['description'] ?? 'new subscription',
+        $plan = Plan::firstOrCreate([
+            'name' => $data['name_plan'],
+            'duration_days' => $data['duration'] ?? 30,
+        ], [
             'price' => $data['price'] ?? 0,
-            'duration' => $data['duration'] ?? 30,
+            'description' => $data['description'] ?? 'new subscription'
         ]);
+
+        $subscription = $user->subscriptions()->create([
+            'plan_id' => $plan->id,
+            'start_date' => $data['starts_at'],
+            'price' => $data['price'] ?? 0,
+        ]);
+        
+        //the logic of end date and status is in the subscription model
+        $subscription->calculateAndSetEndDate()->checkAndUpdateStatus()->save();
 
         return $user;
     }
 
     public function editClient($id)
     {
-        $user = User::find($id);
-        if (! $user || $user->role != 2) {
-            return null; // أو ترجع رسالة خطأ حسب التصميم
+        $user = User::with('userType')->find($id);
+        if (! $user || ($user->userType->name ?? '') != 'Client') {
+            return null; 
         }
         return $user;
     }
 
     public function updateClient($id,array $data)
     {
-        $user = User::find($id);
-        if (!$user || $user->role != 2) {
+        $user = User::with('userType')->find($id);
+        if (!$user || ($user->userType->name ?? '') != 'Client') {
             return null;
         }
 
@@ -81,29 +91,26 @@ class AdminService implements AdminServiceInterface
             'phone_number' => $data['phone_number'],
         ]);
         $subscription = $user->subscription;
+
+        $plan = Plan::firstOrCreate([
+            'name' => $data['name_plan'],
+            'duration_days' => $data['duration'],
+        ]);
+
         if ($subscription) {
-            $updateData = [
-                'name_plan' => $data['name_plan'],
-                'duration'  => $data['duration'],
-            ];
-
-            if ($subscription->starts_at) {
-                // نحسب تاريخ الانتهاء بناءً على تاريخ البداية الأصلي عشان الأيام تتخصم صح
-                $updateData['ends_at'] = $subscription->starts_at->copy()->addDays((int) $data['duration']);
-            } else {
-                $updateData['ends_at'] = \Carbon\Carbon::today()->addDays((int) $data['duration']);
-            }
-
-            $subscription->update($updateData);
-        } else {
-            $newEndDate = \Carbon\Carbon::today()->addDays((int) $data['duration']);
-            $user->subscriptions()->create([
-                'name_plan' => $data['name_plan'],
-                'duration'  => $data['duration'],
-                'starts_at' => \Carbon\Carbon::today(),
-                'ends_at'   => $newEndDate,
-                'status'    => 'active',
+            $subscription->update([
+                'plan_id' => $plan->id,
+                // نحدث start_date للـ today فقط لو لم يكن موجود
+                'start_date' => $subscription->start_date ?? Carbon::today(),
             ]);
+            $subscription->calculateAndSetEndDate()->checkAndUpdateStatus()->save();
+        } else {
+            $newSubscription = $user->subscriptions()->create([
+                'plan_id' => $plan->id,
+                'start_date' => Carbon::today(),
+                'price' => 0,
+            ]);
+            $newSubscription->calculateAndSetEndDate()->checkAndUpdateStatus()->save();
         }
         return $user;
     }
@@ -122,8 +129,10 @@ class AdminService implements AdminServiceInterface
 
     public function getClientById($id)
     {
-        return User::where('role', 2)
-            ->with(['subscription', 'dietPlans'])
+        return User::whereHas('userType', function ($q) {
+                $q->where('name', 'Client');
+            })
+            ->with(['subscription.plan', 'dietPlans'])
             ->findOrFail($id);
     }
 }

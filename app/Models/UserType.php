@@ -5,17 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DietPlan extends Model
+class UserType extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'description',
+        'name',
     ];
 
-    public function user()
+    /**
+     * Get all users that belong to this user type.
+     */
+    public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(User::class);
     }
 }

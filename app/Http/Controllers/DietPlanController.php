@@ -24,6 +24,6 @@ class DietPlanController extends Controller
     {
         $data = $request->all();
         $this->dietPlanService->store($data);
-        return redirect()->route('diet_plans.index')->with('success', 'Diet Plan created successfully');
+        return redirect()->route('diet_plans.index')->with('success', 'تم اضافة النظام الغذائي بنجاح');
     }
 }
