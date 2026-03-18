@@ -17,7 +17,7 @@
                 <a href="{{ route('admin.manage') }}">إدارة العملاء</a>
                 <a href="{{ route('admin.captains.index') }}">إدارة الكباتن</a>
                 <a href="{{ route('workout.index') }}">جداول التمارين</a>
-                <a href="#">الأنظمة الغذائية</a>
+                <a href="{{ route('diet_plans.index') }}">الأنظمة الغذائية</a>
             </nav>
         </aside>
 
@@ -58,23 +58,23 @@
                     </thead>
                     <tbody id="clients-body">
                         @foreach ($users as $user)
-                            <tr class="client-row"data-status="{{ $user->subscription?->is_active ? 'active' : 'inactive' }}">
+                            <tr class="client-row" data-status="{{ $user->current_status }}">
                                 <td>{{ $user->name }}</td>
                                 <td>
-                                    @if ($user->subscription?->is_active)
+                                    @if ($user->current_status == 'active')
                                         <span class="badge active">نشط</span>
                                     @else
                                         <span class="badge inactive">منتهي</span>
                                     @endif
                                 </td>
-                                <td>{{ $user->subscription?->name_plan ?? 'لا يوجد اشتراك' }}</td>
-                                <td>{{ $user->subscription?->remaining_days ?? 0 }} يوم</td>
+                                <td>{{ $user->name_plan }}</td>
+                                <td>{{ $user->remaining_days }} يوم</td>
                                 <td>
-                                    @if ($user->subscription?->description)
+                                    @if ($user->subscription?->plan?->description)
                                         <details style="cursor: pointer;">
                                             <summary style="color: var(--primary); font-size: 13px;">🔎 عرض</summary>
                                             <div style="background: #1a1a1a; padding: 10px; border-radius: 5px; margin-top: 5px; font-size: 13px; color: #ccc; border: 1px solid #333; position: absolute; z-index: 100; max-width: 250px;">
-                                                {{ $user->subscription->description }}
+                                                {{ $user->subscription->plan->description }}
                                             </div>
                                         </details>
                                     @else

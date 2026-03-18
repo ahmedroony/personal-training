@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\UserType;
 
 class AuthController extends Controller
 {
@@ -27,12 +28,15 @@ class AuthController extends Controller
             'phone_number' => 'required|unique:users,phone_number',
             'password' => 'required|min:6|confirmed',
         ]);
+        // هذه الدالة تبحث في قاعدة البيانات عن نوع المستخدم 'Client' 
+        // وتجلب أول نتيجة تجدها ('first') عشان نقدر نستخدم الـ 'id' الخاص به
+        $clientType = UserType::where('name', 'Client')->first();
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone_number' => $request->phone_number,
             'password' => Hash::make($request->password),
-            'role' => 2,
+            'user_type_id' => $clientType ? $clientType->id : 3,
         ]);
         Auth::login($user);
 
@@ -47,10 +51,11 @@ class AuthController extends Controller
         ]);
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            $role = Auth::user()->role;
-            if ($role == 0) {
+            $userTypeName = Auth::user()->userType->name ?? 'Client';
+            
+            if ($userTypeName == 'Admin') {
                 return redirect()->route('admin.index');
-            } elseif ($role == 1) {
+            } elseif ($userTypeName == 'Captain') {
                 return redirect('/captain/dashboard');
             } else {
                 return redirect('/client/dashboard');

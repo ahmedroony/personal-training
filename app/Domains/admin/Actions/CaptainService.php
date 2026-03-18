@@ -3,7 +3,7 @@
 namespace App\Domains\admin\Actions;
 
 use App\Models\User;
-
+use App\Models\UserType;
 class CaptainService
 {
     /**
@@ -12,7 +12,9 @@ class CaptainService
      */
     public function getAllCaptains()
     {
-        return User::where('role', 1)->get();
+        return User::whereHas('userType', function($q) {
+            $q->where('name', 'Captain');
+        })->get();
     }
 
     /**
@@ -25,7 +27,8 @@ class CaptainService
         $captain->email = $data['email'];
         $captain->password = bcrypt($data['password']);
         $captain->phone_number = $data['phone_number'];
-        $captain->role = 1; // 1 = Captain
+        $captainType = UserType::where('name', 'Captain')->first();
+        $captain->user_type_id = $captainType ? $captainType->id : null;
         $captain->save();
 
         return $captain;
@@ -36,9 +39,9 @@ class CaptainService
      */
     public function getCaptainById($id)
     {
-        $captain = User::find($id);
-        if (!$captain || $captain->role != 1) {
-            return null; // نعيد قيمة فارغة لو مش موجود أو مش كابتن
+        $captain = User::with('userType')->find($id);
+        if (!$captain || ($captain->userType->name ?? '') != 'Captain') {
+            return null; 
         }
         return $captain;
     }
@@ -60,7 +63,6 @@ class CaptainService
             'phone_number' => $data['phone_number'],
         ]);
 
-        // لو تم إدخال كلمة مرور جديدة، نقوم بتحديثها أيضاً
         if (!empty($data['password'])) {
             $captain->update([
                 'password' => bcrypt($data['password']),
@@ -70,9 +72,6 @@ class CaptainService
         return $captain;
     }
 
-    /**
-     * حذف كابتن
-     */
     public function deleteCaptain($id)
     {
         $captain = $this->getCaptainById($id);
