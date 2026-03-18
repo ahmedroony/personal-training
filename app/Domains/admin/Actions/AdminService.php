@@ -49,18 +49,22 @@ class AdminService implements AdminServiceInterface
         $user->user_type_id = $clientType ? $clientType->id : null;
         $user->save();
 
-        $plan = Plan::firstOrCreate([
-            'name' => $data['name_plan'],
-            'duration_days' => $data['duration'] ?? 30,
-        ], [
-            'price' => $data['price'] ?? 0,
-            'description' => $data['description'] ?? 'new subscription'
-        ]);
+        if (!empty($data['plan_id'])) {
+            $plan = Plan::findOrFail($data['plan_id']);
+        } else {
+            $plan = Plan::firstOrCreate([
+                'name' => $data['name_plan'],
+                'duration_days' => $data['duration'] ?? 30,
+            ], [
+                'price' => $data['price'] ?? 0,
+                'description' => $data['description'] ?? 'new subscription'
+            ]);
+        }
 
         $subscription = $user->subscriptions()->create([
             'plan_id' => $plan->id,
             'start_date' => $data['starts_at'],
-            'price' => $data['price'] ?? 0,
+            'price' => $data['price'] ?? $plan->price,
         ]);
         
         //the logic of end date and status is in the subscription model

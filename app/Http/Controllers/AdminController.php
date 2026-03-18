@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use App\Models\Subscription;
+use App\Models\Plan;
 class AdminController extends Controller
 {
     protected $adminService;
@@ -28,7 +29,8 @@ class AdminController extends Controller
 
     public function createClient()
     {
-        return view('admin.create_client');
+        $plans = Plan::all();
+        return view('admin.create_client', compact('plans'));
     }
 
     public function manage()
@@ -39,15 +41,15 @@ class AdminController extends Controller
 
     public function storeClient(Request $request)
     {
-        // 1. الفاليديشن (Validation) ده عادي يفضل في الكنترولر في المشاريع الصغيرة
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'name_plan' => 'required|string|max:255',
             'phone' => 'required|string|max:20|unique:users,phone_number',
             'starts_at' => 'required|date',
-            'duration' => 'required|integer',
+            'plan_id' => 'nullable|exists:plans,id',
+            'name_plan' => 'required_without:plan_id|nullable|string|max:255',
+            'duration' => 'required_without:plan_id|nullable|integer',
         ]);
         $this->adminService->storeClient($validatedData);
         return redirect()->route('admin.index')->with('success', 'تم إضافة المتدرب بنجاح.');

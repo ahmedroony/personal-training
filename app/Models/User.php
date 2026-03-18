@@ -80,9 +80,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(DietPlan::class);
     }
-
-    public function workoutPlans()
-    {
-        return $this->hasMany(WorkoutPlan::class);
-    }
 }

@@ -2,19 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class WorkoutPlan extends Model
+class Workout_Plans extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'user_id',
         'description',
     ];
 
-    public function user()
+    public function Users()
     {
         return $this->belongsTo(User::class);
     }

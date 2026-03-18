@@ -14,8 +14,8 @@ class Plan extends Model
         'duration_days',
         'description',
         'price',
-    ];  
-    
+    ];
+
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class);

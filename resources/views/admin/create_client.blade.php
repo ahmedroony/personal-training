@@ -69,9 +69,20 @@
                     <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
 
                     <div class="form-group">
-                        <label class="form-label">اسم الباقة</label>
+                        <label class="form-label">اختر باقة موجودة</label>
+                        <select name="plan_id" class="form-input">
+                            <option value="">-- أو قم بإضافة باقة جديدة بالأسفل --</option>
+                            @foreach ($plans as $plan)
+                                <option value="{{ $plan->id }}">{{ $plan->name }} ({{ $plan->duration_days }} يوم)
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">اسم الباقة الجديدة</label>
                         <input type="text" class="form-input" placeholder="مثال: باقة كمال أجسام شهرية"
-                            name="name_plan" value="{{ old('name_plan') }}" required>
+                            name="name_plan" value="{{ old('name_plan') }}">
                     </div>
 
                     <div class="form-group">
@@ -83,7 +94,7 @@
                     <div class="form-group">
                         <label class="form-label">عدد أيام الاشتراك</label>
                         <input type="number" class="form-input" placeholder="مثال: 30" name="duration"
-                            value="{{ old('duration') }}" required>
+                            value="{{ old('duration') }}">
                     </div>
 
                     <div class="form-group">
