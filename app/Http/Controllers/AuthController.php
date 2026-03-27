@@ -25,7 +25,7 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'phone_number' => 'required|unique:users,phone_number',
+            'phone_number' => 'required|unique:phones,number',
             'password' => 'required|min:6|confirmed',
         ]);
         // هذه الدالة تبحث في قاعدة البيانات عن نوع المستخدم 'Client' 
@@ -34,10 +34,11 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'phone_number' => $request->phone_number,
             'password' => Hash::make($request->password),
             'user_type_id' => $clientType ? $clientType->id : 3,
         ]);
+        $user->phones()->create(['number' => $request->phone_number]);
+
         Auth::login($user);
 
         return redirect('/client/dashboard');

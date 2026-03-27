@@ -13,11 +13,20 @@ class Subscription extends Model
     protected $fillable = [
         'user_id',
         'plan_id',
-        'price',
+        'paid_price',
         'start_date',
         'end_date',
-        'status',
     ];
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
+
+    public function diets()
+    {
+        return $this->hasMany(Diet::class);
+    }
 //this is a cast that convert the start_date and end_date to date
     protected $casts = [
         'start_date' => 'date',
@@ -46,19 +55,6 @@ class Subscription extends Model
     }
 
     /**
-     * Checks if the end_date has passed today, and updates the status to 'expired' or 'active'.
-     */
-    public function checkAndUpdateStatus()
-    {
-        if ($this->end_date && Carbon::today()->gt($this->end_date)) {
-            $this->status = 'expired';
-        } else {
-            $this->status = 'active';
-        }
-        return $this;
-    }
-
-    /**
      * Accessor: Calculates remaining days
      */
     public function getRemainingDaysAttribute()
@@ -76,8 +72,29 @@ class Subscription extends Model
      */
     public function getIsActiveAttribute()
     {
-        return $this->status === 'active'
-            && $this->end_date
-            && $this->end_date->isFuture();
+        if (!$this->start_date || !$this->end_date) {
+            return false;
+        }
+        return Carbon::today()->gte($this->start_date) && Carbon::today()->lte($this->end_date);
+    }
+
+    /**
+     * Dynamic attribute: status
+     */
+    public function getStatusAttribute()
+    {
+        return $this->is_active ? 'active' : 'expired';
+    }
+
+    /**
+     * وظيفة بسيطة لإرجاع تاريخ وقت آخر حضور بشكل جميل
+     */
+    public function getLastAttendanceInfoAttribute()
+    {
+        $last = $this->attendances()->latest()->first();
+        if (!$last) {
+            return 'لم يحضر بعد';
+        }
+        return $last->date->format('Y-m-d') . ' (' . $last->time . ')';
     }
 }

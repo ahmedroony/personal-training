@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     @vite('resources/css/Admin/index.css')
 </head>
+
 <body>
     <div class="app-wrapper">
         <aside class="sidebar" id="sidebar">
@@ -17,6 +18,8 @@
                 <a href="{{ route('admin.manage') }}">إدارة العملاء</a>
                 <a href="{{ route('admin.captains.index') }}">إدارة الكباتن</a>
                 <a href="{{ route('workout.index') }}">جداول التمارين</a>
+                <a href="{{ route('create_diet_plans.index') }}">انشاء الأنظمة الغذائية</a>
+
                 <a href="{{ route('diet_plans.index') }}">الأنظمة الغذائية</a>
             </nav>
         </aside>
@@ -73,7 +76,8 @@
                                     @if ($user->subscription?->plan?->description)
                                         <details style="cursor: pointer;">
                                             <summary style="color: var(--primary); font-size: 13px;">🔎 عرض</summary>
-                                            <div style="background: #1a1a1a; padding: 10px; border-radius: 5px; margin-top: 5px; font-size: 13px; color: #ccc; border: 1px solid #333; position: absolute; z-index: 100; max-width: 250px;">
+                                            <div
+                                                style="background: #1a1a1a; padding: 10px; border-radius: 5px; margin-top: 5px; font-size: 13px; color: #ccc; border: 1px solid #333; position: absolute; z-index: 100; max-width: 250px;">
                                                 {{ $user->subscription->plan->description }}
                                             </div>
                                         </details>
@@ -123,4 +127,5 @@
         }
     </script>
 </body>
+
 </html>

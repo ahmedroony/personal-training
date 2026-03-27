@@ -96,11 +96,11 @@
                     </div>
                     <div class="info-item">
                         <span class="info-label">اسم الباقة:</span>
-                        <span class="info-value">{{ $user->subscription->plan->name ?? 'بدون باقة' }}</span>
+                        <span class="info-value">{{ $user->subscription?->plan?->name ?? 'بدون باقة' }}</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">سعر الباقة:</span>
-                        <span class="info-value">{{ $user->subscription->price ?? 0 }} ج.م</span>
+                        <span class="info-value">{{ $user->subscription?->paid_price ?? 0 }} ج.م</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">تاريخ البدء:</span>
@@ -126,14 +126,17 @@
                 <!-- الأنظمة الغذائية -->
                 <div class="info-card" style="grid-column: 1 / -1;">
                     <h2>🥗 الأنظمة الغذائية (أحدث الخطط)</h2>
-                    @if($user->dietPlans)
-                        @foreach($user->dietPlans as $plan)
-                            <div style="margin-bottom: 20px;">
-                                <div class="content-box">
-                                    {{ $plan->description }}
-                                </div>
+                    @if($diet = $user->subscription?->diets?->last())
+                        <div style="margin-bottom: 20px;">
+                            <div class="content-box">
+                                <strong>{{ $diet->dietPlan->name }}</strong><br>
+                                {{ $diet->dietPlan->base_description }}
+                                @if($diet->custom_notes)
+                                    <hr style="border-top:1px solid #444; margin:10px 0;">
+                                    ملاحظات إضافية: {{ $diet->custom_notes }}
+                                @endif
                             </div>
-                        @endforeach
+                        </div>
                     @else
                         <p style="color: var(--muted); text-align: center; padding: 20px;">لم يتم تعيين نظام غذائي لهذا المشترك بعد.</p>
                     @endif

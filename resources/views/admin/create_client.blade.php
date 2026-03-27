@@ -86,24 +86,27 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">تاريخ بداية الاشتراك</label>
-                        <input type="date" class="form-input" name="starts_at"
-                            value="{{ old('starts_at', date('Y-m-d')) }}" required>
-                    </div>
-
-                    <div class="form-group">
                         <label class="form-label">عدد أيام الاشتراك</label>
                         <input type="number" class="form-input" placeholder="مثال: 30" name="duration"
                             value="{{ old('duration') }}">
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">حالة الاشتراك</label>
-                        <select class="form-select" name="status">
-                            <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>نشط</option>
-                            <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>منتهي / موقوف
-                            </option>
-                        </select>
+                        <label class="form-label">تاريخ بداية الاشتراك</label>
+                        <input type="date" class="form-input" name="starts_at"
+                            value="{{ old('starts_at', date('Y-m-d')) }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">تاريخ نهاية الاشتراك (اختياري - يحسب تلقائياً إذا ترك فارغاً)</label>
+                        <input type="date" class="form-input" name="end_date"
+                            value="{{ old('end_date') }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">المبلغ المدفوع (يترك فارغاً لاعتماده من الباقة)</label>
+                        <input type="number" step="0.01" class="form-input" placeholder="مثال: 500" name="price"
+                            value="{{ old('price') }}">
                     </div>
 
                     <button type="submit" class="btn-submit">تسجيل وإضافة العميل</button>

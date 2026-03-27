@@ -26,10 +26,11 @@ class CaptainService
         $captain->name = $data['name'];
         $captain->email = $data['email'];
         $captain->password = bcrypt($data['password']);
-        $captain->phone_number = $data['phone_number'];
         $captainType = UserType::where('name', 'Captain')->first();
         $captain->user_type_id = $captainType ? $captainType->id : null;
         $captain->save();
+
+        $captain->phones()->create(['number' => $data['phone_number']]);
 
         return $captain;
     }
@@ -60,8 +61,12 @@ class CaptainService
         $captain->update([
             'name' => $data['name'],
             'email' => $data['email'],
-            'phone_number' => $data['phone_number'],
         ]);
+
+        $captain->phones()->updateOrCreate(
+            ['user_id' => $captain->id],
+            ['number' => $data['phone_number']]
+        );
 
         if (!empty($data['password'])) {
             $captain->update([

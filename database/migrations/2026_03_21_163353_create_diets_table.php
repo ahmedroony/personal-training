@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('foods', function (Blueprint $table) {
+        Schema::create('diets', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->decimal('calories', 8, 2);
-            $table->decimal('protein', 8, 2);
-            $table->decimal('carbs', 8, 2);
-            $table->string('unit')->default('100g');
-            $table->timestamps();
+            $table->foreignId('subscription_id')->constrained('subscriptions')->cascadeOnDelete();
+            $table->foreignId('diet_plan_id')->constrained('diet_plans')->cascadeOnDelete();
+            $table->text('custom_notes')->nullable();
         });
     }
 
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('foods');
+        Schema::dropIfExists('diets');
     }
 };

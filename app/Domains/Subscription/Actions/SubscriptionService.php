@@ -1,6 +1,5 @@
 <?php
 namespace App\Domains\Subscription\Actions;
-use App\Models\Subscription;
 use App\interfaces\SubscriptionInterface;
 use App\Models\User;
 use App\Models\Plan;
@@ -20,10 +19,9 @@ class SubscriptionService implements SubscriptionInterface
         $subscription = $user->subscriptions()->create([
             'plan_id' => $plan->id,
             'start_date' => Carbon::parse($data['starts_at']),
-            'price' => $data['price'] ?? 0,
+            'paid_price' => $data['price'] ?? 0,
         ]);
-
-        $subscription->calculateAndSetEndDate()->checkAndUpdateStatus()->save();
+        $subscription->calculateAndSetEndDate()->save();
 
         return $subscription;
     }

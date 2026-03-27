@@ -20,9 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'phone_number',
         'user_type_id', // Changed from role
-        'captain_id',
     ];
 
     /**
@@ -76,8 +74,8 @@ class User extends Authenticatable
         return $this->hasMany(Subscription::class);
     }
 
-    public function dietPlans()
+    public function phones()
     {
-        return $this->hasMany(DietPlan::class);
+        return $this->hasMany(Phone::class);
     }
 }

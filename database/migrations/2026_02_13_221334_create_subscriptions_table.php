@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('plan_id')->constrained('plans')->cascadeOnDelete();
-            $table->decimal('price', 8, 2)->nullable();
+            $table->decimal('paid_price', 8, 2)->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->enum('status', ['active', 'expired'])->default('active');
             $table->timestamps();
         });
     }

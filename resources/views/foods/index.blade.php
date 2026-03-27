@@ -27,6 +27,7 @@
 
         <main class="main-content">
             <header class="header-section">
+                <button>اضافه وجبه</button>
                 <div>
                     <h1>كتالوج الأكل</h1>
                     <p>بناء وجبات مخصصة وتصفح بدائل الأكل</p>

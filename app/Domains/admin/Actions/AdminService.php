@@ -19,19 +19,10 @@ class AdminService implements AdminServiceInterface
 
     public function getAllClients()
     {
-        $users = User::whereHas('userType', function ($q) {
-            $q->where('name', 'Client');
+        // نجلب المستخدمين الذين نوعهم 'Client' مع بيانات اشتراكاتهم وخططهم
+        return User::whereHas('userType', function ($query) {
+            $query->where('name', 'Client');
         })->with('subscription.plan')->get();
-
-        foreach ($users as $user) {
-            $sub = $user->subscription;
-            $user->name_plan = ($sub && $sub->plan) ? $sub->plan->name : 'لا يوجد اشتراك';
-            $user->total_days = ($sub && $sub->plan) ? $sub->plan->duration_days : 0;
-            $user->remaining_days = $sub ? $sub->remaining_days : 0;
-            $user->current_status = ($sub && $sub->is_active) ? 'active' : 'inactive';
-        }
-
-        return $users;
     }
 
     public function createClient() {}
@@ -44,38 +35,46 @@ class AdminService implements AdminServiceInterface
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->password = bcrypt($data['password']);
-        $user->phone_number = $data['phone'] ?? null;
         $clientType = UserType::where('name', 'Client')->first();
         $user->user_type_id = $clientType ? $clientType->id : null;
         $user->save();
+        
+
+        if (!empty($data['phone'])) {
+            $user->phones()->create(['number' => $data['phone']]);
+        }
 
         if (!empty($data['plan_id'])) {
             $plan = Plan::findOrFail($data['plan_id']);
         } else {
             $plan = Plan::firstOrCreate([
                 'name' => $data['name_plan'],
-                'duration_days' => $data['duration'] ?? 30,
+                'duration_days' => $data['duration'],
             ], [
                 'price' => $data['price'] ?? 0,
-                'description' => $data['description'] ?? 'new subscription'
+                'description' => 'باقة جديدة'
             ]);
         }
 
         $subscription = $user->subscriptions()->create([
             'plan_id' => $plan->id,
             'start_date' => $data['starts_at'],
-            'price' => $data['price'] ?? $plan->price,
+            'end_date' => $data['end_date'] ?? null,
+            'paid_price' => $data['price'] ?? $plan->price,
         ]);
         
-        //the logic of end date and status is in the subscription model
-        $subscription->calculateAndSetEndDate()->checkAndUpdateStatus()->save();
+        // Only calculate if end_date was not provided
+        if (!$subscription->end_date) {
+            $subscription->calculateAndSetEndDate();
+        }
+        $subscription->save();
 
         return $user;
     }
 
     public function editClient($id)
     {
-        $user = User::with('userType')->find($id);
+        $user = User::with(['userType', 'phones', 'subscription.plan'])->find($id);
         if (! $user || ($user->userType->name ?? '') != 'Client') {
             return null; 
         }
@@ -92,30 +91,26 @@ class AdminService implements AdminServiceInterface
         $user->update([
             'name' => $data['name'],
             'email' => $data['email'],
-            'phone_number' => $data['phone_number'],
-        ]);
-        $subscription = $user->subscription;
-
-        $plan = Plan::firstOrCreate([
-            'name' => $data['name_plan'],
-            'duration_days' => $data['duration'],
         ]);
 
-        if ($subscription) {
-            $subscription->update([
-                'plan_id' => $plan->id,
-                // نحدث start_date للـ today فقط لو لم يكن موجود
-                'start_date' => $subscription->start_date ?? Carbon::today(),
-            ]);
-            $subscription->calculateAndSetEndDate()->checkAndUpdateStatus()->save();
-        } else {
-            $newSubscription = $user->subscriptions()->create([
-                'plan_id' => $plan->id,
-                'start_date' => Carbon::today(),
-                'price' => 0,
-            ]);
-            $newSubscription->calculateAndSetEndDate()->checkAndUpdateStatus()->save();
+        if (!empty($data['phone_number'])) {
+            $user->phones()->updateOrCreate(
+                ['user_id' => $user->id],
+                ['number' => $data['phone_number']]
+            );
         }
+
+        if ($user->subscription) {
+            $user->subscription->update([
+                'plan_id' => $data['plan_id'],
+                'end_date' => $data['end_date'] ?? $user->subscription->end_date,
+            ]);
+            
+            // If plan changed and no end_date provided, recalculate?
+            // Actually, usually users want to set it manually here.
+            $user->subscription->save();
+        }
+
         return $user;
     }
 
@@ -136,7 +131,7 @@ class AdminService implements AdminServiceInterface
         return User::whereHas('userType', function ($q) {
                 $q->where('name', 'Client');
             })
-            ->with(['subscription.plan', 'dietPlans'])
+            ->with(['subscription.plan', 'subscription.diets.dietPlan'])
             ->findOrFail($id);
     }
 }

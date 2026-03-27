@@ -16,10 +16,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // دالة "firstOrCreate" مفيدة جداً في لارافيل:
-        // هي تقوم بالبحث عن الصف (مثلاً دور "Admin").
-        // لو وجدته، ترجعه مباشرةً من الداتا بيز. ولو لم تجده، تقوم بإنشائه أوتوماتيكياً.
-        // ده بيحمينا من تكرار البيانات أو حدوث ايرور لو شغلنا السيدر (Seeder) أكتر من مرة.
         $adminType = UserType::firstOrCreate(['name' => 'Admin']);
         $captainType = UserType::firstOrCreate(['name' => 'Captain']);
         $clientType = UserType::firstOrCreate(['name' => 'Client']);

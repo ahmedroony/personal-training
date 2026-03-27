@@ -42,7 +42,7 @@ class CaptainController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'phone_number' => 'required|string|max:20|unique:users',
+            'phone_number' => 'required|string|max:20|unique:phones,number',
         ], [
             // تخصيص رسائل الخطأ لتكون أوضح
             'email.unique' => 'البريد الإلكتروني مسجل مسبقاً، يرجى اختيار بريد آخر.',
@@ -79,7 +79,7 @@ class CaptainController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-            'phone_number' => 'required|string|max:20|unique:users,phone_number,' . $id,
+            'phone_number' => 'required|string|max:20|unique:phones,number,' . $id . ',user_id',
             'password' => 'nullable|string|min:8', // الباسوورد اختياري عند التعديل
         ]);
 
