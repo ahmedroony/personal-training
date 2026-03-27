@@ -6,23 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تعديل بيانات الكابتن - GYM CORE</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    @vite('resources/css/captains/form.css')
+    <link rel="stylesheet" href="{{ asset('css/captains/form.css') }}">
 </head>
 
 <body>
     <div class="dashboard-container">
-        <aside class="sidebar">
-            <div class="logo">GYM CORE</div>
-            <nav>
-                <ul>
-                    <li><a href="{{ route('admin.index') }}"> الرئيسية</a></li>
-                    <li><a href="{{ route('admin.manage') }}"> إدارة العملاء</a></li>
-                    <li class="active"><a href="{{ route('admin.captains.index') }}"> إدارة الكباتن</a></li>
-                    <li><a href="#"> جداول التمارين</a></li>
-                    <li><a href="{{ route('diet_plans.index') }}"> الأنظمة الغذائية</a></li>
-                </ul>
-            </nav>
-        </aside>
+        @include('layouts.sidebar')
 
         <main class="main-content">
             <div class="form-container">

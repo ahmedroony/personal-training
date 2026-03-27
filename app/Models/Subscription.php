@@ -62,8 +62,6 @@ class Subscription extends Model
         if (! $this->end_date) {
             return 0;
         }
-        // The second parameter 'false' ensures that if the end date is in the past, it will return a negative value.
-        // We use max(0, ...) to ensure that we don't return negative days.
         return max(0, Carbon::today()->diffInDays($this->end_date, false));
     }
 
@@ -78,17 +76,10 @@ class Subscription extends Model
         return Carbon::today()->gte($this->start_date) && Carbon::today()->lte($this->end_date);
     }
 
-    /**
-     * Dynamic attribute: status
-     */
     public function getStatusAttribute()
     {
         return $this->is_active ? 'active' : 'expired';
     }
-
-    /**
-     * وظيفة بسيطة لإرجاع تاريخ وقت آخر حضور بشكل جميل
-     */
     public function getLastAttendanceInfoAttribute()
     {
         $last = $this->attendances()->latest()->first();

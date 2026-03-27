@@ -36,34 +36,19 @@ body {
     margin-bottom: 40px;
 }
 
-.sidebar nav ul {
-    list-style: none;
-}
-
-.sidebar nav ul li {
+.nav-links a {
+    display: block;
+    padding: 12px 15px;
+    color: #888;
+    text-decoration: none;
     border-radius: 8px;
     margin-bottom: 8px;
-    transition: all 0.3s ease;
-}
-
-.sidebar nav ul li a {
-    padding: 12px 15px;
-    text-decoration: none;
-    color: #888;
-    display: block;
-    font-weight: 600;
     transition: 0.3s;
-    border-radius: 8px;
+    font-weight: 600;
 }
 
-.sidebar nav ul li:hover a,
-.sidebar nav ul li.active a {
-    background-color: #141414;
-    color: #fff;
-}
-
-.sidebar nav ul li:hover,
-.sidebar nav ul li.active {
+.nav-links a:hover,
+.nav-links a.active {
     background-color: #1a1a1a;
     color: #fff;
     border-right: 4px solid #007bff;

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تفاصيل المتدرب | {{ $user->name }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-    @vite('resources/css/Admin/index.css')
+    <link rel="stylesheet" href="{{ asset('css/Admin/index.css') }}">
     <style>
         .details-grid {
             display: grid;
@@ -66,11 +66,13 @@
         <aside class="sidebar">
             <div class="logo">GYM CORE</div>
             <nav class="nav-links">
-                <a href="{{ route('admin.index') }}">الرئيسية</a>
-                <a href="{{ route('admin.manage') }}">إدارة العملاء</a>
-                <a href="{{ route('admin.captains.index') }}">إدارة الكباتن</a>
-                <a href="{{ route('workout.index') }}">جداول التمارين</a>
-                <a href="{{ route('diet_plans.index') }}">الأنظمة الغذائية</a>
+                <a href="{{ route('admin.index') }}">🏠 الرئيسية</a>
+                <a href="{{ route('admin.manage') }}">👤 إدارة العملاء</a>
+                <a href="{{ route('admin.captains.index') }}">👨‍🏫 إدارة الكباتن</a>
+                <a href="{{ route('workout.index') }}">🏋️ جداول التمارين</a>
+                <a href="{{ route('create_diet_plans.index') }}">🍳 إنشاء باقات الطعام</a>
+                <a href="{{ route('diet_plans.index') }}">🥗 تعيين الأنظمة الغذائية</a>
+                <a href="{{ route('admin.attendance') }}">📅 سجل الحضور</a>
             </nav>
         </aside>
 

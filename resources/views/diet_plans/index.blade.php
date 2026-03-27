@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تعيين الأنظمة الغذائية - GYM CORE</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    @vite('resources/css/admin/manage.css') 
+    <link rel="stylesheet" href="{{ asset('css/admin/manage.css') }}">
     <style>
         .description-box {
             background: #1a1a1a;
@@ -41,20 +41,8 @@
 </head>
 <body>
     <div class="dashboard-container">
-        <aside class="sidebar">
-            <div class="logo">GYM CORE</div>
-            <nav>
-                <ul>
-                    <li><a href="{{ route('admin.index') }}"> الرئيسية</a></li>
-                    <li><a href="{{ route('admin.manage') }}"> إدارة العملاء</a></li>
-                    <li><a href="{{ route('admin.captains.index') }}"> إدارة الكباتن</a></li>
-                    <li><a href="{{ route('workout.index') }}"> جداول التمارين</a></li>
-                    <li class="active"><a href="{{ route('diet_plans.index') }}"> الأنظمة الغذائية</a></li>
-                    <li><a href="{{ route('admin.attendance') }}"> سجل الحضور</a></li>
-                </ul>
-            </nav>
-        </aside>
-        
+        @include('layouts.sidebar')
+
         <main class="main-content">
             @if(session('success'))
                 <div style="background-color: #198754; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
@@ -68,11 +56,11 @@
                     <p>اختر المتدرب والنظام الغذائي المناسب له مع إضافة ملاحظات خاصة</p>
                 </div>
             </header>
-            
+
             <section class="form-card" style="max-width: 800px; margin: 0 auto;">
                 <form action="{{ route('diet_plans.store') }}" method="POST">
                     @csrf
-                    
+
                     <div class="form-group">
                         <label>1. اختر المتدرب (المشتركين الحاليين)</label>
                         <select name="subscription_id" class="form-select" required>
@@ -119,7 +107,7 @@
         function showDescription(selectElement) {
             const descriptionText = selectElement.options[selectElement.selectedIndex].getAttribute('data-description');
             const descriptionBox = document.getElementById('planDescription');
-            
+
             if (descriptionText) {
                 document.getElementById('descriptionText').textContent = descriptionText;
                 descriptionBox.style.display = 'block';

@@ -28,8 +28,6 @@ class AuthController extends Controller
             'phone_number' => 'required|unique:phones,number',
             'password' => 'required|min:6|confirmed',
         ]);
-        // هذه الدالة تبحث في قاعدة البيانات عن نوع المستخدم 'Client' 
-        // وتجلب أول نتيجة تجدها ('first') عشان نقدر نستخدم الـ 'id' الخاص به
         $clientType = UserType::where('name', 'Client')->first();
         $user = User::create([
             'name' => $request->name,
@@ -53,7 +51,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             $userTypeName = Auth::user()->userType->name ?? 'Client';
-            
+
             if ($userTypeName == 'Admin') {
                 return redirect()->route('admin.index');
             } elseif ($userTypeName == 'Captain') {
@@ -73,6 +71,6 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('admin.login');
+        return redirect()->route('show.login');
     }
 }

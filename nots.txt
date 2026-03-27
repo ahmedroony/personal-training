@@ -1,2 +1,0 @@
--Dynamic Names of Properties/Methods
--Transaction

@@ -42,27 +42,18 @@ body {
     text-align: center;
 }
 
-.sidebar nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-.sidebar nav ul li {
-    margin-bottom: 10px;
-}
-
-.sidebar nav ul li a {
-    color: var(--text-gray);
-    text-decoration: none;
-    font-size: 16px;
+.nav-links a {
     display: block;
     padding: 10px 15px;
+    color: var(--text-gray);
+    text-decoration: none;
     border-radius: 8px;
+    margin-bottom: 10px;
     transition: 0.3s;
 }
 
-.sidebar nav ul li a:hover,
-.sidebar nav ul li.active a {
+.nav-links a:hover,
+.nav-links a.active {
     background-color: var(--primary-blue);
     color: var(--text-white);
 }

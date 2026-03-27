@@ -6,7 +6,7 @@ use App\interfaces\AdminServiceInterface;
 use App\Models\User;
 use App\Models\Plan;
 use App\Models\UserType;
-use Carbon\Carbon;  
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AdminService implements AdminServiceInterface
@@ -19,7 +19,6 @@ class AdminService implements AdminServiceInterface
 
     public function getAllClients()
     {
-        // نجلب المستخدمين الذين نوعهم 'Client' مع بيانات اشتراكاتهم وخططهم
         return User::whereHas('userType', function ($query) {
             $query->where('name', 'Client');
         })->with('subscription.plan')->get();
@@ -38,7 +37,7 @@ class AdminService implements AdminServiceInterface
         $clientType = UserType::where('name', 'Client')->first();
         $user->user_type_id = $clientType ? $clientType->id : null;
         $user->save();
-        
+
 
         if (!empty($data['phone'])) {
             $user->phones()->create(['number' => $data['phone']]);
@@ -62,8 +61,7 @@ class AdminService implements AdminServiceInterface
             'end_date' => $data['end_date'] ?? null,
             'paid_price' => $data['price'] ?? $plan->price,
         ]);
-        
-        // Only calculate if end_date was not provided
+
         if (!$subscription->end_date) {
             $subscription->calculateAndSetEndDate();
         }
@@ -76,7 +74,7 @@ class AdminService implements AdminServiceInterface
     {
         $user = User::with(['userType', 'phones', 'subscription.plan'])->find($id);
         if (! $user || ($user->userType->name ?? '') != 'Client') {
-            return null; 
+            return null;
         }
         return $user;
     }
@@ -105,9 +103,6 @@ class AdminService implements AdminServiceInterface
                 'plan_id' => $data['plan_id'],
                 'end_date' => $data['end_date'] ?? $user->subscription->end_date,
             ]);
-            
-            // If plan changed and no end_date provided, recalculate?
-            // Actually, usually users want to set it manually here.
             $user->subscription->save();
         }
 

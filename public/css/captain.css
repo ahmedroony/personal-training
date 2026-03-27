@@ -1,0 +1,98 @@
+:root {
+    --primary: #007bff;
+    --bg: #030303;
+    --card: #0e0e0e;
+    --border: #1e1e1e;
+    --text: #fff;
+    --muted: #666;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+body { background: var(--bg); color: var(--text); direction: rtl; }
+.app-wrapper { display: flex; min-height: 100vh; }
+
+/* ── Sidebar ── */
+.sidebar {
+    width: 240px; background: #080808; border-left: 1px solid var(--border);
+    padding: 30px 16px; height: 100vh; position: fixed;
+    display: flex; flex-direction: column;
+}
+.logo { font-size: 22px; font-weight: 900; color: var(--primary); text-align: center; margin-bottom: 36px; letter-spacing: 2px; }
+.nav-links { flex: 1; }
+.nav-links a {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 14px; color: var(--muted); text-decoration: none;
+    border-radius: 10px; margin-bottom: 6px; font-size: 15px; transition: 0.25s;
+}
+.nav-links a:hover, .nav-links a.active {
+    background: rgba(0,123,255,0.1); color: var(--text); border-right: 3px solid var(--primary);
+}
+.sidebar-footer { margin-top: auto; }
+.logout-btn {
+    width: 100%; background: rgba(220,53,69,0.12); border: 1px solid rgba(220,53,69,0.3);
+    color: #dc3545; padding: 12px; border-radius: 10px; cursor: pointer;
+    font-size: 15px; font-family: inherit; transition: 0.25s;
+}
+.logout-btn:hover { background: rgba(220,53,69,0.2); }
+
+/* ── Main ── */
+.main-content { margin-right: 240px; flex: 1; padding: 40px; }
+.page-header { margin-bottom: 28px; }
+.page-header h1 { font-size: 26px; font-weight: 800; }
+.page-header p  { color: var(--muted); margin-top: 4px; }
+
+/* ── Alert ── */
+.alert-success {
+    background: rgba(40,167,69,0.12); border: 1px solid rgba(40,167,69,0.3);
+    color: #28a745; padding: 14px 18px; border-radius: 12px; margin-bottom: 24px; font-size: 15px;
+}
+
+/* ── Check-in Card ── */
+.checkin-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 28px; margin-bottom: 28px;
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    flex-wrap: wrap;
+}
+.checkin-done, .checkin-pending { display: flex; align-items: center; gap: 18px; }
+.checkin-icon { font-size: 42px; }
+.checkin-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+.checkin-sub   { font-size: 14px; color: var(--muted); }
+.checkin-btn {
+    background: var(--primary); color: #fff; border: none;
+    padding: 14px 32px; border-radius: 12px; font-size: 16px; font-weight: 700;
+    font-family: inherit; cursor: pointer; transition: 0.3s;
+    box-shadow: 0 0 20px rgba(0,123,255,0.3);
+}
+.checkin-btn:hover { transform: translateY(-3px); box-shadow: 0 0 35px rgba(0,123,255,0.5); }
+
+/* ── Stats ── */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 28px; }
+.stat-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+    padding: 22px 20px; display: flex; align-items: center; gap: 16px; transition: 0.25s;
+}
+.stat-card:hover { border-color: rgba(0,123,255,0.3); }
+.stat-icon { font-size: 30px; }
+.stat-label { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+.stat-value { font-size: 20px; font-weight: 700; }
+
+/* ── Table Card ── */
+.section-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px;
+}
+.section-card h2 { font-size: 16px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.data-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.data-table th { color: var(--muted); padding: 10px; text-align: right; border-bottom: 1px solid var(--border); }
+.data-table td { padding: 10px; border-bottom: 1px solid var(--border); color: #ccc; }
+.data-table tr:last-child td { border-bottom: none; }
+
+/* ── Empty State ── */
+.empty-state { text-align: center; padding: 40px 20px; color: var(--muted); }
+.empty-state span { font-size: 40px; display: block; margin-bottom: 12px; }
+
+@media (max-width: 900px) {
+    .sidebar { display: none; }
+    .main-content { margin-right: 0; padding: 20px; }
+    .checkin-card { flex-direction: column; align-items: flex-start; }
+}

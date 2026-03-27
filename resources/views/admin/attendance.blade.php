@@ -5,24 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>سجل الحضور - GYM CORE</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    @vite('resources/css/admin/manage.css') 
+    <link rel="stylesheet" href="{{ asset('css/admin/manage.css') }}">
 </head>
 <body>
     <div class="dashboard-container">
-        <aside class="sidebar">
-            <div class="logo">GYM CORE</div>
-            <nav>
-                <ul>
-                    <li><a href="{{ route('admin.index') }}"> الرئيسية</a></li>
-                    <li><a href="{{ route('admin.manage') }}"> إدارة العملاء</a></li>
-                    <li><a href="{{ route('admin.captains.index') }}"> إدارة الكباتن</a></li>
-                    <li><a href="{{ route('workout.index') }}"> جداول التمارين</a></li>
-                    <li><a href="{{ route('diet_plans.index') }}"> الأنظمة الغذائية</a></li>
-                    <li class="active"><a href="{{ route('admin.attendance') }}">📋 سجل الحضور</a></li>
-                </ul>
-            </nav>
-        </aside>
-        
+        @include('layouts.sidebar')
+
         <main class="main-content">
             @if(session('success'))
                 <div style="background-color: #198754; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
@@ -35,7 +23,7 @@
                     <p>بحث باسم المتدرب لتسجيل حضوره</p>
                 </div>
             </header>
-            
+
             <section class="form-card">
                 <h3>📋 قائمة المتدربين لتسجيل الحضور</h3>
                 <div style="overflow-x: auto;">

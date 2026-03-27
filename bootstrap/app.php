@@ -14,5 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->renderable(function (\Illuminate\Session\TokenMismatchException $e) {
+            return redirect()->route('show.login')->with('error', 'انتهت الجلسة، سجّل دخولك مرة تانية.');
+        });
     })->create();

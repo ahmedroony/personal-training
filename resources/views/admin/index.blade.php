@@ -6,30 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة التحكم | GYM CORE</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    @vite('resources/css/Admin/index.css')
+    <link rel="stylesheet" href="{{ asset('css/Admin/index.css') }}">
 </head>
 
 <body>
     <div class="app-wrapper">
-        <aside class="sidebar" id="sidebar">
-            <div class="logo">GYM CORE</div>
-            <nav class="nav-links">
-                <a href="{{ route('admin.index') }}" class="active">الرئيسية</a>
-                <a href="{{ route('admin.manage') }}">إدارة العملاء</a>
-                <a href="{{ route('admin.captains.index') }}">إدارة الكباتن</a>
-                <a href="{{ route('workout.index') }}">جداول التمارين</a>
-                <a href="{{ route('create_diet_plans.index') }}">انشاء الأنظمة الغذائية</a>
-
-                <a href="{{ route('diet_plans.index') }}">الأنظمة الغذائية</a>
-            </nav>
-        </aside>
+        @include('layouts.sidebar')
 
         <main class="main-content">
             <button class="menu-btn" onclick="toggleSidebar()">☰ القائمة</button>
 
-            <header style="margin-bottom: 30px;">
-                <h1>لوحة التحكم</h1>
-                <p style="color: var(--muted);">اضغط على الكروت للفلترة السريعة</p>
+            <header style="margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h1>لوحة التحكم</h1>
+                    <p style="color: var(--muted);">اضغط على الكروت للفلترة السريعة</p>
+                </div>
+                <div style="display: flex; align-items: center; gap: 14px;">
+                    <span style="color: #555; font-size: 14px;">👋 {{ auth()->user()->name }}</span>
+                </div>
             </header>
 
             <section class="stats-grid">
@@ -61,17 +55,17 @@
                     </thead>
                     <tbody id="clients-body">
                         @foreach ($users as $user)
-                            <tr class="client-row" data-status="{{ $user->current_status }}">
+                            <tr class="client-row" data-status="{{ ($user->subscription && $user->subscription->is_active) ? 'active' : 'inactive' }}">
                                 <td>{{ $user->name }}</td>
                                 <td>
-                                    @if ($user->current_status == 'active')
+                                    @if ($user->subscription && $user->subscription->is_active)
                                         <span class="badge active">نشط</span>
                                     @else
                                         <span class="badge inactive">منتهي</span>
                                     @endif
                                 </td>
-                                <td>{{ $user->name_plan }}</td>
-                                <td>{{ $user->remaining_days }} يوم</td>
+                                <td>{{ $user->subscription->plan->name ?? 'بدون باقة' }}</td>
+                                <td>{{ $user->subscription->remaining_days ?? 0 }} يوم</td>
                                 <td>
                                     @if ($user->subscription?->plan?->description)
                                         <details style="cursor: pointer;">

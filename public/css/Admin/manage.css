@@ -36,25 +36,20 @@ body {
     margin-bottom: 40px;
 }
 
-.sidebar nav ul li {
+.nav-links a {
+    display: block;
     padding: 12px 15px;
+    color: #888;
+    text-decoration: none;
     border-radius: 8px;
     margin-bottom: 8px;
     transition: 0.3s;
-    color: #aaa;
-    list-style: none;
 }
 
-.sidebar nav ul li a {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
-
-.sidebar nav ul li:hover,
-.sidebar nav ul li.active {
+.nav-links a:hover,
+.nav-links a.active {
     background-color: #1a1a1a;
-    color: #fff;
+    color: #007bff;
     border-right: 4px solid #007bff;
 }
 
