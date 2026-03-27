@@ -8,18 +8,29 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subscription extends Model
 {
-    /** @use HasFactory<\Database\Factories\SubscriptionFactory> */
     use HasFactory;
 
     protected $fillable = [
         'user_id',
-        'name_plan',
-        'starts_at',
-        'ends_at',
-        'status',
-        'description',
-        'price',
-        'duration',
+        'plan_id',
+        'paid_price',
+        'start_date',
+        'end_date',
+    ];
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
+
+    public function diets()
+    {
+        return $this->hasMany(Diet::class);
+    }
+//this is a cast that convert the start_date and end_date to date
+    protected $casts = [
+        'start_date' => 'date',
+        'end_date' => 'date',
     ];
 
     public function user()
@@ -27,27 +38,63 @@ class Subscription extends Model
         return $this->belongsTo(User::class);
     }
 
-    // The 'starts_at' and 'ends_at' attributes should be cast to dates objects for easier manipulation
-    //instead of strings. This allows us to use Carbon's date methods directly on these attributes.
-    protected $casts = [
-        'starts_at' => 'date',
-        'ends_at' => 'date',
-    ];
-
-    public function getRemainingDaysAttribute()
+    public function plan()
     {
-        if (! $this->ends_at) {
-            return 0;
-        }
-    //the diffInDays method calculates the difference in days between today and the subscription's end date. The second parameter 'false' ensures that if the end date is in the past, it will return a negative value. We use max(0, ...) to ensure that we don't return negative days, which would indicate an expired subscription.
-        return max(0, Carbon::today()->diffInDays($this->ends_at, false));
+        return $this->belongsTo(Plan::class);
     }
 
+    /**
+     * Calculates and sets the end_date based on the chosen plan's duration_days.
+     */
+    public function calculateAndSetEndDate()
+    {
+        if ($this->start_date && $this->plan) {
+            $this->end_date = Carbon::parse($this->start_date)->addDays($this->plan->duration_days);
+        }
+        return $this;
+    }
+
+    /**
+     * Accessor: Calculates remaining days
+     */
+    public function getRemainingDaysAttribute()
+    {
+        if (! $this->end_date) {
+            return 0;
+        }
+        // The second parameter 'false' ensures that if the end date is in the past, it will return a negative value.
+        // We use max(0, ...) to ensure that we don't return negative days.
+        return max(0, Carbon::today()->diffInDays($this->end_date, false));
+    }
+
+    /**
+     * isFuture() checks if the end_date is in the future
+     */
     public function getIsActiveAttribute()
     {
-        return $this->status === 'active'
-            && $this->ends_at
-            //isFuture() method checks if the end date is in the future, meaning the subscription is still valid. If the end date has passed, it will return false, indicating that the subscription is no longer active.
-            && $this->ends_at->isFuture();
+        if (!$this->start_date || !$this->end_date) {
+            return false;
+        }
+        return Carbon::today()->gte($this->start_date) && Carbon::today()->lte($this->end_date);
+    }
+
+    /**
+     * Dynamic attribute: status
+     */
+    public function getStatusAttribute()
+    {
+        return $this->is_active ? 'active' : 'expired';
+    }
+
+    /**
+     * وظيفة بسيطة لإرجاع تاريخ وقت آخر حضور بشكل جميل
+     */
+    public function getLastAttendanceInfoAttribute()
+    {
+        $last = $this->attendances()->latest()->first();
+        if (!$last) {
+            return 'لم يحضر بعد';
+        }
+        return $last->date->format('Y-m-d') . ' (' . $last->time . ')';
     }
 }

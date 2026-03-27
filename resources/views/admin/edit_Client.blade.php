@@ -14,7 +14,13 @@
         <aside class="sidebar">
             <div class="logo">GYM CORE</div>
             <nav>
-                <p style="color: #6c757d; text-align: center; margin-bottom: 15px; font-size: 13px;">لوحة التحكم</p>
+                <ul>
+                    <li><a href="{{ route('admin.index') }}"> الرئيسية</a></li>
+                    <li class="active"><a href="{{ route('admin.manage') }}"> إدارة العملاء</a></li>
+                    <li><a href="{{ route('admin.captains.index') }}"> إدارة الكباتن</a></li>
+                    <li><a href="{{ route('workout.index') }}"> جداول التمارين</a></li>
+                    <li><a href="{{ route('diet_plans.index') }}"> الأنظمة الغذائية</a></li>
+                </ul>
             </nav>
         </aside>
 
@@ -50,21 +56,32 @@
                     </div>
 
                     <div class="form-group">
-                        <label>اسم الباقة</label>
-                        <input type="text" name="name_plan"
-                            value="{{ old('name_plan', $user->subscription->name_plan ?? '') }}" required>
-                    </div>
-
-                    <div class="form-group">
                         <label>رقم الهاتف</label>
                         <input type="tel" name="phone_number"
-                            value="{{ old('phone_number', $user->phone_number) }}" required>
+                            value="{{ old('phone_number', $user->phones->first()->number ?? '') }}" required>
                     </div>
 
                     <div class="form-group">
-                        <label>عدد أيام الباقة</label>
-                        <input type="number" name="duration"
-                            value="{{ old('duration', $user->subscription->duration ?? 0) }}" min="1" required>
+                        <label>اختر الباقة</label>
+                        <select name="plan_id" required>
+                            @foreach ($plans as $plan)
+                                <option value="{{ $plan->id }}" {{ old('plan_id', $user->subscription->plan_id ?? '') == $plan->id ? 'selected' : '' }}>
+                                    {{ $plan->name }} ({{ $plan->duration_days }} يوم)
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>تاريخ الانتهاء</label>
+                        <input type="date" name="end_date"
+                            value="{{ old('end_date', $user->subscription?->end_date?->format('Y-m-d') ?? '') }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>السعر المدفوع (جنيه) - [ثابت لتعاقد العميل القديم]</label>
+                        <input type="number" step="0.01" name="price"
+                            value="{{ old('price', $user->subscription->paid_price ?? 0) }}" readonly style="background-color: #333; cursor: not-allowed; color:#888;">
                     </div>
                     <button type="submit" class="btn-submit">💾 حفظ التعديلات</button>
                 </form>

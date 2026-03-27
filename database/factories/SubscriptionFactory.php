@@ -18,9 +18,10 @@ class SubscriptionFactory extends Factory
     {
         $startsAt = fake()->dateTimeBetween('-1 month', 'now');
         return [
-            'subscription_starts_at' => $startsAt,
-            'subscription_ends_at' => fake()->dateTimeBetween($startsAt, '+6 months'),
+            'starts_at' => $startsAt,
+            'ends_at' => fake()->dateTimeBetween($startsAt, '+6 months'),
             'status' => fake()->randomElement(['active', 'expired']),
+            'description' => fake()->paragraph(3),
         ];
     }
 }

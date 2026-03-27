@@ -9,7 +9,6 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -21,10 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'phone_number',
-        'role',
-        'captain_id',
-        ];
+        'user_type_id', // Changed from role
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -48,20 +45,37 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the user type for this user.
+     */
+    public function userType()
+    {
+        return $this->belongsTo(UserType::class);
+    }
+
     public function captain()
     {
         return $this->belongsTo(User::class, 'captain_id');
     }
+
     public function clients()
     {
         return $this->hasMany(User::class, 'captain_id');
     }
+
     public function subscription()
-{
-    return $this->hasOne(Subscription::class)->latestOfMany();
-}
-public function subscriptions()
-{
-    return $this->hasMany(Subscription::class);
-}
+    {
+        return $this->hasOne(Subscription::class)->latestOfMany();
+    }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    public function phones()
+    {
+        return $this->hasMany(Phone::class);
+    }
 }

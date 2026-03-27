@@ -11,8 +11,7 @@ interface AdminServiceInterface
     public function storeClient(array $data);
     public function getAllClients();
     public function editClient($id);
-
     public function updateClient($id,array $data);
-
     public function deleteClient($id);
+    public function getClientById($id);
 }

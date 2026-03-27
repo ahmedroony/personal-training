@@ -13,6 +13,15 @@
     <div class="dashboard-container">
         <aside class="sidebar">
             <div class="logo">GYM CORE</div>
+            <nav>
+                <ul>
+                    <li><a href="{{ route('admin.index') }}"> الرئيسية</a></li>
+                    <li class="active"><a href="{{ route('admin.manage') }}"> إدارة العملاء</a></li>
+                    <li><a href="{{ route('admin.captains.index') }}"> إدارة الكباتن</a></li>
+                    <li><a href="#"> جداول التمارين</a></li>
+                    <li><a href="{{ route('diet_plans.index') }}"> الأنظمة الغذائية</a></li>
+                </ul>
+            </nav>
         </aside>
 
         <main class="main-content">
@@ -42,7 +51,7 @@
                     <div class="form-group">
                         <label class="form-label">البريد الإلكتروني</label>
                         <input type="email" class="form-input" placeholder="example@mail.com" name="email"
-                            value="{{ old('email') }}" required>
+                        value="{{ old('email') }}" required>
                     </div>
 
                     <div class="form-group">
@@ -60,9 +69,26 @@
                     <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
 
                     <div class="form-group">
-                        <label class="form-label">اسم الباقة</label>
+                        <label class="form-label">اختر باقة موجودة</label>
+                        <select name="plan_id" class="form-input">
+                            <option value="">-- أو قم بإضافة باقة جديدة بالأسفل --</option>
+                            @foreach ($plans as $plan)
+                                <option value="{{ $plan->id }}">{{ $plan->name }} ({{ $plan->duration_days }} يوم)
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">اسم الباقة الجديدة</label>
                         <input type="text" class="form-input" placeholder="مثال: باقة كمال أجسام شهرية"
-                            name="name_plan" value="{{ old('name_plan') }}" required>
+                            name="name_plan" value="{{ old('name_plan') }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">عدد أيام الاشتراك</label>
+                        <input type="number" class="form-input" placeholder="مثال: 30" name="duration"
+                            value="{{ old('duration') }}">
                     </div>
 
                     <div class="form-group">
@@ -72,18 +98,15 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">عدد أيام الاشتراك</label>
-                        <input type="number" class="form-input" placeholder="مثال: 30" name="duration"
-                            value="{{ old('duration') }}" required>
+                        <label class="form-label">تاريخ نهاية الاشتراك (اختياري - يحسب تلقائياً إذا ترك فارغاً)</label>
+                        <input type="date" class="form-input" name="end_date"
+                            value="{{ old('end_date') }}">
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">حالة الاشتراك</label>
-                        <select class="form-select" name="status">
-                            <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>نشط</option>
-                            <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>منتهي / موقوف
-                            </option>
-                        </select>
+                        <label class="form-label">المبلغ المدفوع (يترك فارغاً لاعتماده من الباقة)</label>
+                        <input type="number" step="0.01" class="form-input" placeholder="مثال: 500" name="price"
+                            value="{{ old('price') }}">
                     </div>
 
                     <button type="submit" class="btn-submit">تسجيل وإضافة العميل</button>
