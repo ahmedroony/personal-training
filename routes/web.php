@@ -4,8 +4,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CaptainController;
 use App\Http\Controllers\FoodsController;
-use App\Http\Controllers\PlanController;
 use App\Http\Controllers\WorkoutRoutinesController;
+use App\Http\Controllers\DietPlanController;
+use App\Http\Controllers\UserDietPlan;
 use Illuminate\Support\Facades\Route;
 
 // ----------------- عملاء -----------------
@@ -20,6 +21,8 @@ route::middleware(['auth'])->group(function () {
     route::delete('/admin/deleteClient/{id}', [AdminController::class, 'deleteClient'])->name('admin.deleteClient');
     route::get('/admin/search', [AdminController::class, 'search'])->name('admin.search');
     route::get('/admin/client/{id}', [AdminController::class, 'showClient'])->name('admin.client.show');
+    route::get('/admin/attendance', [AdminController::class, 'attendance'])->name('admin.attendance');
+    route::post('/admin/attendance/{subscription_id}', [AdminController::class, 'storeAttendance'])->name('admin.attendance.store');
     // ----------------- كباتن -----------------
 
     route::get('/admin/captains', [CaptainController::class, 'index'])->name('admin.captains.index');
@@ -31,9 +34,12 @@ route::middleware(['auth'])->group(function () {
     // ----------------- جداول التمارين -----------------
     route::get('/admin/workoutroutines', [WorkoutRoutinesController::class, 'index'])->name('workout.index');
     route::post('/admin/workoutroutines', [WorkoutRoutinesController::class, 'store'])->name('workout.store');
+    // ----------------- عمل الانظمه-----------------
+    route::get('/admin/createmeal' ,[DietPlanController::class,'index'])->name('create_diet_plans.index');
+    route::post('/admin/createmeal' ,[DietPlanController::class,'store'])->name('create_diet_plans.store');
     // ----------------- الانظمه  -----------------
-    route::get('/admin/meals', [PlanController::class, 'dietIndex'])->name('diet_plans.index');
-    route::post('/admin/meals', [PlanController::class, 'dietStore'])->name('diet_plans.store');
+    route::get('/admin/meals', [UserDietPlan::class, 'index'])->name('diet_plans.index');
+    route::post('/admin/meals', [UserDietPlan::class, 'store'])->name('diet_plans.store');
     // ----------------- كتالوج الأكل  -----------------
     route::get('/admin/foods', [FoodsController::class, 'index'])->name('foods.index');
     route::post('/admin/foods', [FoodsController::class, 'store'])->name('foods.store');

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('diet_plans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->text('description')->nullable();
+            $table->string('name');
+            $table->text('base_description')->nullable();
             $table->timestamps();
         });
     }

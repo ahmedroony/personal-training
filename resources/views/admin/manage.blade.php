@@ -58,11 +58,11 @@
                                 @foreach ($users as $user)
                             <tr class="client-row" data-status="{{ $user->current_status }}">
                                 <td>{{ $user->name }}</td>
-                                <td>{{ $user->phone_number }}</td>
-                                <td>{{ $user->name_plan }}</td>
-                                <td>{{ $user->remaining_days }} يوم</td>
+                                <td>{{ $user->phones->first()->number ?? 'لا يوجد' }}</td>
+                                <td>{{ $user->subscription->plan->name ?? 'بدون باقة' }}</td>
+                                <td>{{ $user->subscription->remaining_days ?? 0 }} يوم</td>
                                 <td>
-                                    @if ($user->current_status == 'active')
+                                    @if ($user->subscription && $user->subscription->is_active)
                                         <span class="badge active">نشط</span>
                                     @else
                                         <span class="badge inactive">منتهي</span>
