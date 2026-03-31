@@ -14,7 +14,9 @@
         @include('layouts.sidebar')
 
         <main class="main-content">
-            <button class="menu-btn" onclick="toggleSidebar()">☰ القائمة</button>
+            <div class="mobile-toggle-header" style="display: none; padding: 15px; background: #080808; border-bottom: 1px solid #1e1e1e; margin-bottom: 20px; border-radius: 10px;">
+                <button class="menu-btn" onclick="document.getElementById('sidebar').classList.toggle('show')" style="background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-family: inherit; font-weight: bold;">☰ القائمة</button>
+            </div>
 
             <header class="page-header">
                 <div>
@@ -117,10 +119,7 @@
             });
         }
 
-        // كود فتح القائمة في الموبايل
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('show');
-        }
+
     </script>
 </body>
 

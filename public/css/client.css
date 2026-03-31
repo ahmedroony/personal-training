@@ -81,21 +81,5 @@ body { background: var(--bg); color: var(--text); direction: rtl; }
 .diet-notes { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); }
 .diet-notes strong { color: #aaa; display: block; margin-bottom: 6px; }
 
-.menu-btn {
-    display: none; background: var(--primary); color: white; border: none;
-    padding: 10px 15px; border-radius: 8px; cursor: pointer;
-    font-size: 16px; margin-bottom: 20px;
-}
 
-@media (max-width: 900px) {
-    .sidebar { transform: translateX(240px); }
-    .sidebar.show { transform: translateX(0); }
-    .main-content { margin-right: 0; padding: 20px; }
-    .menu-btn { display: block; }
-    .two-col { grid-template-columns: 1fr; }
-    .page-header { text-align: center; }
-}
-
-.table-responsive { overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch; }
-.data-table { min-width: 600px; }
 

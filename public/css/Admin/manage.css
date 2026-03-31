@@ -244,41 +244,5 @@ tbody tr:hover {
     background: #3d3d3d;
 }
 
-/* الموبايل */
-.menu-btn {
-    display: none;
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-bottom: 20px;
-}
 
-@media (max-width: 992px) {
-    .sidebar {
-        transform: translateX(260px);
-    }
-    
-    .sidebar.show {
-        transform: translateX(0);
-    }
-
-    .main-content {
-        margin-right: 0;
-        padding: 20px;
-    }
-
-    .menu-btn {
-        display: block;
-    }
-
-    .header-section {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-}
 

@@ -1,4 +1,5 @@
 <aside class="sidebar" id="sidebar">
+    <div class="close-btn" onclick="document.getElementById('sidebar').classList.toggle('show')" style="display: none; cursor: pointer; font-size: 24px; color: #fff; margin-bottom: 20px; text-align: left;">✕</div>
     <div class="logo">GYM CORE</div>
     <nav class="nav-links">
         <a href="{{ route('admin.index') }}" class="{{ request()->routeIs('admin.index') ? 'active' : '' }}">🏠 الرئيسية</a>
