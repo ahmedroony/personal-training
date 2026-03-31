@@ -1,4 +1,4 @@
-<aside class="sidebar">
+<aside class="sidebar" id="sidebar">
     <div class="logo">GYM CORE</div>
     <nav class="nav-links">
         <a href="{{ route('admin.index') }}" class="{{ request()->routeIs('admin.index') ? 'active' : '' }}">🏠 الرئيسية</a>

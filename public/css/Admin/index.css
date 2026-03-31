@@ -19,6 +19,8 @@
             border-left: 1px solid var(--border);
             padding: 20px;
             position: fixed;
+            top: 0;
+            right: 0;
             height: 100vh;
             overflow-y: auto;
             transition: 0.3s;
@@ -94,8 +96,14 @@
             .sidebar { transform: translateX(250px); }
             .sidebar.show { transform: translateX(0); }
             .main-content { margin-right: 0; padding: 15px; }
-            .menu-btn { display: block; margin-bottom: 20px; }
+            .menu-btn { display: block; margin-bottom: 30px; }
+            .page-header { flex-direction: column; align-items: flex-start; gap: 15px; }
         }
+
+        .page-header { margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
+        .table-responsive { overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch; }
+        .responsive-table { min-width: 600px; }
+
 
         /* أنميشن اختفاء وظهر الصفوف */
         .client-row { transition: 0.3s; }

@@ -20,12 +20,14 @@ body {
 .sidebar {
     width: 260px;
     background-color: #080808;
-    /* أسود أغمق قليلاً */
     border-left: 1px solid #2d2d2d;
     padding: 30px 20px;
     position: fixed;
+    top: 0;
+    right: 0;
     height: 100vh;
     z-index: 1000;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .logo {
@@ -243,13 +245,40 @@ tbody tr:hover {
 }
 
 /* الموبايل */
+.menu-btn {
+    display: none;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
 @media (max-width: 992px) {
     .sidebar {
-        display: none;
+        transform: translateX(260px);
+    }
+    
+    .sidebar.show {
+        transform: translateX(0);
     }
 
     .main-content {
         margin-right: 0;
         padding: 20px;
     }
+
+    .menu-btn {
+        display: block;
+    }
+
+    .header-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
 }
+
