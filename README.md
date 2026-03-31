@@ -17,7 +17,8 @@ A comprehensive web-based fitness application designed to streamline gym operati
 ## 🚀 Installation & Setup
 
 1. **Clone the repository:**
-   ```bash git clone https://github.com/your-username/personal-training.gitcd your-repo-name
+   ```bash
+git clone https://github.com/your-username/personal-training.gitcd your-repo-name
 composer install
 npm install
   
@@ -29,5 +30,7 @@ Update your SQL database credentials in the new .env file.
 
 
 php artisan key:generate
+
 php artisan migrate
+
 php artisan serve
