@@ -8,6 +8,7 @@ use App\Models\Plan;
 use App\Models\UserType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminService implements AdminServiceInterface
 {
@@ -30,44 +31,44 @@ class AdminService implements AdminServiceInterface
 
     public function storeClient(array $data)
     {
-        $user = new User;
-        $user->name = $data['name'];
-        $user->email = $data['email'];
-        $user->password = bcrypt($data['password']);
-        $clientType = UserType::where('name', 'Client')->first();
-        $user->user_type_id = $clientType ? $clientType->id : null;
-        $user->save();
+            $user = new User;
+            $user->name = $data['name'];
+            $user->email = $data['email'];
+            $user->password = bcrypt($data['password']);
+            $clientType = UserType::where('name', 'Client')->first();
+            $user->user_type_id = $clientType ? $clientType->id : null;
+            $user->save();
 
 
-        if (!empty($data['phone'])) {
-            $user->phones()->create(['number' => $data['phone']]);
-        }
+            if (!empty($data['phone'])) {
+                $user->phones()->create(['number' => $data['phone']]);
+            }
 
-        if (!empty($data['plan_id'])) {
-            $plan = Plan::findOrFail($data['plan_id']);
-        } else {
-            $plan = Plan::firstOrCreate([
-                'name' => $data['name_plan'],
-                'duration_days' => $data['duration'],
-            ], [
-                'price' => $data['price'] ?? 0,
-                'description' => 'باقة جديدة'
+            if (!empty($data['plan_id'])) {
+                $plan = Plan::findOrFail($data['plan_id']);
+            } else {
+                $plan = Plan::firstOrCreate([
+                    'name' => $data['name_plan'],
+                    'duration_days' => $data['duration'],
+                ], [
+                    'price' => $data['price'] ?? 0,
+                    'description' => 'باقة جديدة'
+                ]);
+            }
+
+            $subscription = $user->subscriptions()->create([
+                'plan_id' => $plan->id,
+                'start_date' => $data['starts_at'],
+                'end_date' => $data['end_date'] ?? null,
+                'paid_price' => $data['price'] ?? $plan->price,
             ]);
-        }
 
-        $subscription = $user->subscriptions()->create([
-            'plan_id' => $plan->id,
-            'start_date' => $data['starts_at'],
-            'end_date' => $data['end_date'] ?? null,
-            'paid_price' => $data['price'] ?? $plan->price,
-        ]);
+            if (!$subscription->end_date) {
+                $subscription->calculateAndSetEndDate();
+            }
+            $subscription->save();
 
-        if (!$subscription->end_date) {
-            $subscription->calculateAndSetEndDate();
-        }
-        $subscription->save();
-
-        return $user;
+            return $user;
     }
 
     public function editClient($id)
@@ -81,32 +82,32 @@ class AdminService implements AdminServiceInterface
 
     public function updateClient($id,array $data)
     {
-        $user = User::with('userType')->find($id);
-        if (!$user || ($user->userType->name ?? '') != 'Client') {
-            return null;
-        }
+            $user = User::with('userType')->find($id);
+            if (!$user || ($user->userType->name ?? '') != 'Client') {
+                return null;
+            }
 
-        $user->update([
-            'name' => $data['name'],
-            'email' => $data['email'],
-        ]);
-
-        if (!empty($data['phone_number'])) {
-            $user->phones()->updateOrCreate(
-                ['user_id' => $user->id],
-                ['number' => $data['phone_number']]
-            );
-        }
-
-        if ($user->subscription) {
-            $user->subscription->update([
-                'plan_id' => $data['plan_id'],
-                'end_date' => $data['end_date'] ?? $user->subscription->end_date,
+            $user->update([
+                'name' => $data['name'],
+                'email' => $data['email'],
             ]);
-            $user->subscription->save();
-        }
 
-        return $user;
+            if (!empty($data['phone'])) {
+                $user->phones()->updateOrCreate(
+                    ['user_id' => $user->id],
+                    ['number' => $data['phone']]
+                );
+            }
+
+            if ($user->subscription) {
+                $user->subscription->update([
+                    'plan_id' => $data['plan_id'],
+                    'end_date' => $data['end_date'] ?? $user->subscription->end_date,
+                ]);
+                $user->subscription->save();
+            }
+
+            return $user;
     }
 
     public function deleteClient($id)

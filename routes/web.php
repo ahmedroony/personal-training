@@ -3,7 +3,6 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CaptainController;
-use App\Http\Controllers\FoodsController;
 use App\Http\Controllers\WorkoutRoutinesController;
 use App\Http\Controllers\DietPlanController;
 use App\Http\Controllers\UserDietPlan;

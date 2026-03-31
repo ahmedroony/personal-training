@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Domains\admin\Actions\AdminService;
+use App\Http\Controllers\Controller;
 use App\Models\CaptainAttendance;
 use App\Models\Plan;
 use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class PlanController extends Controller
 {
     protected $adminService;
 
@@ -28,24 +29,19 @@ class AdminController extends Controller
         })->count();
         $inactiveSubscribersCount = $usersCount - $activeSubscribersCount;
 
-        return view('admin.index', compact('users', 'usersCount', 'activeSubscribersCount', 'inactiveSubscribersCount'));
+        return response()->json([
+            'status' => true,
+            'message' => 'تم جلب الإحصائيات بنجاح',
+            'data' => [
+                'total_users' => $usersCount,
+                'active_subscribers' => $activeSubscribersCount,
+                'inactive_subscribers' => $inactiveSubscribersCount,
+                'users' => $users,
+            ],
+        ], 200);
     }
 
-    public function createClient()
-    {
-        $plans = Plan::all();
-
-        return view('admin.create_client', compact('plans'));
-    }
-
-    public function manage()
-    {
-        $users = $this->adminService->getAllClients();
-
-        return view('admin.manage', compact('users'));
-    }
-
-    public function storeClient(Request $request)
+    public function store(Request $request)
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -61,43 +57,65 @@ class AdminController extends Controller
         ]);
         $this->adminService->storeClient($validatedData);
 
-        return redirect()->route('admin.manage')->with('success', 'تم إضافة المتدرب بنجاح.');
+        return response()->json([
+            'status' => true,
+            'message' => 'تم إضافة المتدرب بنجاح',
+        ], 201);
     }
 
-    public function editClient($id)
+    public function show(string $id)
+    {
+        $user = $this->adminService->getClientById($id);
+        
+        return response()->json([
+            'status' => true,
+            'message' => 'تم جلب بيانات المتدرب بنجاح',
+            'data' => [
+                'user' => $user
+            ]
+        ], 200);
+    }
+
+    public function editClient(string $id)
     {
         $user = $this->adminService->editClient($id);
         $plans = Plan::all();
 
-        return view('admin.edit_Client', compact('user', 'plans'));
+        return response()->json([
+            'status' => true,
+            'message' => 'تم جلب بيانات المتدرب والخطط بنجاح',
+            'data' => [
+                'user' => $user,
+                'plans' => $plans
+            ]
+        ], 200);
     }
 
-    public function updateClient($id, Request $request)
+    public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,'.$id,
-            'phone_number' => 'nullable|string|max:20|unique:phones,number,'.$id.',user_id',
+            'phone' => 'required|string|max:20|unique:phones,number,'.$id.',user_id',
             'plan_id' => 'required|exists:plans,id',
             'end_date' => 'nullable|date',
         ]);
         $this->adminService->updateClient($id, $validatedData);
 
-        return redirect()->route('admin.index')->with('success', 'تم تحديث بيانات المتدرب بنجاح.');
+        return response()->json([
+            'status' => true,
+            'message' => 'تم تحديث بيانات المتدرب بنجاح',
+        ], 200);
     }
 
-    public function deleteClient($id)
+    public function destroy(string $id)
     {
         $this->adminService->deleteClient($id);
 
-        return redirect()->route('admin.manage')->with('success', 'تم حذف المتدرب بنجاح.');
-    }
-
-    public function showClient($id)
-    {
-        $user = $this->adminService->getClientById($id);
-
-        return view('admin.client_details', compact('user'));
+        return response()->json([
+            'status' => true,
+            'message' => 'تم حذف المتدرب بنجاح',
+        ], 200);
     }
 
     public function attendance()
@@ -108,7 +126,13 @@ class AdminController extends Controller
             $query->latest()->limit(1);
         }])->get();
 
-        return view('admin.attendance', compact('users'));
+        return response()->json([
+            'status' => true,
+            'message' => 'تم جلب حضور المتدربين بنجاح',
+            'data' => [
+                'users' => $users
+            ]
+        ], 200);
     }
 
     public function storeAttendance($subscription_id)
@@ -120,7 +144,13 @@ class AdminController extends Controller
             'time' => date('H:i:s'),
         ]);
 
-        return redirect()->back()->with('success', 'تم تسجيل الحضور بنجاح!');
+        return response()->json([
+            'status' => true,
+            'message' => 'تم تسجيل الحضور بنجاح!',
+            'data' => [
+                'subscription_id' => $subscription_id
+            ]
+        ], 201);
     }
 
     public function captainAttendance()
@@ -134,6 +164,13 @@ class AdminController extends Controller
             ->orderBy('time', 'desc')
             ->paginate(15);
 
-        return view('admin.captains.attendance', compact('captains', 'attendances'));
+        return response()->json([
+            'status' => true,
+            'message' => 'تم جلب حضور الكباتن بنجاح',
+            'data' => [
+                'captains' => $captains,
+                'attendances' => $attendances
+            ]
+        ], 200);
     }
 }
