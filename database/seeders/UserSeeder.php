@@ -16,11 +16,11 @@ class UserSeeder extends Seeder
         $adminType = UserType::firstOrCreate(['name' => 'Admin']);
 
         User::create([
-            'name' => 'Admin User',
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('12345678'),
-            'user_type_id' => $adminType->id,
-            'status' => 'active',
+                'name' => 'Admin User',
+                'email' => 'admin@admin.com',
+                'password' => bcrypt('12345678'),
+                'user_type_id' => $adminType->id,
+                'status' => 'active',
         ]);
     }
 }

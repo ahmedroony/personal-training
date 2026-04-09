@@ -1,0 +1,18 @@
+-Dynamic Names of Properties/Methods
+-Transaction
+The 7 Restful Methods:
+1- index   -> Get all records
+2- create  -> Show Create form
+3- store   -> Stores new data to the Database
+4- edit    -> Show Edit Form
+5- update  -> Store Updated Data to the Database 
+6- destroy -> Delete an existing record
+7- show    -> Show One Record
+
+
+/* Steps to Follow */ 
+Route -> Controller -> Method -> Model -> View 
+
+قاعدة الـ 
+"Together/Apart":
+ الحاجات اللي بتتغير مع بعضها لسبب واحد، خليهم مع بعض. الحاجات اللي بتتغير لأسباب مختلفة وفي أوقات مختلفة، افصلهم.

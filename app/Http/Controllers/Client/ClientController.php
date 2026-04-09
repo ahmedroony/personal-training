@@ -17,7 +17,7 @@ class ClientController extends Controller
     public function index()
     {
         $user = $this->clientService->getDashboardData();
-        return view('domains.client.dashboard', compact('user'));
+        return view('clients.dashboard', compact('user'));
     }
 
     public function home()

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Domains\admin\Actions\workoutroutines;
+use App\interfaces\WorkoutRoutinesServiceInterface;
 use Illuminate\Http\Request;
 
 class WorkoutRoutinesController extends Controller
 {
     protected $workout;
 
-    public function __construct(workoutroutines $workout)
+    public function __construct(WorkoutRoutinesServiceInterface $workout)
     {
         $this->workout = $workout;
     }

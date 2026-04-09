@@ -48,7 +48,7 @@
                             <tr class="client-row">
                                 <td>{{ $captain->name }}</td>
                                 <td>{{ $captain->email }}</td>
-                                <td dir="ltr" style="text-align: right;">{{ $captain->phone_number }}</td>
+                                <td dir="ltr" style="text-align: right;">{{ $captain->phones->first()->number ?? 'بدون هاتف' }}</td>
                                 <td>
                                     <span class="badge captain">مدرب (كابتن)</span>
                                 </td>

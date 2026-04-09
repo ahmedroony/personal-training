@@ -50,16 +50,7 @@
                             value="{{ old('phone_number', $user->phones->first()->number ?? '') }}" required>
                     </div>
 
-                    <div class="form-group">
-                        <label>اختر الباقة</label>
-                        <select name="plan_id" required>
-                            @foreach ($plans as $plan)
-                                <option value="{{ $plan->id }}" {{ old('plan_id', $user->subscription->plan_id ?? '') == $plan->id ? 'selected' : '' }}>
-                                    {{ $plan->name }} ({{ $plan->duration_days }} يوم)
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+
 
                     <div class="form-group">
                         <label>تاريخ الانتهاء</label>

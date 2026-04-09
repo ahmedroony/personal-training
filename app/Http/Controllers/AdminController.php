@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Domains\admin\Actions\AdminService;
+use App\interfaces\AdminServiceInterface;
 use App\Models\CaptainAttendance;
 use App\Models\Plan;
 use App\Models\Subscription;
@@ -13,7 +13,7 @@ class AdminController extends Controller
 {
     protected $adminService;
 
-    public function __construct(AdminService $adminService)
+    public function __construct(AdminServiceInterface $adminService)
     {
         $this->adminService = $adminService;
     }
@@ -35,14 +35,14 @@ class AdminController extends Controller
     {
         $plans = Plan::all();
 
-        return view('admin.create_client', compact('plans'));
+        return view('clients.create', compact('plans'));
     }
 
     public function manage()
     {
         $users = $this->adminService->getAllClients();
 
-        return view('admin.manage', compact('users'));
+        return view('clients.index', compact('users'));
     }
 
     public function storeClient(Request $request)
@@ -69,7 +69,7 @@ class AdminController extends Controller
         $user = $this->adminService->editClient($id);
         $plans = Plan::all();
 
-        return view('admin.edit_Client', compact('user', 'plans'));
+        return view('clients.edit', compact('user', 'plans'));
     }
 
     public function updateClient($id, Request $request)
@@ -78,7 +78,6 @@ class AdminController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,'.$id,
             'phone_number' => 'nullable|string|max:20|unique:phones,number,'.$id.',user_id',
-            'plan_id' => 'required|exists:plans,id',
             'end_date' => 'nullable|date',
         ]);
         $this->adminService->updateClient($id, $validatedData);
@@ -97,7 +96,7 @@ class AdminController extends Controller
     {
         $user = $this->adminService->getClientById($id);
 
-        return view('admin.client_details', compact('user'));
+        return view('clients.show', compact('user'));
     }
 
     public function attendance()
@@ -134,6 +133,6 @@ class AdminController extends Controller
             ->orderBy('time', 'desc')
             ->paginate(15);
 
-        return view('admin.captains.attendance', compact('captains', 'attendances'));
+        return view('captains.admin_panel.attendance', compact('captains', 'attendances'));
     }
 }

@@ -3,118 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تعيين الأنظمة الغذائية - GYM CORE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/Admin/manage.css') }}">
-    <style>
-        .description-box {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            display: none;
-            color: #ccc;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-        .form-select, .form-textarea {
-            width: 100%;
-            padding: 12px;
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 6px;
-            color: white;
-            margin-top: 5px;
-            font-family: 'Cairo', sans-serif;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #eee;
-            font-weight: 600;
-        }
-    </style>
+    <title>لوحة الكابتن | GYM CORE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/captain.css') }}">
 </head>
 <body>
-    <div class="dashboard-container">
-        @include('layouts.sidebar')
+<div class="app-wrapper">
 
-        <main class="main-content">
-            @if(session('success'))
-                <div style="background-color: #198754; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
-                    {{ session('success') }}
+    {{-- Sidebar --}}
+    <aside class="sidebar">
+        <div class="logo">GYM CORE</div>
+        <nav class="nav-links">
+            <a href="{{ route('captain.dashboard') }}" class="active">🏠 الرئيسية</a>
+        </nav>
+        <div class="sidebar-footer">
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="logout-btn">🚪 تسجيل الخروج</button>
+            </form>
+        </div>
+    </aside>
+
+    {{-- Main --}}
+    <main class="main-content">
+
+        {{-- Header --}}
+        <header class="page-header">
+            <div>
+                <h1>أهلاً، كابتن {{ $captain->name }} 💪</h1>
+                <p>لوحة تحكمك الشخصية</p>
+            </div>
+        </header>
+
+        {{-- Success Message --}}
+        @if(session('success'))
+            <div class="alert-success">{{ session('success') }}</div>
+        @endif
+
+        {{-- Check-in Card --}}
+        <div class="checkin-card">
+            @if($attendedToday)
+                <div class="checkin-done">
+                    <span class="checkin-icon">✅</span>
+                    <div>
+                        <p class="checkin-title">سجّلت حضورك النهارده!</p>
+                        <p class="checkin-sub">أداء ممتاز، استمر! 🔥</p>
+                    </div>
+                </div>
+            @else
+                <div class="checkin-pending">
+                    <span class="checkin-icon">⏰</span>
+                    <div>
+                        <p class="checkin-title">لم تسجّل حضورك بعد</p>
+                        <p class="checkin-sub">اضغط الزرار عشان تسجّل وجودك في الجيم</p>
+                    </div>
+                </div>
+                <form action="{{ route('captain.checkin') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="checkin-btn">📍 سجّل حضوري الآن</button>
+                </form>
+            @endif
+        </div>
+
+        {{-- Stats --}}
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">📅</div>
+                <div>
+                    <p class="stat-label">أيام الحضور هذا الشهر</p>
+                    <p class="stat-value">{{ $monthCount }} يوم</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div>
+                    <p class="stat-label">إجمالي أيام الحضور</p>
+                    <p class="stat-value">{{ $attendances->count() }} يوم</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🗓️</div>
+                <div>
+                    <p class="stat-label">حالة اليوم</p>
+                    <p class="stat-value" style="color: {{ $attendedToday ? '#28a745' : '#ffc107' }}">
+                        {{ $attendedToday ? 'حاضر ✅' : 'لم يسجّل بعد' }}
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        {{-- Attendance History --}}
+        <section class="section-card">
+            <h2>📋 سجل الحضور الكامل</h2>
+            @if($attendances->count() > 0)
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>التاريخ</th>
+                            <th>اليوم</th>
+                            <th>وقت الحضور</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($attendances as $i => $att)
+                            <tr>
+                                <td>{{ $i + 1 }}</td>
+                                <td>{{ $att->date->format('Y-m-d') }}</td>
+                                <td>{{ $att->date->locale('ar')->isoFormat('dddd') }}</td>
+                                <td>{{ $att->time }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @else
+                <div class="empty-state">
+                    <span>📭</span>
+                    <p>لا يوجد سجل حضور حالياً</p>
                 </div>
             @endif
+        </section>
 
-            <header class="header-section">
-                <div>
-                    <h1>🥗 تعيين الأنظمة الغذائية</h1>
-                    <p>اختر المتدرب والنظام الغذائي المناسب له مع إضافة ملاحظات خاصة</p>
-                </div>
-            </header>
-
-            <section class="form-card" style="max-width: 800px; margin: 0 auto;">
-                <form action="{{ route('diet_plans.store') }}" method="POST">
-                    @csrf
-
-                    <div class="form-group">
-                        <label>1. اختر المتدرب (المشتركين الحاليين)</label>
-                        <select name="subscription_id" class="form-select" required>
-                            <option value="">-- اختر المتدرب --</option>
-                            @foreach($users as $user)
-                                <option value="{{ $user->subscription->id }}">
-                                    {{ $user->name }} (ينتهي في: {{ $user->subscription->end_date->format('Y-m-d') }})
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>2. اختر نظاماً غذائياً (Template)</label>
-                        <select name="diet_plan_id" class="form-select" onchange="showDescription(this)" required>
-                            <option value="">-- اختر النظام --</option>
-                            @foreach($dietPlans as $plan)
-                                <option value="{{ $plan->id }}" data-description="{{ $plan->base_description }}">
-                                    {{ $plan->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        <div id="planDescription" class="description-box">
-                            <strong>وصف النظام المختارة:</strong>
-                            <p id="descriptionText"></p>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>3. ملاحظات مخصصة للمتدرب (إضافات، استثناءات، صيام، إلخ)</label>
-                        <textarea name="custom_notes" rows="5" class="form-textarea" placeholder="اكتب أي ملاحظات إضافية هنا..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn-primary" style="width: 100%; padding: 15px; font-size: 16px; margin-top: 10px;">
-                        💾 حفظ وتعيين النظام
-                    </button>
-                </form>
-            </section>
-        </main>
-    </div>
-
-    <script>
-        // وظيفة بسيطة تظهر وصف النظام عند اختياره من القائمة
-        function showDescription(selectElement) {
-            const descriptionText = selectElement.options[selectElement.selectedIndex].getAttribute('data-description');
-            const descriptionBox = document.getElementById('planDescription');
-
-            if (descriptionText) {
-                document.getElementById('descriptionText').textContent = descriptionText;
-                descriptionBox.style.display = 'block';
-            } else {
-                descriptionBox.style.display = 'none';
-            }
-        }
-    </script>
+    </main>
+</div>
 </body>
 </html>
