@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Domains\admin\Actions\DietPlanService;
+use App\interfaces\DietPlanServiceInterface;
+
 class DietPlanController extends Controller
 {
     protected $dietPlanService;
-    public function __construct(DietPlanService $dietPlanService)
+    public function __construct(DietPlanServiceInterface $dietPlanService)
     {
         $this->dietPlanService = $dietPlanService;
     }
     public function index(){
-        $plans =  $this->dietPlanService->index();
-        return view('diet_plans.createDietplan',compact('plans'));
+        $users =  $this->dietPlanService->index();
+        return view('diet_plans.create', compact('users'));
     }
 
     public function store(Request $request){

@@ -20,12 +20,14 @@ body {
 .sidebar {
     width: 260px;
     background-color: #080808;
-    /* أسود أغمق قليلاً */
     border-left: 1px solid #2d2d2d;
     padding: 30px 20px;
     position: fixed;
+    top: 0;
+    right: 0;
     height: 100vh;
     z-index: 1000;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .logo {
@@ -242,14 +244,5 @@ tbody tr:hover {
     background: #3d3d3d;
 }
 
-/* الموبايل */
-@media (max-width: 992px) {
-    .sidebar {
-        display: none;
-    }
 
-    .main-content {
-        margin-right: 0;
-        padding: 20px;
-    }
-}
+

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إضافة مشترك جديد - GYM CORE</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/admin/create.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Admin/create.css') }}">
 </head>
 
 <body>
@@ -40,7 +40,7 @@
                     <div class="form-group">
                         <label class="form-label">البريد الإلكتروني</label>
                         <input type="email" class="form-input" placeholder="example@mail.com" name="email"
-                        value="{{ old('email') }}" required>
+                            value="{{ old('email') }}" required>
                     </div>
 
                     <div class="form-group">
@@ -59,10 +59,11 @@
 
                     <div class="form-group">
                         <label class="form-label">اختر باقة موجودة</label>
-                        <select name="plan_id" class="form-input">
+                        <select name="plan_id" class="form-input" id="plan_id" onchange="toggleDisplay()">
                             <option value="">-- أو قم بإضافة باقة جديدة بالأسفل --</option>
                             @foreach ($plans as $plan)
-                                <option value="{{ $plan->id }}">{{ $plan->name }} ({{ $plan->duration_days }} يوم)
+                                <option value="{{ $plan->id }}"data-price="{{ $plan->price }}">{{ $plan->name }}
+                                    ({{ $plan->duration_days }} يوم)
                                 </option>
                             @endforeach
                         </select>
@@ -70,14 +71,14 @@
 
                     <div class="form-group">
                         <label class="form-label">اسم الباقة الجديدة</label>
-                        <input type="text" class="form-input" placeholder="مثال: باقة كمال أجسام شهرية"
-                            name="name_plan" value="{{ old('name_plan') }}">
+                        <input type="text" class="form-input" id="plan_name" onchange="toggle()"
+                            placeholder="مثال: باقة كمال أجسام شهرية" name="name_plan" value="{{ old('name_plan') }}">
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">عدد أيام الاشتراك</label>
-                        <input type="number" class="form-input" placeholder="مثال: 30" name="duration"
-                            value="{{ old('duration') }}">
+                        <input type="number" class="form-input" id="the_duration" placeholder="مثال: 30"
+                            name="duration" value="{{ old('duration') }}">
                     </div>
 
                     <div class="form-group">
@@ -88,14 +89,13 @@
 
                     <div class="form-group">
                         <label class="form-label">تاريخ نهاية الاشتراك (اختياري - يحسب تلقائياً إذا ترك فارغاً)</label>
-                        <input type="date" class="form-input" name="end_date"
-                            value="{{ old('end_date') }}">
+                        <input type="date" class="form-input" name="end_date" value="{{ old('end_date') }}">
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">المبلغ المدفوع (يترك فارغاً لاعتماده من الباقة)</label>
-                        <input type="number" step="0.01" class="form-input" placeholder="مثال: 500" name="price"
-                            value="{{ old('price') }}">
+                        <input type="number" step="0.01" id="price" class="form-input" placeholder="مثال: 500"
+                            name="price" value="{{ old('price') }}">
                     </div>
 
                     <button type="submit" class="btn-submit">تسجيل وإضافة العميل</button>
@@ -106,5 +106,34 @@
         </main>
     </div>
 </body>
+<script>
+    function toggleDisplay() {
+        let planid = document.getElementById('plan_id');
+        let price = document.getElementById('price');
+        let plan_name = document.getElementById('plan_name');
+        let the_duration = document.getElementById('the_duration')
+        let getpriceatt = planid.options[planid.selectedIndex].getAttribute('data-price');
+        price.value = getpriceatt;
+        if (planid.value != "") {
+            price.style.cursor = "not-allowed";
+            plan_name.style.cursor = "not-allowed";
+            the_duration.style.cursor = "not-allowed";
+        } else {
+            price.style.cursor = "auto";
+            plan_name.style.cursor = "auto";
+            the_duration.style.cursor = "auto";
+        }
+    }
+
+    function toggle() {
+        let plan_name = document.getElementById('plan_name');
+        let planid = document.getElementById('plan_id');
+        if (plan_name.value !== "") {
+            planid.disabled = true; 
+        } else {
+            planid.disabled = false;
+        }
+    }
+</script>
 
 </html>

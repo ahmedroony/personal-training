@@ -19,6 +19,8 @@
             border-left: 1px solid var(--border);
             padding: 20px;
             position: fixed;
+            top: 0;
+            right: 0;
             height: 100vh;
             overflow-y: auto;
             transition: 0.3s;
@@ -87,15 +89,10 @@
         .badge.active { background: rgba(40, 167, 69, 0.1); color: #28a745; }
         .badge.inactive { background: rgba(220, 53, 69, 0.1); color: #dc3545; }
 
-        /* --- الموبايل (Responsive) --- */
-        .menu-btn { display: none; background: var(--primary); color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; }
+        .page-header { margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
+        .table-responsive { overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch; }
+        .responsive-table { min-width: 600px; }
 
-        @media (max-width: 992px) {
-            .sidebar { transform: translateX(250px); }
-            .sidebar.show { transform: translateX(0); }
-            .main-content { margin-right: 0; padding: 15px; }
-            .menu-btn { display: block; margin-bottom: 20px; }
-        }
 
         /* أنميشن اختفاء وظهر الصفوف */
         .client-row { transition: 0.3s; }
@@ -179,3 +176,35 @@
             transition: 0.3s;
         }
         .btn-primary-small:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        /* --- استجابة الموبايل (Clean Mobile Responsive) --- */
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(250px);
+                border-left: none;
+                border-right: 1px solid var(--border);
+                box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            }
+            .sidebar.show {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-right: 0;
+                width: 100%;
+                padding: 15px;
+            }
+            .mobile-toggle-header {
+                display: block !important;
+            }
+            .close-btn {
+                display: block !important;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }

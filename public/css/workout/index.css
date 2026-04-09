@@ -340,17 +340,7 @@ body {
     display: block;
 }
 
-/* === Responsive === */
-@media (max-width: 992px) {
-    .sidebar {
-        display: none;
-    }
 
-    .main-content {
-        margin-right: 0;
-        padding: 20px;
-    }
-}
 
 /* === Scrollbar === */
 .dropdown-list::-webkit-scrollbar {

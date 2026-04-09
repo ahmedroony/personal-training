@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Domains\Subscription\Actions\SubscriptionService;
+use App\interfaces\SubscriptionInterface;
+
 class SubscriptionController extends Controller
 {
     protected $subscriptionService;
-    public function __construct(SubscriptionService $subscriptionService)
+    public function __construct(SubscriptionInterface $subscriptionService)
     {
         $this->subscriptionService = $subscriptionService;
     }

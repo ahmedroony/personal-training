@@ -7,6 +7,7 @@ use App\Http\Controllers\WorkoutRoutinesController;
 use App\Http\Controllers\DietPlanController;
 use App\Http\Controllers\UserDietPlan;
 use App\Http\Controllers\Client\ClientController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Captain\CaptainController as CaptainDashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -57,6 +58,10 @@ Route::middleware(['auth'])->group(function () {
     // ----------------- تعيين الأنظمة -----------------
     Route::get('/admin/meals', [UserDietPlan::class, 'index'])->name('diet_plans.index');
     Route::post('/admin/meals', [UserDietPlan::class, 'store'])->name('diet_plans.store');
+        // -----------------  settings -----------------
+    Route::get('/admin/settings',[SettingController::class,'index'])->name('setting.index');
+    Route::delete('/admin/settings/{id}',[SettingController::class,'delete'])->name('setting.delete');
+    Route::delete('/admin/settings/diet/{id}',[SettingController::class,'deleteDietPlan'])->name('setting.diet.delete');
 });
 
 // --------------------------------------------------------------------------------------------

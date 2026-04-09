@@ -3,7 +3,9 @@ namespace App\Domains\admin\Actions;
 use App\Models\User;
 use App\Models\DietPlan;
 use App\Models\Diet;
-class UesrDietPlanService{
+use App\interfaces\UserDietPlanServiceInterface;
+
+class UserDietPlanService implements UserDietPlanServiceInterface{
     public function index()
     {
         $users = User::whereHas('subscription', function($q) {

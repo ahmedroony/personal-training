@@ -3,8 +3,9 @@
 namespace App\Domains\admin\Actions;
 
 use App\Models\User;
+use App\interfaces\WorkoutRoutinesServiceInterface;
 
-class workoutroutines
+class WorkoutRoutinesService implements WorkoutRoutinesServiceInterface
 {
     public function index()
     {

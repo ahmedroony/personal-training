@@ -23,7 +23,7 @@ class CaptainController extends Controller
         $monthCount    = $this->captainService->getMonthCount();
         $attendedToday = $this->captainService->attendedToday();
 
-        return view('domains.captain.dashboard', compact(
+        return view('diet_plans.index', compact(
             'captain', 'attendances', 'monthCount', 'attendedToday'
         ));
     }

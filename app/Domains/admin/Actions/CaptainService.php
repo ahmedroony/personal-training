@@ -4,13 +4,16 @@ namespace App\Domains\admin\Actions;
 
 use App\Models\User;
 use App\Models\UserType;
-class CaptainService
+use App\interfaces\CaptainServiceInterface;
+
+class CaptainService implements CaptainServiceInterface
 {
     public function getAllCaptains()
     {
         return User::whereHas('userType', function($q) {
             $q->where('name', 'Captain');
         })->get();
+        
     }
 
     public function storeCaptain(array $data)

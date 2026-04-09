@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Domains\admin\Actions\UesrDietPlanService;
+use App\interfaces\UserDietPlanServiceInterface;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class UserDietPlan extends Controller
 {
     protected $UesrDiet;
-    public function __construct(UesrDietPlanService $UesrDiet)
+    public function __construct(UserDietPlanServiceInterface $UesrDiet)
     {
         $this->UesrDiet = $UesrDiet;
     }

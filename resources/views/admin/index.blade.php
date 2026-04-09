@@ -14,14 +14,16 @@
         @include('layouts.sidebar')
 
         <main class="main-content">
-            <button class="menu-btn" onclick="toggleSidebar()">☰ القائمة</button>
+            <div class="mobile-toggle-header" style="display: none; padding: 15px; background: #080808; border-bottom: 1px solid #1e1e1e; margin-bottom: 20px; border-radius: 10px;">
+                <button class="menu-btn" onclick="document.getElementById('sidebar').classList.toggle('show')" style="background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-family: inherit; font-weight: bold;">☰ القائمة</button>
+            </div>
 
-            <header style="margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center;">
+            <header class="page-header">
                 <div>
                     <h1>لوحة التحكم</h1>
                     <p style="color: var(--muted);">اضغط على الكروت للفلترة السريعة</p>
                 </div>
-                <div style="display: flex; align-items: center; gap: 14px;">
+                <div>
                     <span style="color: #555; font-size: 14px;">👋 {{ auth()->user()->name }}</span>
                 </div>
             </header>
@@ -43,46 +45,48 @@
 
             <div class="data-card">
                 <h2 id="table-title">عرض كل المشتركين</h2>
-                <table class="responsive-table">
-                    <thead>
-                        <tr>
-                            <th>الاسم</th>
-                            <th>الحالة</th>
-                            <th>الباقة</th>
-                            <th>الأيام المتبقية</th>
-                            <th>التمرين</th>
-                        </tr>
-                    </thead>
-                    <tbody id="clients-body">
-                        @foreach ($users as $user)
-                            <tr class="client-row" data-status="{{ ($user->subscription && $user->subscription->is_active) ? 'active' : 'inactive' }}">
-                                <td>{{ $user->name }}</td>
-                                <td>
-                                    @if ($user->subscription && $user->subscription->is_active)
-                                        <span class="badge active">نشط</span>
-                                    @else
-                                        <span class="badge inactive">منتهي</span>
-                                    @endif
-                                </td>
-                                <td>{{ $user->subscription->plan->name ?? 'بدون باقة' }}</td>
-                                <td>{{ $user->subscription->remaining_days ?? 0 }} يوم</td>
-                                <td>
-                                    @if ($user->subscription?->plan?->description)
-                                        <details style="cursor: pointer;">
-                                            <summary style="color: var(--primary); font-size: 13px;">🔎 عرض</summary>
-                                            <div
-                                                style="background: #1a1a1a; padding: 10px; border-radius: 5px; margin-top: 5px; font-size: 13px; color: #ccc; border: 1px solid #333; position: absolute; z-index: 100; max-width: 250px;">
-                                                {{ $user->subscription->plan->description }}
-                                            </div>
-                                        </details>
-                                    @else
-                                        <span style="color: var(--muted); font-size: 12px;">--</span>
-                                    @endif
-                                </td>
+                <div class="table-responsive">
+                    <table class="responsive-table">
+                        <thead>
+                            <tr>
+                                <th>الاسم</th>
+                                <th>الحالة</th>
+                                <th>الباقة</th>
+                                <th>الأيام المتبقية</th>
+                                <th>التمرين</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody id="clients-body">
+                            @foreach ($users as $user)
+                                <tr class="client-row" data-status="{{ ($user->subscription && $user->subscription->is_active) ? 'active' : 'inactive' }}">
+                                    <td>{{ $user->name }}</td>
+                                    <td>
+                                        @if ($user->subscription && $user->subscription->is_active)
+                                            <span class="badge active">نشط</span>
+                                        @else
+                                            <span class="badge inactive">منتهي</span>
+                                        @endif
+                                    </td>
+                                    <td>{{ $user->subscription->plan->name ?? 'بدون باقة' }}</td>
+                                    <td>{{ $user->subscription->remaining_days ?? 0 }} يوم</td>
+                                    <td>
+                                        @if ($user->subscription?->plan?->description)
+                                            <details style="cursor: pointer;">
+                                                <summary style="color: var(--primary); font-size: 13px;">🔎 عرض</summary>
+                                                <div
+                                                    style="background: #1a1a1a; padding: 10px; border-radius: 5px; margin-top: 5px; font-size: 13px; color: #ccc; border: 1px solid #333; position: absolute; z-index: 100; max-width: 250px;">
+                                                    {{ $user->subscription->plan->description }}
+                                                </div>
+                                            </details>
+                                        @else
+                                            <span style="color: var(--muted); font-size: 12px;">--</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </main>
     </div>
@@ -115,10 +119,7 @@
             });
         }
 
-        // كود فتح القائمة في الموبايل
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('show');
-        }
+
     </script>
 </body>
 

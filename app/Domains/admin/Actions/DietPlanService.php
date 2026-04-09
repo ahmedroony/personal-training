@@ -1,8 +1,12 @@
 <?php
 namespace App\Domains\admin\Actions;
 use App\Models\DietPlan;
-class DietPlanService{
+use App\interfaces\DietPlanServiceInterface;
+
+class DietPlanService implements DietPlanServiceInterface{
     public function index(){
+        $DietPlan = DietPlan::all();
+        return $DietPlan;
     }
     public function store(array $data){
         DietPlan::create([

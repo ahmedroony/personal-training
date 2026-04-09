@@ -26,8 +26,11 @@ body {
     border-left: 1px solid #2d2d2d;
     padding: 30px 20px;
     position: fixed;
+    top: 0;
+    right: 0;
     height: 100vh;
     z-index: 1000;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .logo {
@@ -185,8 +188,5 @@ tbody tr:hover {
     text-decoration: none;
 }
 
-/* Responsive */
-@media (max-width: 992px) {
-    .sidebar { display: none; }
-    .main-content { margin-right: 0; padding: 20px; }
-}
+
+
