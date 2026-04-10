@@ -17,13 +17,14 @@ Route::get('/', [ClientController::class, 'home'])->name('home');
 // ----------------- مسارات الكابتن -----------------
 Route::middleware(['auth'])->group(function () {
     Route::get('/captain/dashboard', [CaptainDashboardController::class, 'index'])->name('captain.dashboard');
+    Route::post('/captain/add-client', [CaptainDashboardController::class, 'addClient'])->name('captain.addClient');
     Route::post('/captain/checkin', [CaptainDashboardController::class, 'checkIn'])->name('captain.checkin');
 });
 
 // ----------------- عملاء وأدمن -----------------
 Route::middleware(['auth'])->group(function () {
-    // لوحة تحكم المتدرب
     Route::get('/client/dashboard', [ClientController::class, 'index'])->name('client.dashboard');
+    Route::post('/client/checkin', [ClientController::class, 'checkIn'])->name('client.checkin');
 
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/manage', [AdminController::class, 'manage'])->name('admin.manage');

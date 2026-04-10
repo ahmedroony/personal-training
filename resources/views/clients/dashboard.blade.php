@@ -10,7 +10,6 @@
 <body>
     <div class="app-wrapper">
 
-        {{-- Sidebar --}}
         <aside class="sidebar">
             <div class="logo">GYM CORE</div>
             <nav class="nav-links">
@@ -24,17 +23,27 @@
             </div>
         </aside>
 
-        {{-- Main --}}
         <main class="main-content">
 
-            <header class="page-header">
-                <div>
-                    <h1>مرحباً، {{ $user->name ?? 'مستدرب' }} 👋</h1>
-                    <p>إليك نظرة سريعة على حالتك الرياضية</p>
-                </div>
-            </header>
+                <header class="page-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h1>مرحباً، {{ $user->name ?? 'مستدرب' }} 👋</h1>
+                        <p>إليك نظرة سريعة على حالتك الرياضية</p>
+                    </div>
 
-            {{-- Stats --}}
+                    @if(session('success'))
+                        <div style="color: #28a745; background: rgba(40,167,69,0.1); padding: 10px 15px; border-radius: 8px;">{{ session('success') }}</div>
+                    @endif
+                    @if(session('error'))
+                        <div style="color: #dc3545; background: rgba(220,53,69,0.1); padding: 10px 15px; border-radius: 8px;">{{ session('error') }}</div>
+                    @endif
+
+                    <form action="{{ route('client.checkin') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="logout-btn" style="background: #28a745; border: none; color: white;">✅ تسجيل حضور اليوم</button>
+                    </form>
+                </header>
+
             @php
                 $sub = $user->subscription ?? null;
             @endphp
@@ -74,7 +83,6 @@
 
             <div class="two-col">
 
-                {{-- Attendance --}}
                 <section class="section-card">
                     <h2>📅 سجل الحضور</h2>
                     @if($sub && $sub->attendances->count() > 0)
@@ -104,7 +112,6 @@
                     @endif
                 </section>
 
-                {{-- Diet --}}
                 <section class="section-card">
                     <h2>🥗 النظام الغذائي</h2>
                     @php $latestDiet = $sub?->diets?->last(); @endphp

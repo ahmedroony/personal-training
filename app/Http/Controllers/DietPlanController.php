@@ -13,8 +13,8 @@ class DietPlanController extends Controller
         $this->dietPlanService = $dietPlanService;
     }
     public function index(){
-        $users =  $this->dietPlanService->index();
-        return view('diet_plans.create', compact('users'));
+        $dietPlans =  $this->dietPlanService->index();
+        return view('diet_plans.create', compact('dietPlans'));
     }
 
     public function store(Request $request){
