@@ -66,11 +66,10 @@
                 </form>
             </section>
 
-            {{-- قائمة الخطط الغذائية --}}
             <section class="form-card" style="margin-top: 30px;">
                 <h3>📂 الخطط الغذائية الحالية</h3>
 
-                @foreach ($users as $plan)
+                @foreach ($dietPlans as $plan)
                     <div style="background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 15px; margin-bottom: 10px;">
                         <p style="color: white; font-weight: bold; margin: 0 0 5px;">🥗 {{ $plan->name }}</p>
                         <p style="color: #aaa; margin: 0; font-size: 13px;">{{ $plan->base_description }}</p>

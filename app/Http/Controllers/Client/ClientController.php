@@ -24,4 +24,15 @@ class ClientController extends Controller
     {
         return view('home');
     }
+
+    public function checkIn()
+    {
+        $result = $this->clientService->checkIn();
+
+        if ($result) {
+            return redirect()->back()->with('success', 'تم تسجيل حضورك لليوم بنجاح! أحسنت يا بطل 💪');
+        }
+
+        return redirect()->back()->with('error', 'لقد قمت بتسجيل اليوم مسبقاً، أو ليس لديك باقة نشطة حالياً.');
+    }
 }

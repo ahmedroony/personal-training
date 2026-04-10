@@ -14,8 +14,9 @@
         @include('layouts.sidebar')
 
         <main class="main-content">
-            @if(session('success'))
-                <div style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; background-color: #198754; color: white; padding: 15px 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); font-weight: bold; text-align: center;">
+            @if (session('success'))
+                <div
+                    style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; background-color: #198754; color: white; padding: 15px 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); font-weight: bold; text-align: center;">
                     {{ session('success') }}
                 </div>
             @endif
@@ -44,43 +45,48 @@
                             </tr>
                         </thead>
                         <tbody>
-                                @foreach ($users as $user)
-                            <tr class="client-row" data-status="{{ $user->current_status }}">
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->phones->first()->number ?? 'لا يوجد' }}</td>
-                                <td>{{ $user->subscription->plan->name ?? 'بدون باقة' }}</td>
-                                <td>{{ $user->subscription->remaining_days ?? 0 }} يوم</td>
-                                <td>
-                                    @if ($user->subscription && $user->subscription->is_active)
-                                        <span class="badge active">نشط</span>
-                                    @else
-                                        <span class="badge inactive">منتهي</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    @if ($user->subscription?->plan?->description)
-                                        <details style="cursor: pointer;">
-                                            <summary style="color: #007bff; font-size: 13px;">🔎 عرض</summary>
-                                            <div style="background: #1a1a1a; padding: 10px; border-radius: 5px; margin-top: 5px; font-size: 13px; color: #ccc; border: 1px solid #333; position: absolute; z-index: 100; max-width: 250px;">
-                                                {{ $user->subscription->plan->description }}
-                                            </div>
-                                        </details>
-                                    @else
-                                        <span style="color: #888; font-size: 12px;">--</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    <div class="action-btns" style="display: flex; gap: 10px; align-items: center;">
-                                        <a href="{{ route('admin.client.show', $user->id) }}" title="عرض التفاصيل" style="text-decoration: none; font-size: 18px;">👁️</a>
-                                        <a href="{{ route('admin.editClient', $user->id) }}" title="تعديل" style="color: #ffc107; text-decoration: none; font-size: 18px;">✏️</a>
-                                        <form action="{{ route('admin.deleteClient', $user->id) }}" method="POST" style="margin: 0; display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" title="حذف" style="color: #dc3545; background: none; border: none; cursor: pointer; font-size: 18px;">🗑️</button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
+                            @foreach ($users as $user)
+                                <tr class="client-row" data-status="{{ $user->current_status }}">
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->phones->first()->number ?? 'لا يوجد' }}</td>
+                                    <td>{{ $user->subscription->plan->name ?? 'بدون باقة' }}</td>
+                                    <td>{{ $user->subscription->remaining_days ?? 0 }} يوم</td>
+                                    <td>
+                                        @if ($user->subscription && $user->subscription->is_active)
+                                            <span class="badge active">نشط</span>
+                                        @else
+                                            <span class="badge inactive">منتهي</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($user->subscription?->plan?->description)
+                                            <details style="cursor: pointer;">
+                                                <summary style="color: #007bff; font-size: 13px;">🔎 عرض</summary>
+                                                <div
+                                                    style="background: #1a1a1a; padding: 10px; border-radius: 5px; margin-top: 5px; font-size: 13px; color: #ccc; border: 1px solid #333; position: absolute; z-index: 100; max-width: 250px;">
+                                                    {{ $user->subscription->plan->description }}
+                                                </div>
+                                            </details>
+                                        @else
+                                            <span style="color: #888; font-size: 12px;">--</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <div class="action-btns" style="display: flex; gap: 10px; align-items: center;">
+                                            <a href="{{ route('admin.client.show', $user->id) }}" title="عرض التفاصيل"
+                                                style="text-decoration: none; font-size: 18px;">👁️</a>
+                                            <a href="{{ route('admin.editClient', $user->id) }}" title="تعديل"
+                                                style="color: #ffc107; text-decoration: none; font-size: 18px;">✏️</a>
+                                            <form action="{{ route('admin.deleteClient', $user->id) }}" method="POST"
+                                                style="margin: 0; display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" title="حذف"
+                                                    style="color: #dc3545; background: none; border: none; cursor: pointer; font-size: 18px;">🗑️</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -89,4 +95,5 @@
         </main>
     </div>
 </body>
+
 </html>
