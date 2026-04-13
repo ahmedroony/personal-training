@@ -48,7 +48,7 @@
                             <option value="" disabled selected>-- اختر المتدرب --</option>
                             @foreach($users as $user)
                                 <option value="{{ $user->subscription->id }}">
-                                    {{ $user->name }} (باقة: {{ $user->subscription->name ?? 'غير محدد' }})
+                                    {{ $user->name }} (باقة: {{ $user->subscription->plan->name ?? 'غير محدد' }})
                                 </option>
                             @endforeach
                         </select>

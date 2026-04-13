@@ -21,9 +21,9 @@ class ClientService
             'subscription.plan',
             'subscription.attendances' => function ($query) {
                 $query->latest();
-                }
-                ,
-                'subscription.diets.dietPlan',])->find($user->id);
+                },
+                'subscription.diets.dietPlan',
+            ])->find($user->id);
     }
 
     public function checkIn()

@@ -10,7 +10,7 @@ class UserDietPlanService implements UserDietPlanServiceInterface{
     {
         $users = User::whereHas('subscription', function($q) {
             $q->where('end_date', '>=', now());
-        })->with('subscription')->get();
+        })->with('subscription.plan')->get();
 
         $dietPlans = DietPlan::all();
 

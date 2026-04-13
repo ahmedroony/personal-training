@@ -27,7 +27,7 @@ class Subscription extends Model
     {
         return $this->hasMany(Diet::class);
     }
-//this is a cast that convert the start_date and end_date to date
+    
     protected $casts = [
         'start_date' => 'date',
         'end_date' => 'date',

@@ -136,6 +136,20 @@
 
             </div>
 
+            <section class="section-card" style="margin-top: 1.5rem;">
+                <h2>🏋️ جدول التمارين</h2>
+                @if($sub && $sub->plan && $sub->plan->description)
+                    <div style="background: rgba(255,255,255,0.05); border-radius: 10px; padding: 1.5rem; border-right: 4px solid #6c63ff; margin-top: 1rem;">
+                        <p style="color: #fff; font-size: 1rem; line-height: 1.6; white-space: pre-line;">{{ $sub->plan->description }}</p>
+                    </div>
+                @else
+                    <div class="empty-state">
+                        <span>🏋️</span>
+                        <p>لا يوجد جدول تمارين مخصص لهذه الباقة حالياً</p>
+                    </div>
+                @endif
+            </section>
+
         </main>
     </div>
 </body>
