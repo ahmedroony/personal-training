@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Domains\admin\Actions\workoutroutines;
+use App\Domains\admin\Actions\WorkoutRoutinesService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class WorkoutRoutinesController extends Controller
 {
-    protected $workout;
+    protected $workoutService;
 
-    public function __construct(workoutroutines $workout)
+    public function __construct(WorkoutRoutinesService $workoutService)
     {
-        $this->workout = $workout;
+        $this->workoutService = $workoutService;
     }
 
     public function index()
     {
-        $users = $this->workout->index();
+        $users = $this->workoutService->index();
         
         return response()->json([
             'status' => true,
@@ -35,7 +35,7 @@ class WorkoutRoutinesController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        $this->workout->updateDescription($validated);
+        $this->workoutService->updateDescription($validated);
         
         return response()->json([
             'status' => true,

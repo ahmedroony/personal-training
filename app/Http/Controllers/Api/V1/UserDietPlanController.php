@@ -3,21 +3,21 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Domains\admin\Actions\UesrDietPlanService;
+use App\Domains\admin\Actions\UserDietPlanService;
 use Illuminate\Http\Request;
 
 class UserDietPlanController extends Controller
 {
-    protected $UesrDiet;
+    protected $userDietService;
 
-    public function __construct(UesrDietPlanService $UesrDiet)
+    public function __construct(UserDietPlanService $userDietService)
     {
-        $this->UesrDiet = $UesrDiet;
+        $this->userDietService = $userDietService;
     }
 
     public function index()
     {
-        $data = $this->UesrDiet->index();
+        $data = $this->userDietService->index();
         
         return response()->json([
             'status' => true,
@@ -34,7 +34,7 @@ class UserDietPlanController extends Controller
             'custom_notes' => 'nullable|string',
         ]);
 
-        $this->UesrDiet->store($validated);
+        $this->userDietService->store($validated);
 
         return response()->json([
             'status' => true,

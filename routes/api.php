@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Api\V1\AdminDashboardController;
+use App\Http\Controllers\Api\V1\AttendanceController;
 use App\Http\Controllers\Api\V1\CaptainController;
 use App\Http\Controllers\Api\V1\CaptainDashboardController;
+use App\Http\Controllers\Api\V1\ClientController;
 use App\Http\Controllers\Api\V1\DietPlanController;
-use App\Http\Controllers\Api\V1\PlanController;
 use App\Http\Controllers\Api\V1\UserDietPlanController;
 use App\Http\Controllers\Api\V1\WorkoutRoutinesController;
 use App\Models\Plan;
@@ -22,16 +24,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthapiController::class, 'logout']);
 
     // ----------------- عملاء وأدمن -----------------
-    Route::get('/admin', [PlanController::class, 'index']);
-    Route::post('/admin/storeclient', [PlanController::class, 'store']);
-    Route::get('/admin/client/{id}', [PlanController::class, 'show']);
-    Route::get('/admin/editclient/{id}', [PlanController::class, 'editClient']);
-    Route::put('/admin/updateclient/{id}', [PlanController::class, 'update']);
-    Route::delete('/admin/deleteclient/{id}', [PlanController::class, 'destroy']);
+    Route::get('/admin', [AdminDashboardController::class, 'index']);
+    Route::post('/admin/storeclient', [ClientController::class, 'store']);
+    Route::get('/admin/client/{id}', [ClientController::class, 'show']);
+    Route::get('/admin/editclient/{id}', [ClientController::class, 'editClient']);
+    Route::put('/admin/updateclient/{id}', [ClientController::class, 'update']);
+    Route::delete('/admin/deleteclient/{id}', [ClientController::class, 'destroy']);
 
-    Route::get('/admin/attendance', [PlanController::class, 'attendance']);
-    Route::post('/admin/attendance/{subscription_id}', [PlanController::class, 'storeAttendance']);
-    Route::get('/admin/captains/attendance', [PlanController::class, 'captainAttendance']);
+    Route::get('/admin/attendance', [AttendanceController::class, 'attendance']);
+    Route::post('/admin/attendance/{subscription_id}', [AttendanceController::class, 'storeAttendance']);
+    Route::get('/admin/captains/attendance', [AttendanceController::class, 'captainAttendance']);
 
     // ----------------- كباتن (إدارة المدير) -----------------
     Route::get('/admin/captains', [CaptainController::class, 'index']);
