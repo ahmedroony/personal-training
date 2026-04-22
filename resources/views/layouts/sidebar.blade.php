@@ -7,7 +7,7 @@
         <a href="{{ route('admin.captains.index') }}" class="{{ request()->routeIs('admin.captains.index*') ? 'active' : '' }}">👨‍🏫 إدارة الكباتن</a>
         <a href="{{ route('admin.captains.attendance') }}" class="{{ request()->routeIs('admin.captains.attendance') ? 'active' : '' }}">🏅 حضور الكباتن</a>
         <a href="{{ route('admin.attendance') }}" class="{{ request()->routeIs('admin.attendance') ? 'active' : '' }}">📅 سجل حضور العملاء</a>
-        <a href="{{ route('workout.index') }}" class="{{ request()->routeIs('workout.index') ? 'active' : '' }}">🏋️ جداول التمارين</a>
+        <a href="{{ route('workout-plan.index') }}" class="{{ request()->routeIs('workout-plan.index') ? 'active' : '' }}">🏋️ جداول التمارين</a>
         <a href="{{ route('create_diet_plans.index') }}" class="{{ request()->routeIs('create_diet_plans.index') ? 'active' : '' }}">🍳 إنشاء باقات الطعام</a>
         <a href="{{ route('diet_plans.index') }}" class="{{ request()->routeIs('diet_plans.index') ? 'active' : '' }}">🥗 تعيين الأنظمة الغذائية</a>
         <a href="{{ route('setting.index') }}" class="{{ request()->routeIs('setting.index') ? 'active' : '' }}">📦 إدارة الباقات والأنظمة</a>

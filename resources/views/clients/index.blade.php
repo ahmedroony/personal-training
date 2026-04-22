@@ -25,8 +25,10 @@
                     <h1>سجل المشتركين</h1>
                     <p>إدارة، بحث وتعديل بيانات المتدربين</p>
                 </div>
-                <div>
-                    <a href="{{ route('admin.createclient') }}" class="btn-primary">+ مشترك جديد</a>
+                <div class="header-actions">
+                    <a href="{{ route('admin.createClient') }}" class="add-btn">
+                        <i class="fas fa-plus"></i> إضافة متدرب
+                    </a>
                 </div>
             </header>
             <section class="form-card">

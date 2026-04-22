@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Domains\admin\Actions\WorkoutRoutinesService;
+use App\interfaces\WorkoutPlanServiceInterface;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreWorkoutPlanRequest;
 use Illuminate\Http\Request;
 
-class WorkoutRoutinesController extends Controller
+class WorkoutPlanController extends Controller
 {
     protected $workoutService;
 
-    public function __construct(WorkoutRoutinesService $workoutService)
+    public function __construct(WorkoutPlanServiceInterface $workoutService)
     {
         $this->workoutService = $workoutService;
     }
@@ -28,12 +29,9 @@ class WorkoutRoutinesController extends Controller
         ], 200);
     }
 
-    public function store(Request $request)
+    public function store(StoreWorkoutPlanRequest $request)
     {
-        $validated = $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'description' => 'nullable|string',
-        ]);
+        $validated = $request->validated();
 
         $this->workoutService->updateDescription($validated);
         

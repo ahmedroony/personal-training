@@ -11,8 +11,8 @@ use App\interfaces\DietPlanServiceInterface;
 use App\Domains\admin\Actions\DietPlanService;
 use App\interfaces\UserDietPlanServiceInterface;
 use App\Domains\admin\Actions\UserDietPlanService;
-use App\interfaces\WorkoutRoutinesServiceInterface;
-use App\Domains\admin\Actions\WorkoutRoutinesService;
+use App\interfaces\WorkoutPlanServiceInterface;
+use App\Domains\admin\Actions\WorkoutPlanService;
 use App\interfaces\SettingServiceInterface;
 use App\Domains\Settings\Actions\SettingService;
 use App\interfaces\SubscriptionInterface;
@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CaptainServiceInterface::class, CaptainService::class);
         $this->app->bind(DietPlanServiceInterface::class, DietPlanService::class);
         $this->app->bind(UserDietPlanServiceInterface::class, UserDietPlanService::class);
-        $this->app->bind(WorkoutRoutinesServiceInterface::class, WorkoutRoutinesService::class);
+        $this->app->bind(WorkoutPlanServiceInterface::class, WorkoutPlanService::class);
         $this->app->bind(SettingServiceInterface::class, SettingService::class);
         $this->app->bind(SubscriptionInterface::class, SubscriptionService::class);
     }

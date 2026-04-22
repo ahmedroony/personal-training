@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreDietPlanRequest;
 use Illuminate\Http\Request;
 use App\Domains\admin\Actions\DietPlanService;
 
@@ -28,12 +29,9 @@ class DietPlanController extends Controller
         ], 200);
     }
 
-    public function store(Request $request)
+    public function store(StoreDietPlanRequest $request)
     {
-        $vaildata = $request->validate([
-            'name' => 'required|string|max:255',
-            'base_description' => 'required|string|max:255',
-        ]);
+        $vaildata = $request->validated();
         
         $this->dietPlanService->store($vaildata);
         

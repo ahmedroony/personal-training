@@ -40,7 +40,7 @@
             {{-- اختيار المتدرب --}}
             <section class="form-card">
                 <h3>🏋️ اختر المتدرب</h3>
-                <form action="{{ route('workout.store') }}" method="POST" class="client-form">
+                <form action="{{ route('workout-plan.store') }}" method="POST" class="client-form">
                     @csrf
                     <div style="margin-bottom: 20px;">
                         <select name="user_id" class="search-input"

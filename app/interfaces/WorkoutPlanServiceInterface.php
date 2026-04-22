@@ -2,7 +2,7 @@
 
 namespace App\interfaces;
 
-interface WorkoutRoutinesServiceInterface
+interface WorkoutPlanServiceInterface
 {
     public function index();
     public function updateDescription(array $data);
