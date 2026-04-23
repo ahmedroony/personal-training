@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Domains\admin\Actions\CaptainService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCaptainRequest;
+use App\Http\Requests\UpdateCaptainRequest;
 use Illuminate\Http\Request;
 
 class CaptainController extends Controller
@@ -28,17 +30,9 @@ class CaptainController extends Controller
         ], 200);
     }
 
-    public function store(Request $request)
+    public function store(StoreCaptainRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-            'phone_number' => 'required|string|max:20|unique:phones,number',
-        ], [
-            'email.unique' => 'البريد الإلكتروني مسجل مسبقاً، يرجى اختيار بريد آخر.',
-            'phone_number.unique' => 'رقم الهاتف مسجل مسبقاً، يرجى اختيار رقم آخر.',
-        ]);
+        $validatedData = $request->validated();
 
         $this->captainService->storeCaptain($validatedData);
 
@@ -68,14 +62,9 @@ class CaptainController extends Controller
         ], 200);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateCaptainRequest $request, $id)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-            'phone_number' => 'nullable|string|max:20|unique:phones,number,' . $id . ',user_id',
-            'password' => 'nullable|string|min:8',
-        ]);
+        $validatedData = $request->validated();
 
         $this->captainService->updateCaptain($id, $validatedData);
 

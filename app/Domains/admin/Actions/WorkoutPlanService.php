@@ -3,9 +3,9 @@
 namespace App\Domains\admin\Actions;
 
 use App\Models\User;
-use App\interfaces\WorkoutRoutinesServiceInterface;
+use App\interfaces\WorkoutPlanServiceInterface;
 
-class WorkoutRoutinesService implements WorkoutRoutinesServiceInterface
+class WorkoutPlanService implements WorkoutPlanServiceInterface
 {
     public function index()
     {

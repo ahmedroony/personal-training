@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\V1;
 use App\Domains\admin\Actions\AdminService;
 use App\Http\Controllers\Controller;
 use App\Models\Plan;
+use App\Http\Requests\StoreClientRequest;
+use App\Http\Requests\UpdateClientRequest;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -16,20 +18,9 @@ class ClientController extends Controller
         $this->adminService = $adminService;
     }
 
-    public function store(Request $request)
+    public function store(StoreClientRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-            'phone' => 'required|string|max:20|unique:phones,number',
-            'starts_at' => 'required|date',
-            'end_date' => 'nullable|date|after_or_equal:starts_at',
-            'plan_id' => 'nullable|exists:plans,id',
-            'name_plan' => 'required_without:plan_id|nullable|string|max:255',
-            'duration' => 'required_without:plan_id|nullable|integer',
-            'price' => 'nullable|numeric|min:0',
-        ]);
+        $validatedData = $request->validated();
 
         $this->adminService->storeClient($validatedData);
 
@@ -67,15 +58,9 @@ class ClientController extends Controller
         ], 200);
     }
 
-    public function update(Request $request, string $id)
+    public function update(UpdateClientRequest $request, string $id)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,'.$id,
-            'phone' => 'required|string|max:20|unique:phones,number,'.$id.',user_id',
-            'plan_id' => 'required|exists:plans,id',
-            'end_date' => 'nullable|date',
-        ]);
+        $validatedData = $request->validated();
 
         $this->adminService->updateClient($id, $validatedData);
 

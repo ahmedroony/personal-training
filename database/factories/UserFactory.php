@@ -24,11 +24,10 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'phone_number' => fake()->unique()->phoneNumber(),
             'email_verified_at' => now(),
-            'password' => bcrypt('password'), // الباسورد الموحد للتجربة
-            'role' => fake()->randomElement([1, 2]), // 1 كابتن أو 2 عميل
-            'status' => fake()->randomElement(['active', 'inactive']),        ];
+            'password' => bcrypt('password'),
+            'user_type_id' => \App\Models\UserType::firstOrCreate(['name' => 'Client'])->id,
+        ];
     }
 
     /**

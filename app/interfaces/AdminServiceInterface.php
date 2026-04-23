@@ -14,4 +14,9 @@ interface AdminServiceInterface
     public function updateClient($id,array $data);
     public function deleteClient($id);
     public function getClientById($id);
+    public function getDashboardData();
+    public function getAllPlans();
+    public function getClientsWithAttendance();
+    public function storeAttendance($subscription_id);
+    public function getCaptainAttendanceData();
 }

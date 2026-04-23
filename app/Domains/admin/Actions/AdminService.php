@@ -6,6 +6,8 @@ use App\interfaces\AdminServiceInterface;
 use App\Models\Plan;
 use App\Models\User;
 use App\Models\UserType;
+use App\Models\Subscription;
+use App\Models\CaptainAttendance;
 
 class AdminService implements AdminServiceInterface
 {
@@ -126,5 +128,56 @@ class AdminService implements AdminServiceInterface
         })
             ->with(['subscription.plan', 'subscription.diets.dietPlan'])
             ->findOrFail($id);
+    }
+
+    public function getDashboardData()
+    {
+        $users = $this->getAllClients();
+        $usersCount = $users->count();
+
+        $activeSubscribersCount = $users->filter(function ($user) {
+            return $user->subscription && $user->subscription->is_active;
+        })->count();
+        $inactiveSubscribersCount = $usersCount - $activeSubscribersCount;
+
+        return compact('users', 'usersCount', 'activeSubscribersCount', 'inactiveSubscribersCount');
+    }
+
+    public function getAllPlans()
+    {
+        return Plan::all();
+    }
+
+    public function getClientsWithAttendance()
+    {
+        return User::whereHas('userType', function ($query) {
+            $query->where('name', 'Client');
+        })->with(['subscription.attendances' => function ($query) {
+            $query->latest()->limit(1);
+        }])->get();
+    }
+
+    public function storeAttendance($subscription_id)
+    {
+        $subscription = Subscription::findOrFail($subscription_id);
+
+        return $subscription->attendances()->create([
+            'date' => date('Y-m-d'),
+            'time' => date('H:i:s'),
+        ]);
+    }
+
+    public function getCaptainAttendanceData()
+    {
+        $captains = User::whereHas('userType', function ($q) {
+            $q->where('name', 'Captain');
+        })->with(['phones'])->get();
+
+        $attendances = CaptainAttendance::with('captain')
+            ->orderBy('date', 'desc')
+            ->orderBy('time', 'desc')
+            ->paginate(15);
+
+        return compact('captains', 'attendances');
     }
 }

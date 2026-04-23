@@ -20,8 +20,8 @@ class AuthapiController extends Controller
                 'message' => 'بيانات الدخول غير صحيحة'
             ], 401);
         }
-
-        $token = $user->createToken('auth_token')->plainTextToken;
+        $role = $user->userType->name;
+        $token = $user->createToken('auth_token',[$role])->plainTextToken;
 
         return response()->json([
             'status' => true,

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\UserType;
+use App\Http\Requests\AuthValidate\Register;
+use App\Http\Requests\AuthValidate\Login;
 
 class AuthController extends Controller
 {
@@ -20,20 +23,18 @@ class AuthController extends Controller
         return view('admin.login');
     }
 
-    public function register(Request $request)
+    public function register(Register $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'phone_number' => 'required|unique:phones,number',
-            'password' => 'required|min:6|confirmed',
-        ]);
+        $request->validated();
         $clientType = UserType::where('name', 'Client')->first();
+        if(!$clientType){
+            throw new \Exception('Client Role not found');
+        };
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'user_type_id' => $clientType ? $clientType->id : 3,
+            'user_type_id' => $clientType->id,
         ]);
         $user->phones()->create(['number' => $request->phone_number]);
 
@@ -42,13 +43,10 @@ class AuthController extends Controller
         return redirect('/client/dashboard');
     }
 
-    public function login(Request $request)
+    public function login(Login $request)
     {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-        if (Auth::attempt($credentials)) {
+        $request->validated();
+        if (Auth::attempt($request->only('email', 'password'))) {
             $request->session()->regenerate();
             $userTypeName = Auth::user()->userType->name ?? 'Client';
 

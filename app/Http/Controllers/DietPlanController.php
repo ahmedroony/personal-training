@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreDietPlanRequest;
 use Illuminate\Http\Request;
 use App\interfaces\DietPlanServiceInterface;
 
@@ -17,12 +18,9 @@ class DietPlanController extends Controller
         return view('diet_plans.create', compact('dietPlans'));
     }
 
-    public function store(Request $request){
-        $vaildata = $request->validate([
-            'name' => 'required|string|max:255',
-            'base_description' => 'required|string|max:255',
-        ]);
+    public function store(StoreDietPlanRequest $request){
+        $vaildata = $request->validated();
         $this->dietPlanService->store($vaildata);
-        return redirect()->route('create_diet_plans.store')->with('success', 'تم إضافة الخطة بنجاح');
+        return redirect()->route('create_diet_plans.index')->with('success', 'تم إضافة الخطة بنجاح');
     }
 }

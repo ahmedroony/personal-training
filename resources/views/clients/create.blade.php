@@ -30,7 +30,7 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{ route('admin.storeclient') }}" method="POST" class="client-form">
+                <form action="{{ route('admin.storeClient') }}" method="POST" class="client-form">
                     @csrf
                     <div class="form-group">
                         <label class="form-label">اسم المتدرب بالكامل</label>
