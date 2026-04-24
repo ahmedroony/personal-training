@@ -69,7 +69,7 @@
                 <a href="{{ route('admin.index') }}">🏠 الرئيسية</a>
                 <a href="{{ route('admin.manage') }}">👤 إدارة العملاء</a>
                 <a href="{{ route('admin.captains.index') }}">👨‍🏫 إدارة الكباتن</a>
-                <a href="{{ route('workout.index') }}">🏋️ جداول التمارين</a>
+                <a href="{{ route('workout-plan.index') }}">🏋️ جداول التمارين</a>
                 <a href="{{ route('create_diet_plans.index') }}">🍳 إنشاء باقات الطعام</a>
                 <a href="{{ route('diet_plans.index') }}">🥗 تعيين الأنظمة الغذائية</a>
                 <a href="{{ route('admin.attendance') }}">📅 سجل الحضور</a>

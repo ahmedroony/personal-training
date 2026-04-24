@@ -35,7 +35,7 @@ class CaptainService implements CaptainServiceInterface
      */
     public function getCaptainById($id)
     {
-        $captain = User::with('userType')->find($id);
+        $captain = User::with(['userType', 'phones'])->find($id);
         if (!$captain || ($captain->userType->name ?? '') != 'Captain') {
             return null;
         }

@@ -79,4 +79,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Phone::class);
     }
+
+    public function getPhoneNumberAttribute()
+    {
+        return $this->phones->first()->number ?? '';
+    }
 }
