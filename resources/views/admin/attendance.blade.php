@@ -1,78 +1,83 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سجل الحضور - GYM CORE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/Admin/manage.css') }}">
-</head>
-<body>
-    <div class="dashboard-container">
-        @include('layouts.sidebar')
+@extends('layouts.app')
 
-        <main class="main-content">
-            @if(session('success'))
-                <div style="background-color: #198754; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
-                    {{ session('success') }}
-                </div>
-            @endif
-            <header class="header-section">
-                <div>
-                    <h1>سجل حضور المتدربين اليوم</h1>
-                    <p>بحث باسم المتدرب لتسجيل حضوره</p>
-                </div>
-            </header>
+@php
+    $title = 'سجل حضور المتدربين | GYM CORE';
+    $headerTitle = 'سجل حضور المتدربين اليوم';
+@endphp
 
-            <section class="form-card">
-                <h3>📋 قائمة المتدربين لتسجيل الحضور</h3>
-                <div style="overflow-x: auto;">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>الاسم</th>
-                                <th>حالة الاشتراك</th>
-                                <th>آخر حضور</th>
-                                <th>إجراء</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($users as $user)
-                            <tr class="client-row">
-                                <td>{{ $user->name }}</td>
+@section('content')
+<div class="space-y-6">
+
+    <!-- Header Card -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-base-200 p-6 rounded-xl border border-base-300">
+        <div>
+            <h2 class="text-xl font-bold text-base-content">سجل حضور المتدربين اليوم</h2>
+            <p class="text-xs text-base-content/60 mt-1">تحديد وحفظ حضور المشتركين بنقرة واحدة</p>
+        </div>
+    </div>
+
+    <!-- Table Section -->
+    <div class="card bg-base-200 border border-base-300">
+        <div class="card-body p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-base font-bold text-base-content">قائمة المتدربين</h3>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="table table-zebra w-full">
+                    <thead>
+                        <tr class="bg-base-300/50 text-base-content text-xs">
+                            <th class="font-bold">الاسم</th>
+                            <th class="font-bold">حالة الاشتراك</th>
+                            <th class="font-bold">آخر حضور</th>
+                            <th class="font-bold text-center">إجراء</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($users as $user)
+                            <tr class="hover:bg-base-300/30 transition-colors">
+                                <td class="font-semibold text-base-content text-sm">
+                                    {{ $user->name }}
+                                </td>
                                 <td>
                                     @if($user->subscription && $user->subscription->is_active)
-                                        <span class="badge active">نشط</span>
+                                        <span class="badge badge-success badge-sm font-semibold">نشط</span>
                                     @else
-                                        <span class="badge inactive">منتهي</span>
+                                        <span class="badge badge-error badge-sm font-semibold">منتهي</span>
                                     @endif
                                 </td>
                                 <td>
-                                    <span style="color: #fff; font-size: 13px;">
+                                    <span class="text-xs text-base-content/80">
                                         {{ $user->subscription->last_attendance_info ?? 'لا يوجد اشتراك' }}
                                     </span>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     @if($user->subscription && $user->subscription->is_active)
-                                    <form action="{{ route('admin.attendance.store', $user->subscription->id) }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="btn-primary" style="background-color: #28a745; padding: 5px 10px; border: none; border-radius: 4px; color: #fff; cursor: pointer;">
-                                            ✅ تسجيل حضور
-                                        </button>
-                                    </form>
-                                @else
-                                        <button disabled style="background-color: #555; padding: 5px 10px; border: none; border-radius: 4px; color: #999; cursor: not-allowed;">
+                                        <form action="{{ route('admin.attendance.store', $user->subscription->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn btn-success btn-xs text-white">
+                                                تسجيل حضور
+                                            </button>
+                                        </form>
+                                    @else
+                                        <button disabled class="btn btn-neutral btn-disabled btn-xs">
                                             جدد اشتراكك
                                         </button>
                                     @endif
                                 </td>
                             </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-        </main>
+                        @empty
+                            <tr>
+                                <td colspan="4" class="text-center py-6 text-base-content/50 text-xs">
+                                    لا يوجد متدربين لعرضهم
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+
+</div>
+@endsection

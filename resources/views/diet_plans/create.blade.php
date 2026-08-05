@@ -1,85 +1,88 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إنشاء خطة غذائية - GYM CORE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/workout/index.css') }}">
-</head>
+@php
+    $title = 'إنشاء خطة غذائية | GYM CORE';
+    $headerTitle = 'إنشاء خطة غذائية جديدة';
+@endphp
 
-<body>
-    <div class="dashboard-container">
-        @include('layouts.sidebar')
+@section('content')
+<div class="max-w-3xl mx-auto space-y-6">
 
-        <main class="main-content">
-            <header class="header-section">
+    <!-- Form Card -->
+    <div class="card bg-base-200 border border-base-300 shadow-xl">
+        <div class="card-body p-6 md:p-8 space-y-6">
+            
+            <div class="flex items-center justify-between pb-4 border-b border-base-300">
                 <div>
-                    <h1>🥗 إنشاء خطة غذائية</h1>
-                    <p>أضف خطة غذائية جديدة للمتدربين</p>
+                    <h2 class="text-xl font-black text-base-content flex items-center gap-2">
+                        <span>🍳</span> إنشاء خطة غذائية جديدة
+                    </h2>
+                    <p class="text-xs text-base-content/60 mt-1">أضف خطة غذائية جديدة لإعادة استخدامها مع المتدربين</p>
                 </div>
-            </header>
-
-            @if (session('success'))
-                <div
-                    style="background-color: #198754; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                    {{ session('success') }}
-                </div>
-            @endif
+            </div>
 
             @if ($errors->any())
-                <div
-                    style="background-color: #dc3545; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                    <ul style="margin: 0; padding-right: 20px;">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+                <div role="alert" class="alert alert-error shadow-sm text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-5 w-5" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <div>
+                        <span class="font-bold">يرجى تصحيح الأخطاء:</span>
+                        <ul class="list-disc list-inside mt-1">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
             @endif
 
-            <section class="form-card">
-                <h3>📋 بيانات الخطة الغذائية</h3>
-                <form action="{{ route('create_diet_plans.store') }}" method="POST" class="client-form">
-                    @csrf
+            <form action="{{ route('create_diet_plans.store') }}" method="POST" class="space-y-4">
+                @csrf
 
-                    <div style="margin-bottom: 20px;">
-                        <label style="display: block; color: #aaa; margin-bottom: 8px; font-size: 14px;">اسم الخطة
-                            الغذائية</label>
-                        <input type="text" name="name" value="{{ old('name') }}"
-                            placeholder="مثال: خطة التضخم - 3000 سعرة" class="search-input"
-                            style="width: 100%; height: 50px; background: #1a1a1a; color: white; border: 1px solid #333; padding: 10px 15px; border-radius: 8px; font-family: inherit; font-size: 15px;"
-                            required>
-                    </div>
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text font-bold text-base-content">اسم الخطة الغذائية</span>
+                    </label>
+                    <input type="text" name="name" value="{{ old('name') }}" placeholder="مثال: خطة التضخم - 3000 سعرة" required class="input input-bordered w-full focus:input-primary" />
+                </div>
 
-                    <div style="margin-bottom: 20px;">
-                        <label style="display: block; color: #aaa; margin-bottom: 8px; font-size: 14px;">وصف الخطة
-                            الغذائية</label>
-                        <textarea name="base_description" placeholder="اكتب تفاصيل الخطة الغذائية هنا... (الوجبات، السعرات، التوقيت)"
-                            class="workout-textarea" style="width: 100%; min-height: 200px; padding: 20px;" required>{{ old('base_description') }}</textarea>
-                    </div>
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text font-bold text-base-content">وصف الخطة الغذائية</span>
+                    </label>
+                    <textarea name="base_description" placeholder="اكتب تفاصيل الخطة الغذائية هنا... (الوجبات، السعرات، التوقيت)" required class="textarea textarea-bordered w-full h-44 focus:textarea-primary">{{ old('base_description') }}</textarea>
+                </div>
 
-                    <div class="actions-bar">
-                        <button type="submit" class="btn-save" style="width: 100%;">💾 حفظ الخطة الغذائية</button>
-                    </div>
-                </form>
-            </section>
+                <div class="pt-4">
+                    <button type="submit" class="btn btn-primary w-full shadow-lg shadow-primary/20">
+                        <span>💾</span> حفظ الخطة الغذائية
+                    </button>
+                </div>
+            </form>
 
-            <section class="form-card" style="margin-top: 30px;">
-                <h3>📂 الخطط الغذائية الحالية</h3>
-
-                @foreach ($dietPlans as $plan)
-                    <div style="background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 15px; margin-bottom: 10px;">
-                        <p style="color: white; font-weight: bold; margin: 0 0 5px;">🥗 {{ $plan->name }}</p>
-                        <p style="color: #aaa; margin: 0; font-size: 13px;">{{ $plan->base_description }}</p>
-                    </div>
-                @endforeach
-
-            </section>
-
-        </main>
+        </div>
     </div>
-</body>
 
-</html>
+    <!-- Existing Diet Plans List Card -->
+    <div class="card bg-base-200 border border-base-300 shadow-md">
+        <div class="card-body p-6 space-y-4">
+            <h3 class="text-lg font-bold text-base-content flex items-center gap-2 border-b border-base-300 pb-3">
+                <span>📂</span> الخطط الغذائية الحالية
+            </h3>
+
+            <div class="space-y-3">
+                @forelse ($dietPlans as $plan)
+                    <div class="bg-base-300/50 p-4 rounded-xl border border-base-300 hover:border-primary/40 transition-colors">
+                        <h4 class="font-bold text-base-content flex items-center gap-2">
+                            <span>🥗</span> {{ $plan->name }}
+                        </h4>
+                        <p class="text-xs text-base-content/70 mt-2 leading-relaxed whitespace-pre-line">{{ $plan->base_description }}</p>
+                    </div>
+                @empty
+                    <p class="text-center py-6 text-base-content/50 text-sm">لا يوجد خطط غذائية مضافة حتى الآن.</p>
+                @endforelse
+            </div>
+        </div>
+    </div>
+
+</div>
+@endsection

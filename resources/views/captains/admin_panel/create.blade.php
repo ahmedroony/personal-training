@@ -1,64 +1,80 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إضافة كابتن جديد - GYM CORE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/captains/form.css') }}">
-</head>
+@php
+    $title = 'إضافة كابتن جديد | GYM CORE';
+    $headerTitle = 'إضافة كابتن جديد';
+@endphp
 
-<body>
-    <div class="dashboard-container">
-        @include('layouts.sidebar')
+@section('content')
+<div class="max-w-2xl mx-auto space-y-6">
 
-        <main class="main-content">
-            <div class="form-container">
-                <div class="form-header">
-                    <h2>💪 إضافة كابتن (مدرب) جديد</h2>
-                    <p>أدخل بيانات المدرب الجديد لإنشاء حسابه</p>
+    <div class="card bg-base-200 border border-base-300">
+        <div class="card-body p-6 space-y-6">
+            
+            <div class="flex items-center justify-between pb-4 border-b border-base-300">
+                <div>
+                    <h2 class="text-lg font-bold text-base-content">إضافة كابتن جديد</h2>
+                    <p class="text-xs text-base-content/60 mt-1">أدخل بيانات المدرب الجديد لإنشاء حسابه</p>
                 </div>
+                <a href="{{ route('admin.captains.index') }}" class="btn btn-ghost btn-xs">
+                    إلغاء
+                </a>
+            </div>
 
-                @if ($errors->any())
-                    <div style="background-color: #dc3545; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                        <ul style="margin: 0; padding-right: 20px;">
+            @if ($errors->any())
+                <div role="alert" class="alert alert-error text-xs py-3">
+                    <div>
+                        <span class="font-bold">يرجى تصحيح الأخطاء:</span>
+                        <ul class="list-disc list-inside mt-1">
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
                         </ul>
                     </div>
-                @endif
+                </div>
+            @endif
 
-                <form method="POST" action="{{ route('admin.captains.store') }}">
-                    @csrf
+            <form method="POST" action="{{ route('admin.captains.store') }}" class="space-y-4">
+                @csrf
 
-                    <div class="form-group">
-                        <label>اسم الكابتن بالكامل</label>
-                        <input type="text" name="name" value="{{ old('name') }}" required placeholder="مثال: كابتن أحمد">
-                    </div>
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text font-semibold text-xs text-base-content">اسم الكابتن بالكامل</span>
+                    </label>
+                    <input type="text" name="name" value="{{ old('name') }}" placeholder="مثال: أحمد محمود" required class="input input-bordered input-sm w-full" />
+                </div>
 
-                    <div class="form-group">
-                        <label>البريد الإلكتروني</label>
-                        <input type="email" name="email" value="{{ old('email') }}" required placeholder="captain@gym.com">
-                    </div>
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text font-semibold text-xs text-base-content">البريد الإلكتروني</span>
+                    </label>
+                    <input type="email" name="email" value="{{ old('email') }}" placeholder="captain@gym.com" required class="input input-bordered input-sm w-full" />
+                </div>
 
-                    <div class="form-group">
-                        <label>رقم الهاتف</label>
-                        <input type="tel" name="phone_number" value="{{ old('phone_number') }}" required placeholder="01234567890">
-                    </div>
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text font-semibold text-xs text-base-content">رقم الهاتف</span>
+                    </label>
+                    <input type="tel" name="phone_number" value="{{ old('phone_number') }}" placeholder="01234567890" required class="input input-bordered input-sm w-full" />
+                </div>
 
-                    <div class="form-group">
-                        <label>كلمة المرور</label>
-                        <input type="password" name="password" required placeholder="كلمة مرور للدخول للوحة الكابتن (8 أحرف على الأقل)">
-                    </div>
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text font-semibold text-xs text-base-content">كلمة المرور</span>
+                    </label>
+                    <input type="password" name="password" placeholder="كلمة مرور للدخول (8 أحرف على الأقل)" required class="input input-bordered input-sm w-full" />
+                </div>
 
-                    <button type="submit" class="btn-submit btn-submit-create">➕ إضافة الكابتن</button>
-                </form>
-                <a href="{{ route('admin.captains.index') }}" class="back-link">← إلغاء وعودة للقائمة</a>
-            </div>
-        </main>
+                <div class="pt-4 flex items-center justify-end gap-3">
+                    <a href="{{ route('admin.captains.index') }}" class="btn btn-ghost btn-sm">إلغاء</a>
+                    <button type="submit" class="btn btn-primary btn-sm px-6">
+                        إضافة الكابتن
+                    </button>
+                </div>
+            </form>
+
+        </div>
     </div>
-</body>
 
-</html>
+</div>
+@endsection

@@ -1,102 +1,117 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إدارة الباقات والأنظمة الغذائية - GYM CORE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/Admin/manage.css') }}">
-</head>
+@php
+    $title = 'إدارة الباقات والأنظمة | GYM CORE';
+    $headerTitle = 'إدارة الباقات والأنظمة الغذائية';
+@endphp
 
-<body>
-    <div class="dashboard-container">
-        @include('layouts.sidebar')
+@section('content')
+<div class="space-y-6">
 
-        <main class="main-content">
-            @if(session('success'))
-                <div style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; background-color: #198754; color: white; padding: 15px 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); font-weight: bold; text-align: center;">
-                    {{ session('success') }}
-                </div>
-            @endif
-            <header class="header-section">
-                <div>
-                    <h1>إدارة الباقات والأنظمة الغذائية</h1>
-                    <p>إدارة وعرض وحذف الباقات والأنظمة المتاحة</p>
-                </div>
-            </header>
-            <section class="form-card">
-                <h3>📋 قائمة الباقات</h3>
-                <div style="overflow-x: auto;">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>اسم الباقة</th>
-                                <th>الإجراءات</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if ($plans->isEmpty())
-                                <tr>
-                                    <td colspan="2" style="text-align: center;">لا توجد باقات متاحة حالياً.</td>
-                                </tr>
-                            @else
-                                @foreach ($plans as $plan)
-                                <tr class="client-row">
-                                    <td>{{ $plan->name ?? 'باقة بدون اسم' }}</td>
-                                    <td>
-                                        <div class="action-btns" style="display: flex; gap: 10px; align-items: center;">
-                                            <form action="{{ route('setting.delete', $plan->id) }}" method="POST" style="margin: 0; display: inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" title="حذف" style="color: #dc3545; background: none; border: none; cursor: pointer; font-size: 18px;">🗑️</button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            @endif
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <section class="form-card" style="margin-top: 30px;">
-                <h3>🥗 قائمة باقات الطعام</h3>
-                <div style="overflow-x: auto;">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>اسم باقة الطعام</th>
-                                <th>الإجراءات</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if ($dietPlans->isEmpty())
-                                <tr>
-                                    <td colspan="2" style="text-align: center;">لا توجد باقات طعام متاحة حالياً.</td>
-                                </tr>
-                            @else
-                                @foreach ($dietPlans as $dietPlan)
-                                <tr class="client-row">
-                                    <td>{{ $dietPlan->name ?? 'باقة بدون اسم' }}</td>
-                                    <td>
-                                        <div class="action-btns" style="display: flex; gap: 10px; align-items: center;">
-                                            <form action="{{ route('setting.diet.delete', $dietPlan->id) }}" method="POST" style="margin: 0; display: inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" title="حذف" style="color: #dc3545; background: none; border: none; cursor: pointer; font-size: 18px;">🗑️</button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            @endif
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-        </main>
+    <!-- Top Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-base-200 p-6 rounded-2xl border border-base-300 shadow-sm">
+        <div>
+            <h2 class="text-2xl font-black text-base-content">إدارة الباقات والأنظمة الغذائية 📦</h2>
+            <p class="text-sm text-base-content/60 mt-1">عرض، متابعة وحذف الباقات والأنظمة المتاحة في النظام</p>
+        </div>
+        <div class="badge badge-primary badge-lg font-bold p-3">
+            الإعدادات والباقات
+        </div>
     </div>
-</body>
-</html>
+
+    <!-- Plans Table -->
+    <div class="card bg-base-200 border border-base-300 shadow-md">
+        <div class="card-body p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xl font-bold text-base-content flex items-center gap-2">
+                    <span>📋</span> قائمة باقات الاشتراك
+                </h3>
+                <span class="badge badge-ghost text-xs">Training Plans</span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="table table-zebra w-full">
+                    <thead>
+                        <tr class="bg-base-300/50 text-base-content">
+                            <th class="font-bold">اسم الباقة</th>
+                            <th class="font-bold text-center">الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($plans as $plan)
+                            <tr class="hover:bg-base-300/30 transition-colors">
+                                <td class="font-bold text-base-content flex items-center gap-2">
+                                    <span>🏋️</span> {{ $plan->name ?? 'باقة بدون اسم' }}
+                                </td>
+                                <td class="text-center">
+                                    <form action="{{ route('setting.delete', $plan->id) }}" method="POST" onsubmit="return confirm('هل أنت تأكد من حذف هذه الباقة؟');" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" title="حذف" class="btn btn-square btn-ghost btn-sm text-error hover:bg-error/10">
+                                            🗑️
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="2" class="text-center py-8 text-base-content/50">
+                                    لا توجد باقات متاحة حالياً.
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Diet Plans Table -->
+    <div class="card bg-base-200 border border-base-300 shadow-md">
+        <div class="card-body p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xl font-bold text-base-content flex items-center gap-2">
+                    <span>🥗</span> قائمة باقات الطعام
+                </h3>
+                <span class="badge badge-ghost text-xs">Diet Plans</span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="table table-zebra w-full">
+                    <thead>
+                        <tr class="bg-base-300/50 text-base-content">
+                            <th class="font-bold">اسم باقة الطعام</th>
+                            <th class="font-bold text-center">الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($dietPlans as $dietPlan)
+                            <tr class="hover:bg-base-300/30 transition-colors">
+                                <td class="font-bold text-base-content flex items-center gap-2">
+                                    <span>🍳</span> {{ $dietPlan->name ?? 'باقة بدون اسم' }}
+                                </td>
+                                <td class="text-center">
+                                    <form action="{{ route('setting.diet.delete', $dietPlan->id) }}" method="POST" onsubmit="return confirm('هل أنت تأكد من حذف باقة الطعام هذه؟');" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" title="حذف" class="btn btn-square btn-ghost btn-sm text-error hover:bg-error/10">
+                                            🗑️
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="2" class="text-center py-8 text-base-content/50">
+                                    لا توجد باقات طعام متاحة حالياً.
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+@endsection

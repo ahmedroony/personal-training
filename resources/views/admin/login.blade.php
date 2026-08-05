@@ -1,60 +1,74 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تسجيل الدخول | GYM CORE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/Admin/login/login.css') }}">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
+<body class="bg-base-100 min-h-screen flex items-center justify-center p-4 font-sans">
+
+    <div class="card bg-base-200 w-full max-w-md border border-base-300 shadow">
+        <div class="card-body p-8 space-y-6">
+            
+            <!-- Logo & Brand Header -->
+            <div class="text-center space-y-1">
+                <h1 class="text-2xl font-bold tracking-wide text-base-content">GYM CORE</h1>
+                <p class="text-xs text-base-content/60">أهلاً بك مجدداً! أدخل بياناتك للمتابعة.</p>
+            </div>
+
+            <!-- Error Feedback -->
             @if ($errors->any())
-                <div class="error-messages">
-                    <strong>عفواً، راجع الأخطاء التالية:</strong>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+                <div role="alert" class="alert alert-error text-xs py-3">
+                    <div>
+                        <span class="font-bold">تنبيه:</span>
+                        <ul class="list-disc list-inside mt-1">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
             @endif
-    <div class="login-container">
-        <div class="login-card">
-            <div class="logo">GYM CORE</div>
 
-            <div class="login-header">
-                <h2>تسجيل الدخول</h2>
-                <p>أهلاً بك مجدداً! أدخل بياناتك للمتابعة.</p>
-            </div>
-
-            <div class="error-message">
-                البريد الإلكتروني أو كلمة المرور غير صحيحة.
-            </div>
-            <form action="{{ route('login') }}" method="POST">
+            <!-- Login Form -->
+            <form action="{{ route('login') }}" method="POST" class="space-y-4">
                 @csrf
-                <div class="form-group">
-                    <label>البريد الإلكتروني</label>
-                    <input type="email" placeholder="admin@gym.com" required name="email">
-                </div>
 
-                <div class="form-group">
-                    <label>كلمة المرور</label>
-                    <input type="password" placeholder="••••••••" required name="password">
-                </div>
-
-                <div class="form-options">
-                    <label class="remember-me">
-                        <input type="checkbox" name="remember"> تذكرني
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text font-semibold text-xs text-base-content">البريد الإلكتروني</span>
                     </label>
-                    <a href="#" class="forgot-password">نسيت كلمة المرور؟</a>
+                    <input type="email" name="email" value="{{ old('email') }}" placeholder="admin@gym.com" required class="input input-bordered input-sm w-full" />
                 </div>
 
-                <button type="submit" class="btn-login">دخول للوحة التحكم</button>
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text font-semibold text-xs text-base-content">كلمة المرور</span>
+                    </label>
+                    <input type="password" name="password" placeholder="••••••••" required class="input input-bordered input-sm w-full" />
+                </div>
+
+                <div class="flex items-center justify-between pt-1">
+                    <label class="label cursor-pointer gap-2 p-0">
+                        <input type="checkbox" name="remember" class="checkbox checkbox-primary checkbox-xs" />
+                        <span class="label-text text-xs text-base-content/80">تذكرني</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-full btn-sm mt-2">
+                    دخول للوحة التحكم
+                </button>
             </form>
+
+            <div class="text-center pt-2 border-t border-base-300">
+                <p class="text-xs text-base-content/60">
+                    ليس لديك حساب؟ <a href="{{ route('show.register') }}" class="link link-primary font-semibold">إنشاء حساب جديد</a>
+                </p>
+            </div>
+
         </div>
     </div>
 
 </body>
-
 </html>
