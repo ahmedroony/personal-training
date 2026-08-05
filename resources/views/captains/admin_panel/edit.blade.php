@@ -1,66 +1,81 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تعديل بيانات الكابتن - GYM CORE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/captains/form.css') }}">
-</head>
+@php
+    $title = 'تعديل بيانات الكابتن | GYM CORE';
+    $headerTitle = 'تعديل بيانات الكابتن';
+@endphp
 
-<body>
-    <div class="dashboard-container">
-        @include('layouts.sidebar')
+@section('content')
+<div class="max-w-2xl mx-auto space-y-6">
 
-        <main class="main-content">
-            <div class="form-container">
-                <div class="form-header">
-                    <h2>✏️ تعديل بيانات الكابتن</h2>
-                    <p>تحديث بيانات الكابتن: {{ $captain->name }}</p>
+    <div class="card bg-base-200 border border-base-300">
+        <div class="card-body p-6 space-y-6">
+            
+            <div class="flex items-center justify-between pb-4 border-b border-base-300">
+                <div>
+                    <h2 class="text-lg font-bold text-base-content">تعديل بيانات الكابتن</h2>
+                    <p class="text-xs text-base-content/60 mt-1">تحديث بيانات الكابتن: {{ $captain->name }}</p>
                 </div>
+                <a href="{{ route('admin.captains.index') }}" class="btn btn-ghost btn-xs">
+                    العودة
+                </a>
+            </div>
 
-                @if ($errors->any())
-                    <div style="background-color: #dc3545; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                        <ul style="margin: 0; padding-right: 20px;">
+            @if ($errors->any())
+                <div role="alert" class="alert alert-error text-xs py-3">
+                    <div>
+                        <span class="font-bold">يرجى تصحيح الأخطاء:</span>
+                        <ul class="list-disc list-inside mt-1">
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
                         </ul>
                     </div>
-                @endif
+                </div>
+            @endif
 
-                <form method="POST" action="{{ route('admin.captains.update', $captain->id) }}">
-                    @csrf
-                    @method('PUT')
+            <form method="POST" action="{{ route('admin.captains.update', $captain->id) }}" class="space-y-4">
+                @csrf
+                @method('PUT')
 
-                    <div class="form-group">
-                        <label>اسم الكابتن بالكامل</label>
-                        <input type="text" name="name" value="{{ old('name', $captain->name) }}" required>
-                    </div>
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text font-semibold text-xs text-base-content">اسم الكابتن بالكامل</span>
+                    </label>
+                    <input type="text" name="name" value="{{ old('name', $captain->name) }}" required class="input input-bordered input-sm w-full" />
+                </div>
 
-                    <div class="form-group">
-                        <label>البريد الإلكتروني</label>
-                        <input type="email" name="email" value="{{ old('email', $captain->email) }}" required>
-                    </div>
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text font-semibold text-xs text-base-content">البريد الإلكتروني</span>
+                    </label>
+                    <input type="email" name="email" value="{{ old('email', $captain->email) }}" required class="input input-bordered input-sm w-full" />
+                </div>
 
-                    <div class="form-group">
-                        <label>رقم الهاتف</label>
-                        <input type="tel" name="phone_number" value="{{ old('phone_number', $captain->phone_number) }}" required>
-                    </div>
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text font-semibold text-xs text-base-content">رقم الهاتف</span>
+                    </label>
+                    <input type="tel" name="phone_number" value="{{ old('phone_number', $captain->phone_number) }}" required class="input input-bordered input-sm w-full" />
+                </div>
 
-                    <div class="form-group">
-                        <label>كلمة المرور الجديدة (اختياري)</label>
-                        <input type="password" name="password" placeholder="اترك الحقل فارغاً إذا لم ترد تغيير كلمة المرور">
-                        <span class="notice">* إذا قمت بكتابة كلمة مرور هنا سيتم تغيير كلمة مرور الكابتن السابقة.</span>
-                    </div>
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text font-semibold text-xs text-base-content">كلمة المرور الجديدة (اختياري)</span>
+                    </label>
+                    <input type="password" name="password" placeholder="اترك الحقل فارغاً إذا لم ترد تغيير كلمة المرور" class="input input-bordered input-sm w-full" />
+                </div>
 
-                    <button type="submit" class="btn-submit btn-submit-edit">💾 حفظ التعديلات</button>
-                </form>
-                <a href="{{ route('admin.captains.index') }}" class="back-link">← إلغاء وعودة للقائمة</a>
-            </div>
-        </main>
+                <div class="pt-4 flex items-center justify-end gap-3">
+                    <a href="{{ route('admin.captains.index') }}" class="btn btn-ghost btn-sm">إلغاء</a>
+                    <button type="submit" class="btn btn-primary btn-sm px-6">
+                        حفظ التعديلات
+                    </button>
+                </div>
+            </form>
+
+        </div>
     </div>
-</body>
 
-</html>
+</div>
+@endsection

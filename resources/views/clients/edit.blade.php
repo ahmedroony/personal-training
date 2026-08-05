@@ -1,74 +1,90 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تعديل بيانات العميل - GYM CORE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/Admin/edit.css') }}">
-</head>
+@php
+    $title = 'تعديل بيانات العميل | GYM CORE';
+    $headerTitle = 'تعديل بيانات العميل';
+@endphp
 
-<body>
-    <div class="dashboard-container">
-        @include('layouts.sidebar')
+@section('content')
+<div class="max-w-2xl mx-auto space-y-6">
 
-        <main class="main-content">
-            <div class="form-container">
-                <div class="form-header">
-                    <h2>✏️ تعديل بيانات العميل</h2>
-                    <p>قم بتحديث البيانات واضغط حفظ لتأكيد التغييرات.</p>
+    <div class="card bg-base-200 border border-base-300">
+        <div class="card-body p-6 space-y-6">
+            
+            <div class="flex items-center justify-between pb-4 border-b border-base-300">
+                <div>
+                    <h2 class="text-lg font-bold text-base-content">تعديل بيانات العميل</h2>
+                    <p class="text-xs text-base-content/60 mt-1">قم بتحديث البيانات واضغط حفظ لتأكيد التغييرات</p>
                 </div>
-                @if ($errors->any())
-                    <div
-                        style="background-color: #dc3545; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                        <ul style="margin: 0; padding-right: 20px;">
+                <a href="{{ route('admin.index') }}" class="btn btn-ghost btn-xs">
+                    العودة
+                </a>
+            </div>
+
+            @if ($errors->any())
+                <div role="alert" class="alert alert-error text-xs py-3">
+                    <div>
+                        <span class="font-bold">يرجى تصحيح الأخطاء:</span>
+                        <ul class="list-disc list-inside mt-1">
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
                         </ul>
                     </div>
-                @endif
+                </div>
+            @endif
 
-                <form method="POST" action="{{ route('admin.updateClient', $user->id) }}">
-                    @csrf
-                    @method('PUT')
+            <form method="POST" action="{{ route('admin.updateClient', $user->id) }}" class="space-y-4">
+                @csrf
+                @method('PUT')
 
-                    <div class="form-group">
-                        <label>اسم المتدرب بالكامل</label>
-                        <input type="text" name="name" value="{{ old('name', $user->name) }}" required>
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text font-semibold text-xs text-base-content">اسم المتدرب بالكامل</span>
+                    </label>
+                    <input type="text" name="name" value="{{ old('name', $user->name) }}" required class="input input-bordered input-sm w-full" />
+                </div>
+
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text font-semibold text-xs text-base-content">البريد الإلكتروني</span>
+                    </label>
+                    <input type="email" name="email" value="{{ old('email', $user->email) }}" required class="input input-bordered input-sm w-full" />
+                </div>
+
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text font-semibold text-xs text-base-content">رقم الهاتف</span>
+                    </label>
+                    <input type="tel" name="phone_number" value="{{ old('phone_number', $user->phones->first()->number ?? '') }}" required class="input input-bordered input-sm w-full" />
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="form-control w-full">
+                        <label class="label">
+                            <span class="label-text font-semibold text-xs text-base-content">تاريخ الانتهاء</span>
+                        </label>
+                        <input type="date" name="end_date" value="{{ old('end_date', $user->subscription?->end_date?->format('Y-m-d') ?? '') }}" class="input input-bordered input-sm w-full" />
                     </div>
 
-                    <div class="form-group">
-                        <label>البريد الإلكتروني</label>
-                        <input type="email" name="email" value="{{ old('email', $user->email) }}" required>
+                    <div class="form-control w-full">
+                        <label class="label">
+                            <span class="label-text font-semibold text-xs text-base-content">السعر المدفوع (جنيه)</span>
+                        </label>
+                        <input type="number" step="0.01" name="price" value="{{ old('price', $user->subscription->paid_price ?? 0) }}" readonly class="input input-bordered input-sm w-full bg-base-300 cursor-not-allowed opacity-70" />
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label>رقم الهاتف</label>
-                        <input type="tel" name="phone_number"
-                            value="{{ old('phone_number', $user->phones->first()->number ?? '') }}" required>
-                    </div>
+                <div class="pt-4 flex items-center justify-end gap-3">
+                    <a href="{{ route('admin.index') }}" class="btn btn-ghost btn-sm">إلغاء</a>
+                    <button type="submit" class="btn btn-primary btn-sm px-6">
+                        حفظ التعديلات
+                    </button>
+                </div>
+            </form>
 
-
-
-                    <div class="form-group">
-                        <label>تاريخ الانتهاء</label>
-                        <input type="date" name="end_date"
-                            value="{{ old('end_date', $user->subscription?->end_date?->format('Y-m-d') ?? '') }}">
-                    </div>
-
-                    <div class="form-group">
-                        <label>السعر المدفوع (جنيه) - [ثابت لتعاقد العميل القديم]</label>
-                        <input type="number" step="0.01" name="price"
-                            value="{{ old('price', $user->subscription->paid_price ?? 0) }}" readonly style="background-color: #333; cursor: not-allowed; color:#888;">
-                    </div>
-                    <button type="submit" class="btn-submit">💾 حفظ التعديلات</button>
-                </form>
-                <a href="{{ route('admin.index') }}" class="back-link">← إلغاء وعودة للقائمة</a>
-            </div>
-        </main>
+        </div>
     </div>
-</body>
 
-</html>
+</div>
+@endsection

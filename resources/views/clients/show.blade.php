@@ -1,150 +1,111 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تفاصيل المتدرب | {{ $user->name }}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/Admin/index.css') }}">
-    <style>
-        .details-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-        .info-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        .info-card h2 {
-            color: var(--primary);
-            font-size: 20px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .info-item {
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .info-label { color: var(--muted); font-size: 14px; }
-        .info-value { font-weight: 600; color: #fff; }
-        .content-box {
-            background: #161616;
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            margin-top: 10px;
-            white-space: pre-wrap;
-            font-size: 14px;
-            line-height: 1.6;
-            color: #ccc;
-        }
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--muted);
-            text-decoration: none;
-            margin-bottom: 20px;
-            transition: 0.3s;
-        }
-        .back-btn:hover { color: var(--primary); }
-    </style>
-</head>
-<body>
-    <div class="app-wrapper">
-        <aside class="sidebar">
-            <div class="logo">GYM CORE</div>
-            <nav class="nav-links">
-                <a href="{{ route('admin.index') }}">🏠 الرئيسية</a>
-                <a href="{{ route('admin.manage') }}">👤 إدارة العملاء</a>
-                <a href="{{ route('admin.captains.index') }}">👨‍🏫 إدارة الكباتن</a>
-                <a href="{{ route('workout-plan.index') }}">🏋️ جداول التمارين</a>
-                <a href="{{ route('create_diet_plans.index') }}">🍳 إنشاء باقات الطعام</a>
-                <a href="{{ route('diet_plans.index') }}">🥗 تعيين الأنظمة الغذائية</a>
-                <a href="{{ route('admin.attendance') }}">📅 سجل الحضور</a>
-            </nav>
-        </aside>
+@extends('layouts.app')
 
-        <main class="main-content">
-            <a href="{{ route('admin.index') }}" class="back-btn">← العودة للوحة التحكم</a>
+@php
+    $title = 'تفاصيل المتدرب | ' . $user->name;
+    $headerTitle = 'ملف المتدرب: ' . $user->name;
+@endphp
 
-            <header style="margin-bottom: 30px;">
-                <h1>ملف المتدرب: {{ $user->name }}</h1>
-                <p style="color: var(--muted);">عرض شامل لجميع بيانات المتدرب واشتراكاته</p>
-            </header>
+@section('content')
+<div class="space-y-6">
 
-            <div class="details-grid">
-                <!-- البيانات الشخصية والاختراك -->
-                <div class="info-card">
-                    <h2>👤 البيانات الأساسية</h2>
-                    <div class="info-item">
-                        <span class="info-label">رقم الهاتف:</span>
-                        <span class="info-value">{{ $user->phone_number }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">البريد الإلكتروني:</span>
-                        <span class="info-value">{{ $user->email }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">اسم الباقة:</span>
-                        <span class="info-value">{{ $user->subscription?->plan?->name ?? 'بدون باقة' }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">سعر الباقة:</span>
-                        <span class="info-value">{{ $user->subscription?->paid_price ?? 0 }} ج.م</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">تاريخ البدء:</span>
-                        <span class="info-value">{{ $user->subscription?->start_date?->format('Y-m-d') ?? '--' }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">تاريخ الانتهاء:</span>
-                        <span class="info-value">{{ $user->subscription?->end_date?->format('Y-m-d') ?? '--' }}</span>
-                    </div>
-                </div>
+    <!-- Top Action Bar -->
+    <div class="flex items-center justify-between">
+        <a href="{{ route('admin.index') }}" class="btn btn-ghost btn-xs">
+            العودة للوحة التحكم
+        </a>
+        <a href="{{ route('admin.editClient', $user->id) }}" class="btn btn-warning btn-xs">
+            تعديل البيانات
+        </a>
+    </div>
 
-                <!-- جدول التمارين -->
-                <div class="info-card">
-                    <h2>🏋️ جدول التمارين</h2>
-                    <div class="info-item">
-                        <span class="info-label">وصف التدريب:</span>
-                    </div>
-                    <div class="content-box">
-                        {{ $user->subscription->plan->description ?? 'لا يوجد جدول تمارين محدد بعد' }}
-                    </div>
-                </div>
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-                <!-- الأنظمة الغذائية -->
-                <div class="info-card" style="grid-column: 1 / -1;">
-                    <h2>🥗 الأنظمة الغذائية (أحدث الخطط)</h2>
-                    @if($diet = $user->subscription?->diets?->last())
-                        <div style="margin-bottom: 20px;">
-                            <div class="content-box">
-                                <strong>{{ $diet->dietPlan->name }}</strong><br>
-                                {{ $diet->dietPlan->base_description }}
-                                @if($diet->custom_notes)
-                                    <hr style="border-top:1px solid #444; margin:10px 0;">
-                                    ملاحظات إضافية: {{ $diet->custom_notes }}
-                                @endif
-                            </div>
-                        </div>
-                    @else
-                        <p style="color: var(--muted); text-align: center; padding: 20px;">لم يتم تعيين نظام غذائي لهذا المشترك بعد.</p>
-                    @endif
+        <!-- Personal Info & Subscription Card -->
+        <div class="card bg-base-200 border border-base-300">
+            <div class="card-body p-6 space-y-4">
+                <h3 class="text-base font-bold text-base-content border-b border-base-300 pb-3">
+                    البيانات الأساسية
+                </h3>
+
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center text-xs py-1 border-b border-base-300/50">
+                        <span class="text-base-content/60">رقم الهاتف:</span>
+                        <span class="font-semibold text-base-content font-mono" dir="ltr">{{ $user->phone_number }}</span>
+                    </div>
+
+                    <div class="flex justify-between items-center text-xs py-1 border-b border-base-300/50">
+                        <span class="text-base-content/60">البريد الإلكتروني:</span>
+                        <span class="font-semibold text-base-content">{{ $user->email }}</span>
+                    </div>
+
+                    <div class="flex justify-between items-center text-xs py-1 border-b border-base-300/50">
+                        <span class="text-base-content/60">اسم الباقة:</span>
+                        <span class="badge badge-outline badge-sm font-semibold">{{ $user->subscription?->plan?->name ?? 'بدون باقة' }}</span>
+                    </div>
+
+                    <div class="flex justify-between items-center text-xs py-1 border-b border-base-300/50">
+                        <span class="text-base-content/60">سعر الباقة:</span>
+                        <span class="font-semibold text-base-content">{{ $user->subscription?->paid_price ?? 0 }} ج.م</span>
+                    </div>
+
+                    <div class="flex justify-between items-center text-xs py-1 border-b border-base-300/50">
+                        <span class="text-base-content/60">تاريخ البدء:</span>
+                        <span class="font-semibold text-base-content font-mono">{{ $user->subscription?->start_date?->format('Y-m-d') ?? '--' }}</span>
+                    </div>
+
+                    <div class="flex justify-between items-center text-xs py-1">
+                        <span class="text-base-content/60">تاريخ الانتهاء:</span>
+                        <span class="font-semibold text-base-content font-mono">{{ $user->subscription?->end_date?->format('Y-m-d') ?? '--' }}</span>
+                    </div>
                 </div>
             </div>
-        </main>
+        </div>
+
+        <!-- Workout Plan Card -->
+        <div class="card bg-base-200 border border-base-300">
+            <div class="card-body p-6 space-y-4">
+                <h3 class="text-base font-bold text-base-content border-b border-base-300 pb-3">
+                    جدول التمارين
+                </h3>
+
+                <div class="bg-base-300/60 p-4 rounded-lg border border-base-300 text-xs leading-relaxed text-base-content/90 whitespace-pre-line min-h-[160px]">
+                    {{ $user->subscription->plan->description ?? 'لا يوجد جدول تمارين محدد بعد' }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Diet Plan Card (Full Width) -->
+        <div class="card bg-base-200 border border-base-300 lg:col-span-2">
+            <div class="card-body p-6 space-y-4">
+                <h3 class="text-base font-bold text-base-content border-b border-base-300 pb-3">
+                    الأنظمة الغذائية (أحدث الخطط)
+                </h3>
+
+                @if($diet = $user->subscription?->diets?->last())
+                    <div class="bg-base-300/60 p-4 rounded-lg border border-base-300 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <h4 class="font-bold text-sm text-base-content">{{ $diet->dietPlan->name }}</h4>
+                            <span class="badge badge-ghost badge-xs">نظام غذائي</span>
+                        </div>
+                        <p class="text-xs text-base-content/80 leading-relaxed">{{ $diet->dietPlan->base_description }}</p>
+
+                        @if($diet->custom_notes)
+                            <div class="divider text-xs text-base-content/40 my-2">ملاحظات الكابتن الخاصة</div>
+                            <p class="text-xs text-base-content/70 bg-base-300 p-3 rounded border border-base-300">
+                                {{ $diet->custom_notes }}
+                            </p>
+                        @endif
+                    </div>
+                @else
+                    <div class="text-center py-6 text-base-content/50 text-xs">
+                        لم يتم تعيين نظام غذائي لهذا المشترك بعد.
+                    </div>
+                @endif
+            </div>
+        </div>
+
     </div>
-</body>
-</html>
+
+</div>
+@endsection

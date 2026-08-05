@@ -1,69 +1,70 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>جداول التمارين - GYM CORE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/workout/index.css') }}">
-</head>
+@php
+    $title = 'جداول التمارين | GYM CORE';
+    $headerTitle = 'جداول التمارين';
+@endphp
 
-<body>
-    <div class="dashboard-container">
-        @include('layouts.sidebar')
+@section('content')
+<div class="max-w-3xl mx-auto space-y-6">
 
-        <main class="main-content">
-            <header class="header-section">
+    <div class="card bg-base-200 border border-base-300 shadow-xl">
+        <div class="card-body p-6 md:p-8 space-y-6">
+            
+            <div class="flex items-center justify-between pb-4 border-b border-base-300">
                 <div>
-                    <h1>جداول التمارين</h1>
-                    <p>اختر متدرب واكتب التمارين أو الملاحظات الخاصة به</p>
+                    <h2 class="text-xl font-black text-base-content flex items-center gap-2">
+                        <span>🏋️</span> جداول التمارين
+                    </h2>
+                    <p class="text-xs text-base-content/60 mt-1">اختر متدرب واكتب التمارين أو الملاحظات الخاصة به</p>
                 </div>
-            </header>
-            @if (session('success'))
-                <div
-                    style="background-color: #198754; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                    {{ session('success') }}
-                </div>
-            @endif
+            </div>
 
             @if ($errors->any())
-                <div
-                    style="background-color: #dc3545; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                    <ul style="margin: 0; padding-right: 20px;">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+                <div role="alert" class="alert alert-error shadow-sm text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-5 w-5" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <div>
+                        <span class="font-bold">يرجى تصحيح الأخطاء:</span>
+                        <ul class="list-disc list-inside mt-1">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
             @endif
-            {{-- اختيار المتدرب --}}
-            <section class="form-card">
-                <h3>🏋️ اختر المتدرب</h3>
-                <form action="{{ route('workout-plan.store') }}" method="POST" class="client-form">
-                    @csrf
-                    <div style="margin-bottom: 20px;">
-                        <select name="user_id" class="search-input"
-                            style="width: 100%; height: 50px; background: #1a1a1a; color: white; border: 1px solid #333; padding: 10px; border-radius: 8px;"
-                            required>
-                            <option value="">-- اختر المتدرب من هنا --</option>
-                            @foreach ($users as $user)
-                                <option value="{{ $user->id }}">{{ $user->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
 
-                    <textarea name="description" class="workout-textarea" id="workoutText" placeholder="اكتب تفاصيل التمرين هنا..."
-                        style="width: 100%; min-height: 200px; padding: 20px;"></textarea>
+            <form action="{{ route('workout-plan.store') }}" method="POST" class="space-y-4">
+                @csrf
 
-                    <div class="actions-bar">
-                        <button type="submit" class="btn-save" style="width: 100%;">💾 حفظ الجدول</button>
-                    </div>
-                </form>
-            </section>
-        </main>
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text font-bold text-base-content">اختر المتدرب</span>
+                    </label>
+                    <select name="user_id" required class="select select-bordered w-full focus:select-primary">
+                        <option value="" disabled selected>-- اختر المتدرب من هنا --</option>
+                        @foreach ($users as $user)
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text font-bold text-base-content">تفاصيل تمرين المشترك</span>
+                    </label>
+                    <textarea name="description" placeholder="اكتب تفاصيل التمرين هنا..." class="textarea textarea-bordered w-full h-48 focus:textarea-primary"></textarea>
+                </div>
+
+                <div class="pt-4">
+                    <button type="submit" class="btn btn-primary w-full shadow-lg shadow-primary/20">
+                        <span>💾</span> حفظ الجدول
+                    </button>
+                </div>
+            </form>
+
+        </div>
     </div>
 
-</body>
-
-</html>
+</div>
+@endsection

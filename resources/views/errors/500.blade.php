@@ -1,68 +1,33 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>خطأ في النظام - GYM CORE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #0a0a0a;
-            --primary: #c9ff00;
-            --text: #ffffff;
-            --muted: #888;
-        }
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
-        }
-        .container {
-            padding: 30px;
-            max-width: 500px;
-        }
-        .icon {
-            font-size: 80px;
-            margin-bottom: 20px;
-            display: block;
-        }
-        h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-        p {
-            color: var(--muted);
-            font-size: 16px;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-        .btn {
-            background-color: var(--primary);
-            color: #000;
-            text-decoration: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: 0.3s;
-            display: inline-block;
-        }
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(201, 255, 0, 0.4);
-        }
-    </style>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
-    <div class="container">
-        <span class="icon">🏋️‍♂️</span>
-        <h1>عفواً، حدث خطأ غير متوقع!</h1>
-        <p>نواجه حالياً مشكلة تقنية بسيطة. جاري العمل على حلها بواسطة فريقنا الفني.</p>
-        <a href="{{ url('/') }}" class="btn">العودة للرئيسية</a>
+<body class="bg-base-100 min-h-screen flex items-center justify-center p-4 font-sans">
+
+    <div class="card bg-base-200 border border-base-300 max-w-md w-full shadow-2xl text-center">
+        <div class="card-body p-8 space-y-6 items-center">
+            
+            <div class="w-20 h-20 rounded-full bg-error/10 text-error flex items-center justify-center text-4xl mb-2">
+                🏋️‍♂️
+            </div>
+
+            <h1 class="text-2xl font-black text-base-content">عفواً، حدث خطأ غير متوقع!</h1>
+            <p class="text-sm text-base-content/70 leading-relaxed">
+                نواجه حالياً مشكلة تقنية بسيطة. جاري العمل على حلها بواسطة فريقنا الفني.
+            </p>
+
+            <div class="pt-4 w-full">
+                <a href="{{ url('/') }}" class="btn btn-primary w-full shadow-lg shadow-primary/20">
+                    العودة للرئيسية 🏠
+                </a>
+            </div>
+
+        </div>
+    </div>
+
 </body>
 </html>

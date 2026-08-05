@@ -1,76 +1,81 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حضور الكباتن | GYM CORE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/Admin/index.css') }}"> {{-- نستخدم نفس ستايل لوحة التحكم لتوحيد الشكل --}}
-    <style>
-        .captain-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px; }
-        .captain-card { background: #111; border: 1px solid #222; padding: 20px; border-radius: 12px; display: flex; align-items: center; gap: 15px; }
-        .avatar { width: 50px; height: 50px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; }
-        .cap-info h4 { font-size: 16px; margin-bottom: 4px; }
-        .cap-info p { font-size: 12px; color: #666; }
-    </style>
-</head>
+@php
+    $title = 'حضور الكباتن | GYM CORE';
+    $headerTitle = 'تقرير حضور الكباتن';
+@endphp
 
-<body>
-    <div class="app-wrapper">
-        @include('layouts.sidebar')
+@section('content')
+<div class="space-y-6">
 
-        <main class="main-content">
-            <header style="margin-bottom: 30px;">
-                <h1>🏅 تقرير حضور الكباتن</h1>
-                <p style="color: var(--muted);">مراقبة سجل حضور وانصراف مدربي الصالة الرياضية</p>
-            </header>
+    <!-- Header Card -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-base-200 p-6 rounded-xl border border-base-300">
+        <div>
+            <h2 class="text-xl font-bold text-base-content">تقرير حضور وانصراف الكباتن</h2>
+            <p class="text-xs text-base-content/60 mt-1">مراقبة سجل حضور مدربي وطاقم الصالة الرياضية</p>
+        </div>
+    </div>
 
-            {{-- ملخص الكباتن --}}
-            <section class="captain-stats">
-                @foreach($captains as $captain)
-                    <div class="captain-card">
-                        <div class="avatar">{{ mb_substr($captain->name, 0, 1) }}</div>
-                        <div class="cap-info">
-                            <h4>{{ $captain->name }}</h4>
-                            <p>📞 {{ $captain->phones->first()->number ?? 'بدون هاتف' }}</p>
-                        </div>
+    <!-- Captains List Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        @foreach($captains as $captain)
+            <div class="card bg-base-200 border border-base-300">
+                <div class="card-body p-4 flex flex-row items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-base-300 flex items-center justify-center font-bold text-sm">
+                        {{ mb_substr($captain->name, 0, 1) }}
                     </div>
-                @endforeach
-            </section>
+                    <div>
+                        <h4 class="font-semibold text-base-content text-sm">{{ $captain->name }}</h4>
+                        <p class="text-xs text-base-content/60" dir="ltr">{{ $captain->phones->first()->number ?? 'بدون هاتف' }}</p>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
 
-            <div class="data-card">
-                <h2>📋 سجل الحضور الكامل</h2>
-                <table class="responsive-table">
+    <!-- Attendance Logs Table -->
+    <div class="card bg-base-200 border border-base-300">
+        <div class="card-body p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-base font-bold text-base-content">سجل الحضور الكامل</h3>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="table table-zebra w-full">
                     <thead>
-                        <tr>
-                            <th>الكابتن</th>
-                            <th>التاريخ</th>
-                            <th>اليوم</th>
-                            <th>الوقت</th>
+                        <tr class="bg-base-300/50 text-base-content text-xs">
+                            <th class="font-bold">الكابتن</th>
+                            <th class="font-bold">التاريخ</th>
+                            <th class="font-bold">اليوم</th>
+                            <th class="font-bold">الوقت</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($attendances as $att)
-                            <tr class="client-row">
-                                <td><strong style="color: var(--primary);">{{ $att->captain->name }}</strong></td>
-                                <td>{{ $att->date->format('Y-m-d') }}</td>
-                                <td>{{ $att->date->locale('ar')->isoFormat('dddd') }}</td>
-                                <td>{{ $att->time }}</td>
+                            <tr class="hover:bg-base-300/30 transition-colors">
+                                <td class="font-semibold text-sm text-base-content">{{ $att->captain->name }}</td>
+                                <td class="font-mono text-xs">{{ $att->date->format('Y-m-d') }}</td>
+                                <td class="text-xs">{{ $att->date->locale('ar')->isoFormat('dddd') }}</td>
+                                <td class="font-mono text-xs">{{ $att->time }}</td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" style="text-align: center; padding: 30px; color: #666;">لم يتم تسجيل أي حضور للكباتن بعد.</td>
+                                <td colspan="4" class="text-center py-6 text-base-content/50 text-xs">
+                                    لم يتم تسجيل أي حضور للكباتن بعد.
+                                </td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
-                <div style="margin-top: 20px;">
+            </div>
+
+            @if($attendances->hasPages())
+                <div class="mt-4 flex justify-center">
                     {{ $attendances->links() }}
                 </div>
-            </div>
-        </main>
+            @endif
+        </div>
     </div>
-</body>
 
-</html>
+</div>
+@endsection
