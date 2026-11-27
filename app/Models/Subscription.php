@@ -27,7 +27,7 @@ class Subscription extends Model
     {
         return $this->hasMany(Diet::class);
     }
-    
+
     protected $casts = [
         'start_date' => 'date',
         'end_date' => 'date',
@@ -54,9 +54,6 @@ class Subscription extends Model
         return $this;
     }
 
-    /**
-     * Accessor: Calculates remaining days
-     */
     public function getRemainingDaysAttribute()
     {
         if (! $this->end_date) {
@@ -65,9 +62,6 @@ class Subscription extends Model
         return max(0, Carbon::today()->diffInDays($this->end_date, false));
     }
 
-    /**
-     * isFuture() checks if the end_date is in the future
-     */
     public function getIsActiveAttribute()
     {
         if (!$this->start_date || !$this->end_date) {
